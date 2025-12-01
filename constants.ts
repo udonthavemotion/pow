@@ -80,24 +80,20 @@ export const BUSES: Bus[] = [
     // PASTE YOUR GOHIGHLEVEL CALENDAR EMBED CODE FOR "KUTTIN LOOSE" (COCONUT) BELOW
     // ------------------------------------------------------------------
     calendarEmbedCode: `<iframe src="https://app.partyonwheelspow.com/widget/booking/lxTcijWz1fWVLZHizAoC" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="eVnwTNulhldzIaZuYCeh_1764626564280"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>` 
-  },
-  {
-    id: 'b4',
-    name: 'Big Blue',
-    tagline: 'Maximum capacity, maximum fun.',
-    description: 'Our largest hauler for the biggest krewes. Perfect for Greek life events, corporate outings, or massive family reunions.',
-    hourlyRate: 200,
-    minHours: 5,
-    capacity: 45,
-    // IMAGE: Place bus photo in public/images/buses/ and update path below
-    imageUrl: '/images/buses/big-blue-main.jpg', // Update filename to match your image
-    features: ['Max Capacity', 'Karaoke System', 'Fog Machine', 'Bathroom'],
-    
-    // ------------------------------------------------------------------
-    // PASTE YOUR GOHIGHLEVEL CALENDAR EMBED CODE FOR BUS 4 BELOW
-    // ------------------------------------------------------------------
-    calendarEmbedCode: ``
   }
+  // TEMPORARILY REMOVED: Big Blue (b4) - waiting for image and details
+  // {
+  //   id: 'b4',
+  //   name: 'Big Blue',
+  //   tagline: 'Maximum capacity, maximum fun.',
+  //   description: 'Our largest hauler for the biggest krewes. Perfect for Greek life events, corporate outings, or massive family reunions.',
+  //   hourlyRate: 200,
+  //   minHours: 5,
+  //   capacity: 45,
+  //   imageUrl: '/images/buses/big-blue-main.jpg',
+  //   features: ['Max Capacity', 'Karaoke System', 'Fog Machine', 'Bathroom'],
+  //   calendarEmbedCode: ``
+  // }
 ];
 
 // EVENT IMAGES: Place event photos in public/images/events/ and update paths below

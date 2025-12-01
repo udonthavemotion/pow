@@ -252,7 +252,7 @@ Set up workflows to automatically tag contacts based on:
    "Thanks for booking [BUS NAME] with Party on Wheels! 
    Your ride is scheduled for [DATE] at [TIME]. 
    We'll send a reminder 48 hours before. 
-   Questions? Call 985-555-0123"
+   Questions? Call 985-333-9762"
    ```
 
 2. Add tag: `bus-[bus-name]` (based on calendar)
@@ -274,7 +274,7 @@ Set up workflows to automatically tag contacts based on:
    Bus: [BUS NAME]
    Pickup: [LOCATION]
    
-   Need to make changes? Call us at 985-555-0123"
+   Need to make changes? Call us at 985-333-9762"
    ```
 
 2. Move to pipeline stage: "Pre-Event Reminder"

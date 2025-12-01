@@ -109,10 +109,10 @@ const FAQ: React.FC = () => {
           <h3 className="text-3xl font-black uppercase mb-4 font-['Bebas_Neue']">Still Have Questions?</h3>
           <p className="text-lg mb-6 opacity-90">We're here to help! Give us a call or send us a message.</p>
           <a 
-            href="tel:9855550123"
+            href="tel:+19853339762"
             className="inline-block bg-white text-[#FF6B00] px-8 py-4 font-bold uppercase tracking-widest rounded-lg hover:bg-gray-100 transition-colors"
           >
-            Call Us: 985-555-0123
+            Call Us: 985-333-9762
           </a>
         </div>
       </div>

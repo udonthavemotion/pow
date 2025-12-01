@@ -268,10 +268,10 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                         📞 Call To Book Now
                       </p>
                       <a
-                        href="tel:9855550123"
+                        href="tel:+19853339762"
                         className="text-5xl font-black text-white hover:text-[#39FF14] transition-colors font-['Bebas_Neue'] tracking-tight block"
                       >
-                        985-555-0123
+                        985-333-9762
                       </a>
                       <p className="text-black/80 text-sm mt-3 font-bold">
                         Available 24/7 for immediate bookings
