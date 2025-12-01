@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Party On Wheels | Houma's Premier Party Bus Rental</title>
+    <meta name="description" content="Book the wildest ride in South Louisiana. Party buses for weddings, proms, and nights out in Houma and New Orleans." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+      
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px; /* Offset for fixed navbar */
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #FFFFFF;
+        color: #1a1a1a;
+      }
+      
+      h1, h2, h3, h4 {
+        font-family: 'Bebas Neue', sans-serif; /* Loud, fun font for headers */
+        letter-spacing: 0.05em;
+      }
+
+      .font-serif {
+        font-family: 'Bebas Neue', sans-serif;
+      }
+
+      /* Custom POW Colors */
+      .bg-pow-orange { background-color: #FF6B00; }
+      .text-pow-orange { color: #FF6B00; }
+      .bg-pow-green { background-color: #39FF14; }
+      .text-pow-green { color: #39FF14; }
+
+      /* Hide scrollbar for clean aesthetic in horizontal scrolls if any */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      @keyframes fade-in-up {
+        0% { opacity: 0; transform: translateY(30px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+
+      .animate-fade-in-up {
+        animation: fade-in-up 1s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

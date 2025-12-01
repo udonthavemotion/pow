@@ -1,0 +1,41 @@
+==========================================
+PARTY ON WHEELS - ASSET PLACEMENT GUIDE
+==========================================
+
+Simply drag and drop your images into the appropriate folders below:
+
+📁 logo/
+   → Place your logo file here: pow-logo.png (or .svg, .jpg)
+
+📁 buses/
+   → orange-juice-main.jpg
+   → green-light-main.jpg
+   → white-knight-main.jpg
+   → big-blue-main.jpg
+   → (Optional gallery images: orange-juice-gallery-1.jpg, etc.)
+
+📁 hero/
+   → hero-background.jpg (wide format, 1920x1080px recommended)
+
+📁 events/
+   → wedding.jpg
+   → mardi-gras.jpg
+   → nights-out.jpg
+
+📁 about/
+   → owner-photo.jpg (portrait orientation recommended)
+
+📁 misc/
+   → Any other images you need
+
+==========================================
+
+After adding your files:
+1. Make sure filenames match what's in constants.ts
+2. Or update the paths in constants.ts to match your filenames
+3. Restart dev server: npm run dev
+4. Hard refresh browser: Ctrl+Shift+R
+
+See ASSETS_GUIDE.md in project root for detailed instructions.
+
+
