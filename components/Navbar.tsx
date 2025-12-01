@@ -71,8 +71,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow }) => {
           </div>
 
           {/* Right Actions (Mobile Toggle) */}
-          <div className={`flex items-center gap-6 z-50 relative ${textClasses}`}>
-            <a 
+          <div className={`flex items-center gap-3 md:gap-6 z-50 relative ${textClasses}`}>
+            <a
                 href="#fleet"
                 onClick={(e) => {
                   e.preventDefault();
@@ -82,21 +82,22 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow }) => {
                     handleLinkClick(e, 'fleet');
                   }
                 }}
-                className="hidden md:inline-block bg-[#FF6B00] text-white px-6 py-2 font-bold uppercase tracking-widest text-sm hover:bg-[#e56000] transition-colors -skew-x-12"
+                className="hidden md:inline-block bg-[#FF6B00] text-white px-6 py-3 font-bold uppercase tracking-widest text-sm hover:bg-[#e56000] transition-colors -skew-x-12"
             >
                 <span className="skew-x-12 inline-block">Book Now</span>
             </a>
-            
-            <button 
-              className={`block md:hidden focus:outline-none transition-colors duration-500`}
+
+            <button
+              className={`block md:hidden focus:outline-none transition-colors duration-500 p-2`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             >
                {mobileMenuOpen ? (
-                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8 text-black">
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-10 h-10 text-black">
                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                  </svg>
                ) : (
-                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-10 h-10">
                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                  </svg>
                )}
