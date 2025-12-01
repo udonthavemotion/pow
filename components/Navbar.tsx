@@ -9,9 +9,10 @@ import { BRAND_NAME, LOGO_URL } from '../constants';
 
 interface NavbarProps {
   onNavClick: (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => void;
+  onBookNow?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavClick }) => {
+const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -73,7 +74,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick }) => {
           <div className={`flex items-center gap-6 z-50 relative ${textClasses}`}>
             <a 
                 href="#fleet"
-                onClick={(e) => handleLinkClick(e, 'fleet')}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onBookNow) {
+                    onBookNow();
+                  } else {
+                    handleLinkClick(e, 'fleet');
+                  }
+                }}
                 className="hidden md:inline-block bg-[#FF6B00] text-white px-6 py-2 font-bold uppercase tracking-widest text-sm hover:bg-[#e56000] transition-colors -skew-x-12"
             >
                 <span className="skew-x-12 inline-block">Book Now</span>
@@ -108,7 +116,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick }) => {
             <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors">FAQ</a>
             <a 
                 href="#fleet" 
-                onClick={(e) => handleLinkClick(e, 'fleet')} 
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onBookNow) {
+                    onBookNow();
+                  } else {
+                    handleLinkClick(e, 'fleet');
+                  }
+                }} 
                 className="bg-[#FF6B00] text-white px-8 py-4 text-2xl mt-8 -skew-x-12"
             >
                 <span className="skew-x-12 inline-block">Book A Ride</span>

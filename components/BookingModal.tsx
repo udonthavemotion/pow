@@ -7,11 +7,13 @@ import React, { useEffect, useRef } from 'react';
 import { Bus } from '../types';
 
 interface BookingModalProps {
-  bus: Bus;
+  bus?: Bus | null;
+  serviceMenuEmbedCode?: string;
   onClose: () => void;
 }
 
-const BookingModal: React.FC<BookingModalProps> = ({ bus, onClose }) => {
+const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, onClose }) => {
+  const isServiceMenu = !bus && serviceMenuEmbedCode;
   const iframeContainerRef = useRef<HTMLDivElement>(null);
 
   // Handle escape key
@@ -27,7 +29,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, onClose }) => {
 
   // Ensure iframe loads and adjust height dynamically
   useEffect(() => {
-    if (iframeContainerRef.current && bus.calendarEmbedCode) {
+    const embedCode = isServiceMenu ? serviceMenuEmbedCode : bus?.calendarEmbedCode;
+    if (iframeContainerRef.current && embedCode) {
       const iframe = iframeContainerRef.current.querySelector('iframe');
       if (iframe) {
         // Ensure iframe has proper attributes for visibility
@@ -49,7 +52,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, onClose }) => {
         oldScript.parentNode?.replaceChild(newScript, oldScript);
       });
     }
-  }, [bus.calendarEmbedCode]);
+  }, [bus?.calendarEmbedCode, serviceMenuEmbedCode, isServiceMenu]);
 
   return (
     <div
@@ -97,16 +100,29 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, onClose }) => {
                     Book Now
                   </span>
                 </div>
-                <h2 className="text-5xl lg:text-6xl font-black uppercase tracking-tight font-['Bebas_Neue'] text-white leading-none">
-                  {bus.name}
-                </h2>
-                <p className="text-[#FF6B00] text-xl font-bold italic">
-                  {bus.tagline}
-                </p>
+                {isServiceMenu ? (
+                  <>
+                    <h2 className="text-5xl lg:text-6xl font-black uppercase tracking-tight font-['Bebas_Neue'] text-white leading-none">
+                      Choose Your Ride
+                    </h2>
+                    <p className="text-[#FF6B00] text-xl font-bold italic">
+                      Select from our fleet
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-5xl lg:text-6xl font-black uppercase tracking-tight font-['Bebas_Neue'] text-white leading-none">
+                      {bus.name}
+                    </h2>
+                    <p className="text-[#FF6B00] text-xl font-bold italic">
+                      {bus.tagline}
+                    </p>
+                  </>
+                )}
               </div>
 
               {/* Bus Image */}
-              {bus.imageUrl && (
+              {!isServiceMenu && bus?.imageUrl && (
                 <div className="relative -mx-6 lg:-mx-8">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-[#39FF14] opacity-20 mix-blend-overlay"></div>
                   <img
@@ -141,44 +157,48 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, onClose }) => {
               </div>
 
               {/* Features Highlight */}
-              <div className="space-y-3">
-                <h3 className="text-2xl font-black uppercase text-[#39FF14] font-['Bebas_Neue'] tracking-wide">
-                  What's Included
-                </h3>
-                <div className="space-y-2 max-h-40 lg:max-h-48 overflow-y-auto scrollbar-thin scrollbar-thumb-[#FF6B00] scrollbar-track-zinc-900">
-                  {bus.features.slice(0, 8).map((feature, index) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-3 text-white group hover:text-[#39FF14] transition-colors"
-                    >
-                      <span className="text-[#FF6B00] text-xl flex-shrink-0 group-hover:text-[#39FF14]">✓</span>
-                      <span className="text-sm font-medium">{feature}</span>
-                    </div>
-                  ))}
+              {!isServiceMenu && bus?.features && (
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-black uppercase text-[#39FF14] font-['Bebas_Neue'] tracking-wide">
+                    What's Included
+                  </h3>
+                  <div className="space-y-2 max-h-40 lg:max-h-48 overflow-y-auto scrollbar-thin scrollbar-thumb-[#FF6B00] scrollbar-track-zinc-900">
+                    {bus.features.slice(0, 8).map((feature, index) => (
+                      <div
+                        key={index}
+                        className="flex items-start gap-3 text-white group hover:text-[#39FF14] transition-colors"
+                      >
+                        <span className="text-[#FF6B00] text-xl flex-shrink-0 group-hover:text-[#39FF14]">✓</span>
+                        <span className="text-sm font-medium">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Pricing Card */}
-              <div className="bg-gradient-to-br from-[#FF6B00] to-[#e56000] p-5 -skew-x-3 shadow-2xl border-2 border-[#39FF14]">
-                <div className="skew-x-3 space-y-2">
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-5xl font-black text-black font-['Bebas_Neue']">
-                      ${bus.hourlyRate}
-                    </span>
-                    <span className="text-xl text-black/80 font-bold">/hour</span>
-                  </div>
-                  <div className="flex items-center gap-4 text-black text-sm font-bold">
-                    <div className="flex items-center gap-1">
-                      <span className="text-lg">⏱</span>
-                      <span>{bus.minHours} hr minimum</span>
+              {!isServiceMenu && bus && (
+                <div className="bg-gradient-to-br from-[#FF6B00] to-[#e56000] p-5 -skew-x-3 shadow-2xl border-2 border-[#39FF14]">
+                  <div className="skew-x-3 space-y-2">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-5xl font-black text-black font-['Bebas_Neue']">
+                        ${bus.hourlyRate}
+                      </span>
+                      <span className="text-xl text-black/80 font-bold">/hour</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <span className="text-lg">👥</span>
-                      <span>Up to {bus.capacity} guests</span>
+                    <div className="flex items-center gap-4 text-black text-sm font-bold">
+                      <div className="flex items-center gap-1">
+                        <span className="text-lg">⏱</span>
+                        <span>{bus.minHours} hr minimum</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-lg">👥</span>
+                        <span>Up to {bus.capacity} guests</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
 
             {/* Bottom Accent */}
@@ -197,20 +217,20 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, onClose }) => {
             {/* Calendar Header */}
             <div className="bg-black border-b-4 border-[#39FF14] p-4 lg:p-6">
               <h3 className="text-3xl lg:text-4xl font-black uppercase text-white font-['Bebas_Neue'] tracking-wide">
-                Choose Your Party Date
+                {isServiceMenu ? 'Select Your Service' : 'Choose Your Party Date'}
               </h3>
               <p className="text-zinc-400 text-sm mt-1">
-                Select your date and time to secure your booking
+                {isServiceMenu ? 'Browse our fleet and select your preferred bus' : 'Select your date and time to secure your booking'}
               </p>
             </div>
 
             {/* Calendar Container */}
             <div className="flex-1 overflow-auto bg-white p-4 lg:p-6">
-              {bus.calendarEmbedCode ? (
+              {(isServiceMenu ? serviceMenuEmbedCode : bus?.calendarEmbedCode) ? (
                 <div
                   ref={iframeContainerRef}
                   className="w-full min-h-[750px] bg-white rounded-lg shadow-inner border-2 border-zinc-200"
-                  dangerouslySetInnerHTML={{ __html: bus.calendarEmbedCode }}
+                  dangerouslySetInnerHTML={{ __html: isServiceMenu ? serviceMenuEmbedCode! : bus!.calendarEmbedCode! }}
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center min-h-[750px] text-center p-8">
@@ -238,7 +258,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, onClose }) => {
                     Calendar Coming Soon
                   </h4>
                   <p className="text-zinc-600 text-lg mb-8 max-w-md">
-                    Ready to party? Contact us directly to book <span className="text-[#FF6B00] font-bold">{bus.name}</span>
+                    Ready to party? Contact us directly to book {bus ? <span className="text-[#FF6B00] font-bold">{bus.name}</span> : 'your ride'}
                   </p>
 
                   {/* Call to Action */}
@@ -280,22 +300,32 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, onClose }) => {
 
         {/* Bottom Bar - Quick Info */}
         <div className="bg-black border-t-4 border-[#39FF14] px-4 lg:px-8 py-4 flex flex-wrap gap-4 items-center justify-between text-white">
-          <div className="flex flex-wrap items-center gap-4 text-sm">
-            <div className="flex items-center gap-2">
-              <span className="text-[#FF6B00] text-lg">💰</span>
-              <span className="font-bold">${bus.hourlyRate}/hr</span>
+          {!isServiceMenu && bus && (
+            <div className="flex flex-wrap items-center gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-[#FF6B00] text-lg">💰</span>
+                <span className="font-bold">${bus.hourlyRate}/hr</span>
+              </div>
+              <div className="h-4 w-px bg-zinc-700"></div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#39FF14] text-lg">⏱</span>
+                <span className="font-bold">{bus.minHours} hour minimum</span>
+              </div>
+              <div className="h-4 w-px bg-zinc-700"></div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#FF6B00] text-lg">👥</span>
+                <span className="font-bold">Up to {bus.capacity} guests</span>
+              </div>
             </div>
-            <div className="h-4 w-px bg-zinc-700"></div>
-            <div className="flex items-center gap-2">
-              <span className="text-[#39FF14] text-lg">⏱</span>
-              <span className="font-bold">{bus.minHours} hour minimum</span>
+          )}
+          {isServiceMenu && (
+            <div className="flex flex-wrap items-center gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-[#FF6B00] text-lg">🚌</span>
+                <span className="font-bold">Multiple Buses Available</span>
+              </div>
             </div>
-            <div className="h-4 w-px bg-zinc-700"></div>
-            <div className="flex items-center gap-2">
-              <span className="text-[#FF6B00] text-lg">👥</span>
-              <span className="font-bold">Up to {bus.capacity} guests</span>
-            </div>
-          </div>
+          )}
 
           <button
             onClick={onClose}

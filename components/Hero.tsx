@@ -6,9 +6,20 @@
 
 import React from 'react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onBookNow?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onBookNow }) => {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
+    
+    // If clicking "Pick Your Bus", trigger service menu
+    if (targetId === 'fleet' && onBookNow) {
+      onBookNow();
+      return;
+    }
+    
     const element = document.getElementById(targetId);
     if (element) {
       const headerOffset = 85;
