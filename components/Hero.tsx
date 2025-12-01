@@ -57,36 +57,36 @@ const Hero: React.FC<HeroProps> = ({ onBookNow }) => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
+      <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 sm:px-6">
         <div className="animate-fade-in-up max-w-4xl mx-auto">
-          <span className="block text-xl md:text-2xl font-bold uppercase tracking-[0.3em] text-[#39FF14] mb-6 drop-shadow-md">
+          <span className="block text-base sm:text-xl md:text-2xl font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[#39FF14] mb-4 sm:mb-6 drop-shadow-md">
             Houma • Thibodaux • New Orleans
           </span>
-          
-          <h1 className="text-7xl md:text-9xl font-black text-white leading-none mb-6 drop-shadow-xl font-['Bebas_Neue']">
+
+          <h1 className="text-5xl sm:text-7xl md:text-9xl font-black text-white leading-none mb-4 sm:mb-6 drop-shadow-xl font-['Bebas_Neue']">
             LET THE GOOD <br/>
             <span className="text-[#FF6B00]">TIMES ROLL</span>
           </h1>
-          
-          <p className="max-w-xl mx-auto text-lg md:text-2xl text-gray-200 font-medium mb-12 drop-shadow-md">
-            The wildest party buses in South Louisiana. <br/>
+
+          <p className="max-w-xl mx-auto text-base sm:text-lg md:text-2xl text-gray-200 font-medium mb-8 sm:mb-12 drop-shadow-md px-4">
+            The wildest party buses in South Louisiana. <br className="hidden sm:block"/>
             Loud music, good vibes, and unforgettable nights.
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a 
-                href="#fleet" 
+
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
+            <a
+                href="#fleet"
                 onClick={(e) => handleNavClick(e, 'fleet')}
-                className="group relative px-10 py-5 bg-[#FF6B00] text-white -skew-x-12 hover:bg-[#ff8533] transition-all duration-300 shadow-[0_0_20px_rgba(255,107,0,0.5)]"
+                className="group relative px-8 sm:px-10 py-4 sm:py-5 min-h-[56px] bg-[#FF6B00] text-white -skew-x-12 hover:bg-[#ff8533] transition-all duration-300 shadow-[0_0_20px_rgba(255,107,0,0.5)] flex items-center justify-center"
             >
-                <span className="block skew-x-12 text-xl font-bold tracking-widest uppercase">Pick Your Bus</span>
+                <span className="block skew-x-12 text-lg sm:text-xl font-bold tracking-widest uppercase">Pick Your Bus</span>
             </a>
-            <a 
-                href="#about" 
+            <a
+                href="#about"
                 onClick={(e) => handleNavClick(e, 'about')}
-                className="group relative px-10 py-5 bg-transparent border-2 border-white text-white -skew-x-12 hover:bg-white hover:text-black transition-all duration-300"
+                className="group relative px-8 sm:px-10 py-4 sm:py-5 min-h-[56px] bg-transparent border-2 border-white text-white -skew-x-12 hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center"
             >
-                <span className="block skew-x-12 text-xl font-bold tracking-widest uppercase">Learn More</span>
+                <span className="block skew-x-12 text-lg sm:text-xl font-bold tracking-widest uppercase">Learn More</span>
             </a>
           </div>
         </div>

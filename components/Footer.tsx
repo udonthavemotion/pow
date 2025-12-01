@@ -13,64 +13,64 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
   return (
-    <footer className="bg-black pt-24 pb-12 px-6 text-gray-400 border-t border-gray-800">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
-        
+    <footer className="bg-black pt-16 sm:pt-24 pb-8 sm:pb-12 px-4 sm:px-6 text-gray-400 border-t border-gray-800">
+      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12">
+
         <div className="md:col-span-5">
-          <img 
-            src={LOGO_URL} 
-            alt={`${BRAND_NAME} Logo`} 
-            className="h-16 w-auto mb-6 object-contain"
+          <img
+            src={LOGO_URL}
+            alt={`${BRAND_NAME} Logo`}
+            className="h-14 sm:h-16 w-auto mb-5 sm:mb-6 object-contain"
           />
-          <p className="max-w-xs font-medium leading-relaxed mb-6">
-            South Louisiana's premier party bus rental service. 
+          <p className="max-w-xs font-medium leading-relaxed mb-5 sm:mb-6 text-sm sm:text-base">
+            South Louisiana's premier party bus rental service.
             Loud music. Good vibes. Unforgettable times.
           </p>
-          <div className="flex gap-4 items-center">
-            <a 
-              href="https://www.facebook.com/profile.php?id=61579938620708&sk=photos" 
-              target="_blank" 
+          <div className="flex gap-3 sm:gap-4 items-center">
+            <a
+              href="https://www.facebook.com/profile.php?id=61579938620708&sk=photos"
+              target="_blank"
               rel="noopener noreferrer"
               className="group w-12 h-12 bg-[#1877F2] rounded-full flex items-center justify-center hover:bg-[#FF6B00] transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-[#FF6B00]/50"
               aria-label="Visit Party On Wheels on Facebook"
             >
-              <svg 
-                className="w-6 h-6 text-white group-hover:scale-110 transition-transform" 
-                fill="currentColor" 
+              <svg
+                className="w-6 h-6 text-white group-hover:scale-110 transition-transform"
+                fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
             </a>
-            <span className="text-gray-500 text-sm font-medium">Follow Us</span>
+            <span className="text-gray-500 text-xs sm:text-sm font-medium">Follow Us</span>
           </div>
         </div>
 
         <div className="md:col-span-3">
-          <h4 className="font-bold text-white mb-6 tracking-wide text-sm uppercase">Quick Links</h4>
-          <ul className="space-y-4 font-medium">
-            <li><a href="#fleet" onClick={(e) => onLinkClick(e, 'fleet')} className="hover:text-[#39FF14] transition-colors">Our Fleet</a></li>
-            <li><a href="#how-it-works" onClick={(e) => onLinkClick(e, 'how-it-works')} className="hover:text-[#39FF14] transition-colors">How It Works</a></li>
-            <li><a href="#events" onClick={(e) => onLinkClick(e, 'events')} className="hover:text-[#39FF14] transition-colors">Events</a></li>
-            <li><a href="#faq" onClick={(e) => onLinkClick(e, 'faq')} className="hover:text-[#39FF14] transition-colors">FAQ</a></li>
+          <h4 className="font-bold text-white mb-5 sm:mb-6 tracking-wide text-sm uppercase">Quick Links</h4>
+          <ul className="space-y-3 sm:space-y-4 font-medium text-sm sm:text-base">
+            <li><a href="#fleet" onClick={(e) => onLinkClick(e, 'fleet')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">Our Fleet</a></li>
+            <li><a href="#how-it-works" onClick={(e) => onLinkClick(e, 'how-it-works')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">How It Works</a></li>
+            <li><a href="#events" onClick={(e) => onLinkClick(e, 'events')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">Events</a></li>
+            <li><a href="#faq" onClick={(e) => onLinkClick(e, 'faq')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">FAQ</a></li>
           </ul>
         </div>
-        
+
         <div className="md:col-span-4">
-          <h4 className="font-bold text-white mb-6 tracking-wide text-sm uppercase">Contact Us</h4>
-          <p className="mb-2">Serving All Of Southern Louisiana</p>
-          <a href="tel:+19853339762" className="mb-2 text-xl text-white font-bold hover:text-[#FF6B00] transition-colors block">
+          <h4 className="font-bold text-white mb-5 sm:mb-6 tracking-wide text-sm uppercase">Contact Us</h4>
+          <p className="mb-3 sm:mb-2 text-sm sm:text-base">Serving All Of Southern Louisiana</p>
+          <a href="tel:+19853339762" className="mb-3 sm:mb-2 text-lg sm:text-xl text-white font-bold hover:text-[#FF6B00] transition-colors block py-2 min-h-[44px] flex items-center">
             +1 985-333-9762
           </a>
-          <a href="mailto:partyonwheelspow@gmail.com" className="text-sm hover:text-[#39FF14] transition-colors">
+          <a href="mailto:partyonwheelspow@gmail.com" className="text-sm hover:text-[#39FF14] transition-colors inline-block py-2 min-h-[44px] flex items-center">
             partyonwheelspow@gmail.com
           </a>
         </div>
       </div>
 
-      <div className="max-w-[1600px] mx-auto mt-20 pt-8 border-t border-gray-800">
-        <div className="flex flex-col items-center gap-2 text-sm text-center">
+      <div className="max-w-[1600px] mx-auto mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-gray-800">
+        <div className="flex flex-col items-center gap-3 sm:gap-2 text-xs sm:text-sm text-center px-4">
           <p className="text-gray-400">
             Serving All Of Southern Louisiana - <a href="tel:+19853339762" className="text-white hover:text-[#FF6B00] transition-colors font-bold">+1 985-333-9762</a> - <a href="mailto:partyonwheelspow@gmail.com" className="hover:text-[#39FF14] transition-colors">partyonwheelspow@gmail.com</a>
           </p>

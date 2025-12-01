@@ -110,13 +110,13 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow }) => {
       <div className={`fixed inset-0 bg-white z-40 flex flex-col justify-center items-center transition-all duration-500 ease-in-out ${
           mobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-10 pointer-events-none'
       }`}>
-          <div className="flex flex-col items-center space-y-8 text-4xl font-bold font-serif text-gray-900 uppercase">
-            <a href="#fleet" onClick={(e) => handleLinkClick(e, 'fleet')} className="hover:text-[#FF6B00] transition-colors">Our Buses</a>
-            <a href="#how-it-works" onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors">How It Works</a>
-            <a href="#events" onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors">Events</a>
-            <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors">FAQ</a>
-            <a 
-                href="#fleet" 
+          <div className="flex flex-col items-center space-y-6 text-3xl sm:text-4xl font-bold font-serif text-gray-900 uppercase px-6">
+            <a href="#fleet" onClick={(e) => handleLinkClick(e, 'fleet')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Our Buses</a>
+            <a href="#how-it-works" onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">How It Works</a>
+            <a href="#events" onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Events</a>
+            <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">FAQ</a>
+            <a
+                href="#fleet"
                 onClick={(e) => {
                   e.preventDefault();
                   if (onBookNow) {
@@ -124,8 +124,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow }) => {
                   } else {
                     handleLinkClick(e, 'fleet');
                   }
-                }} 
-                className="bg-[#FF6B00] text-white px-8 py-4 text-2xl mt-8 -skew-x-12"
+                }}
+                className="bg-[#FF6B00] text-white px-10 py-5 text-xl sm:text-2xl mt-8 -skew-x-12 min-h-[56px] flex items-center justify-center"
             >
                 <span className="skew-x-12 inline-block">Book A Ride</span>
             </a>
