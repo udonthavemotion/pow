@@ -74,26 +74,26 @@ const Hero: React.FC<HeroProps> = ({ onBookNow }) => {
       <div className="absolute top-0 left-0 w-[400px] h-[400px] sm:w-[800px] sm:h-[800px] bg-purple-600 rounded-full mix-blend-screen filter blur-[150px] opacity-20 animate-pulse"></div>
       <div className="absolute bottom-0 right-0 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-yellow-400 rounded-full mix-blend-screen filter blur-[120px] opacity-15 animate-pulse" style={{ animationDelay: '2s' }}></div>
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-20 sm:pt-24 md:pt-28 pb-20 sm:pb-12">
+      {/* Content - Optimized for full visibility on initial load */}
+      <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-12">
         <div className={`max-w-5xl mx-auto w-full transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <span className="block text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.3em] text-yellow-400 mb-4 sm:mb-6 md:mb-8 drop-shadow-lg animate-fade-in-up">
+          <span className="block text-sm sm:text-lg md:text-2xl lg:text-3xl font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.3em] text-yellow-400 mb-3 sm:mb-4 md:mb-6 drop-shadow-lg animate-fade-in-up">
             Houma • Thibodaux • New Orleans
           </span>
 
           {/* Enhanced Typography - Luxury Purple & Gold - Mobile Optimized */}
-          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-black text-white leading-[0.9] mb-4 sm:mb-6 md:mb-8 drop-shadow-2xl font-['Bebas_Neue'] tracking-tight animate-fade-in-up px-2" style={{ animationDelay: '0.1s' }}>
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-black text-white leading-[0.9] mb-3 sm:mb-4 md:mb-6 drop-shadow-2xl font-['Bebas_Neue'] tracking-tight animate-fade-in-up px-2" style={{ animationDelay: '0.1s' }}>
             LET THE GOOD <br/>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-purple-300 to-yellow-400">TIMES ROLL</span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl lg:text-3xl text-gray-100 font-semibold mb-6 sm:mb-8 md:mb-12 drop-shadow-lg px-2 sm:px-4 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <p className="max-w-2xl mx-auto text-base sm:text-lg md:text-xl lg:text-3xl text-gray-100 font-semibold mb-4 sm:mb-6 md:mb-8 drop-shadow-lg px-2 sm:px-4 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             The most luxurious party buses in South Louisiana. <br className="hidden sm:block"/>
             <span className="text-yellow-400">Premium sound, VIP vibes, unforgettable nights.</span>
           </p>
 
           {/* Enhanced CTA Buttons - Luxury Gradient - Mobile Optimized */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-2 sm:px-4 mb-8 sm:mb-12 md:mb-16 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-2 sm:px-4 mb-4 sm:mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             <a
                 href="#fleet"
                 onClick={(e) => handleNavClick(e, 'fleet')}

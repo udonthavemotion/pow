@@ -180,21 +180,6 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
                             {bus.description}
                           </p>
 
-                          {/* Features Pills - Premium Design */}
-                          <div className="flex flex-wrap gap-2 mb-7">
-                            {bus.features.slice(0, 4).map((feature, idx) => (
-                              <span
-                                key={idx}
-                                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-purple-600/30 backdrop-blur-sm border border-purple-400/30 rounded-lg text-xs font-semibold text-purple-200 uppercase tracking-wider hover:bg-purple-600/40 hover:border-purple-400/50 transition-all duration-300"
-                              >
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3.5 h-3.5 text-yellow-400">
-                                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                                </svg>
-                                {feature}
-                              </span>
-                            ))}
-                          </div>
-
                           {/* Book Button - Maximum Impact Design - Mobile Optimized */}
                           <div className="mt-auto">
                               <button
@@ -216,14 +201,6 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
                                     </svg>
                                   </span>
                               </button>
-
-                              {/* Minimum Hours Notice - Professional Detail */}
-                              <div className="mt-3 text-center">
-                                <p className="text-xs text-gray-400 tracking-wide">
-                                  <span className="text-purple-300 font-semibold">{bus.minHours} hour minimum</span>
-                                  {' '} • View full details
-                                </p>
-                              </div>
                           </div>
                       </div>
 
