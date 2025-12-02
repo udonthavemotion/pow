@@ -57,24 +57,24 @@ const FAQ: React.FC = () => {
     <section id="faq" className="py-16 sm:py-24 px-4 sm:px-6 md:px-12 bg-white">
       <div className="max-w-[1000px] mx-auto">
         <div className="text-center mb-12 sm:mb-16">
-          <span className="text-[#FF6B00] font-bold tracking-widest uppercase text-sm sm:text-lg mb-3 sm:mb-4 block">Got Questions?</span>
+          <span className="text-purple-600 font-bold tracking-widest uppercase text-sm sm:text-lg mb-3 sm:mb-4 block">Got Questions?</span>
           <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4">
             Frequently Asked Questions
           </h2>
-          <div className="w-20 sm:w-24 h-2 bg-[#39FF14] mx-auto mt-3 sm:mt-4"></div>
+          <div className="w-20 sm:w-24 h-2 bg-gradient-to-r from-purple-500 to-yellow-400 mx-auto mt-3 sm:mt-4"></div>
         </div>
 
         <div className="space-y-3 sm:space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:border-[#FF6B00]"
+              className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:border-purple-500"
             >
               <button
                 onClick={() => toggleFAQ(index)}
                 className="w-full px-4 sm:px-6 py-4 sm:py-5 min-h-[56px] text-left flex justify-between items-center focus:outline-none group"
               >
-                <span className="font-bold text-gray-900 text-base sm:text-lg pr-6 sm:pr-8 group-hover:text-[#FF6B00] transition-colors">
+                <span className="font-bold text-gray-900 text-base sm:text-lg pr-6 sm:pr-8 group-hover:text-purple-600 transition-colors">
                   {faq.question}
                 </span>
                 <svg
@@ -83,7 +83,7 @@ const FAQ: React.FC = () => {
                   viewBox="0 0 24 24"
                   strokeWidth={2.5}
                   stroke="currentColor"
-                  className={`w-6 h-6 sm:w-7 sm:h-7 text-[#FF6B00] flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-6 h-6 sm:w-7 sm:h-7 text-purple-600 flex-shrink-0 transition-transform duration-300 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
                 >
@@ -112,16 +112,16 @@ const FAQ: React.FC = () => {
           </div>
 
           <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-0">
-            {/* Left Side - Orange Section */}
-            <div className="bg-gradient-to-br from-[#FF6B00] to-[#e56000] p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden">
+            {/* Left Side - Purple Section */}
+            <div className="bg-gradient-to-br from-purple-600 to-purple-800 p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden">
               {/* Decorative Elements */}
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#39FF14] rounded-full opacity-10 blur-3xl"></div>
+              <div className="absolute -top-20 -right-20 w-64 h-64 bg-yellow-400 rounded-full opacity-10 blur-3xl"></div>
               <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-black rounded-full opacity-10 blur-2xl"></div>
 
               <div className="relative z-10">
                 {/* Phone Icon */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-full flex items-center justify-center mb-6 shadow-xl animate-pulse">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8 sm:w-10 sm:h-10 text-[#FF6B00]">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center mb-6 shadow-xl shadow-yellow-500/50 animate-pulse">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-8 h-8 sm:w-10 sm:h-10 text-black">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
                   </svg>
                 </div>
@@ -135,23 +135,23 @@ const FAQ: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Side - Green/White Section */}
+            {/* Right Side - Gold/White Section */}
             <div className="bg-gradient-to-br from-gray-50 to-white p-8 sm:p-10 flex flex-col justify-center items-center text-center relative">
               {/* Decorative Elements */}
-              <div className="absolute top-0 right-0 w-32 h-32 border-r-4 border-t-4 border-[#39FF14] opacity-30"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 border-l-4 border-b-4 border-[#FF6B00] opacity-30"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 border-r-4 border-t-4 border-yellow-400 opacity-30"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 border-l-4 border-b-4 border-purple-600 opacity-30"></div>
 
               <div className="relative z-10 w-full max-w-sm">
                 <div className="mb-6">
-                  <p className="text-gray-600 font-bold uppercase tracking-wider text-sm mb-2">Ready to Party?</p>
+                  <p className="text-purple-600 font-bold uppercase tracking-wider text-sm mb-2">Ready to Party?</p>
                   <p className="text-5xl sm:text-6xl font-black text-gray-900 font-['Bebas_Neue'] mb-2">Let's Talk!</p>
-                  <div className="w-20 h-1 bg-gradient-to-r from-[#FF6B00] to-[#39FF14] mx-auto"></div>
+                  <div className="w-20 h-1 bg-gradient-to-r from-purple-600 to-yellow-400 mx-auto"></div>
                 </div>
 
                 {/* Call Button */}
                 <a
                   href="tel:+19853339762"
-                  className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#FF6B00] to-[#39FF14] text-white px-8 py-5 font-black uppercase tracking-widest rounded-xl hover:shadow-2xl hover:shadow-[#FF6B00]/30 transition-all duration-300 hover:-translate-y-1 text-base sm:text-lg w-full overflow-hidden"
+                  className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 to-yellow-400 text-white px-8 py-5 font-black uppercase tracking-widest rounded-xl hover:shadow-2xl hover:shadow-purple-600/30 transition-all duration-300 hover:-translate-y-1 text-base sm:text-lg w-full overflow-hidden"
                 >
                   <span className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300">
@@ -163,7 +163,7 @@ const FAQ: React.FC = () => {
                 {/* Additional Contact Options */}
                 <div className="mt-6 flex items-center justify-center gap-4 text-sm text-gray-500">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-[#39FF14] rounded-full animate-pulse"></span>
+                    <span className="w-2 h-2 bg-purple-600 rounded-full animate-pulse"></span>
                     <span>Available 24/7</span>
                   </div>
                   <span className="text-gray-300">|</span>
