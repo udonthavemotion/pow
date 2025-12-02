@@ -55,7 +55,7 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
     <section
       ref={sectionRef}
       id="fleet"
-      className="py-20 sm:py-32 px-4 sm:px-6 md:px-12 lg:px-16 bg-gradient-to-b from-[#0F0A1F] via-[#1A1425] to-[#0F0A1F] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-32 px-4 sm:px-6 md:px-12 lg:px-16 bg-gradient-to-b from-[#0F0A1F] via-[#1A1425] to-[#0F0A1F] relative overflow-hidden"
     >
       {/* Luxury Purple & Gold Background Accents - Enhanced */}
       <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-purple-600 rounded-full mix-blend-screen filter blur-[140px] opacity-[0.12] animate-pulse"></div>
@@ -82,8 +82,8 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
             <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" style={{ animationDelay: '1s' }}></div>
           </div>
 
-          {/* Main Title - Enhanced with Better Gradient */}
-          <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-yellow-400 font-['Bebas_Neue'] tracking-tight leading-none drop-shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+          {/* Main Title - Enhanced with Better Gradient - Mobile Optimized */}
+          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-purple-400 to-yellow-400 font-['Bebas_Neue'] tracking-tight leading-none drop-shadow-[0_0_30px_rgba(168,85,247,0.4)] px-2">
             THE FLEET
           </h2>
 
@@ -127,13 +127,14 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
                     {/* Inner Frosted Glass Card */}
                     <div className="relative rounded-3xl overflow-hidden bg-black/40 backdrop-blur-2xl flex flex-col border border-white/10 group-hover:border-white/20 transition-all duration-700">
 
-                      {/* Image Section - Enhanced */}
+                      {/* Image Section - Enhanced - Mobile Optimized */}
                       <div className="relative w-full aspect-[16/10] overflow-hidden">
                           <img
                             src={bus.imageUrl}
                             alt={`${bus.name} - Luxury party bus`}
                             className="w-full h-full object-cover transition-transform duration-[1000ms] ease-out group-hover:scale-110"
                             loading="lazy"
+                            style={{ maxWidth: '100%', height: 'auto' }}
                           />
 
                           {/* Premium Glassmorphism Overlay - Enhanced */}
@@ -194,12 +195,12 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
                             ))}
                           </div>
 
-                          {/* Book Button - Maximum Impact Design */}
+                          {/* Book Button - Maximum Impact Design - Mobile Optimized */}
                           <div className="mt-auto">
                               <button
                                   onClick={() => onBusClick(bus)}
                                   aria-label={`Book ${bus.name} luxury party bus`}
-                                  className="relative w-full py-5 sm:py-6 min-h-[64px] bg-gradient-to-r from-purple-600 via-purple-500 to-yellow-400 text-white font-black uppercase tracking-[0.2em] hover:shadow-2xl hover:shadow-purple-500/60 transition-all duration-500 rounded-xl text-sm sm:text-base overflow-hidden group/btn"
+                                  className="relative w-full py-4 sm:py-5 md:py-6 min-h-[56px] sm:min-h-[64px] bg-gradient-to-r from-purple-600 via-purple-500 to-yellow-400 text-white font-black uppercase tracking-[0.2em] hover:shadow-2xl hover:shadow-purple-500/60 transition-all duration-500 rounded-xl text-sm sm:text-base overflow-hidden group/btn"
                               >
                                   {/* Animated Shine Effect */}
                                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover/btn:translate-x-[200%] transition-transform duration-1000"></span>

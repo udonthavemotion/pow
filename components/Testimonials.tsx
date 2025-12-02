@@ -69,7 +69,7 @@ const Testimonials: React.FC = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <span className="text-yellow-400 font-bold tracking-widest uppercase text-lg mb-4 block">What People Say</span>
-          <h2 className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-300 to-yellow-400 font-['Bebas_Neue'] uppercase mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-300 to-yellow-400 font-['Bebas_Neue'] uppercase mb-4">
             Who Dat Says
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-yellow-400 mx-auto mt-4 rounded-full"></div>

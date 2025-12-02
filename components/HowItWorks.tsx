@@ -64,7 +64,7 @@ const HowItWorks: React.FC = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <span className="text-[#FF6B00] font-bold tracking-widest uppercase text-sm sm:text-lg mb-3 sm:mb-4 block">Simple Process</span>
-          <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4">
             How It Works
           </h2>
           <div className="w-20 sm:w-24 h-2 bg-[#39FF14] mx-auto mt-3 sm:mt-4"></div>
@@ -105,11 +105,11 @@ const HowItWorks: React.FC = () => {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-12 sm:mt-16">
+        {/* CTA - Mobile Optimized */}
+        <div className="text-center mt-12 sm:mt-16 px-4">
           <a
             href="#fleet"
-            className="inline-block bg-[#FF6B00] text-white px-8 sm:px-10 py-4 sm:py-5 min-h-[56px] font-bold uppercase tracking-widest text-base sm:text-lg hover:bg-[#e56000] transition-colors -skew-x-12 shadow-lg hover:shadow-xl"
+            className="inline-block bg-[#FF6B00] text-white px-6 sm:px-8 md:px-10 py-4 sm:py-5 min-h-[56px] font-bold uppercase tracking-widest text-base sm:text-lg hover:bg-[#e56000] transition-colors -skew-x-12 shadow-lg hover:shadow-xl w-full sm:w-auto"
           >
             <span className="block skew-x-12">Get Started Now</span>
           </a>

@@ -45,7 +45,7 @@ const Events: React.FC = () => {
         }`}>
             <div className="max-w-2xl">
                 <span className="block text-xs sm:text-sm font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-[#FF6B00] mb-3 sm:mb-4">What We Do</span>
-                <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-gray-900 font-['Bebas_Neue'] uppercase">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-gray-900 font-['Bebas_Neue'] uppercase">
                     We Roll For <br/> Any Occasion
                 </h2>
             </div>
@@ -87,8 +87,8 @@ const Events: React.FC = () => {
         </div>
 
         <div className="mt-12 sm:mt-16 text-center px-4">
-            <p className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 uppercase">Got a crazy idea? We can handle it.</p>
-            <a href="#fleet" className="inline-block border-b-2 sm:border-b-4 border-[#FF6B00] text-2xl sm:text-3xl font-black text-gray-900 uppercase hover:text-[#FF6B00] transition-colors py-2 min-h-[44px] flex items-center justify-center">
+            <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 uppercase">Got a crazy idea? We can handle it.</p>
+            <a href="#fleet" className="inline-block border-b-2 sm:border-b-4 border-[#FF6B00] text-xl sm:text-2xl md:text-3xl font-black text-gray-900 uppercase hover:text-[#FF6B00] transition-colors py-3 sm:py-2 min-h-[56px] flex items-center justify-center w-full sm:w-auto">
                 Book Your Custom Ride
             </a>
         </div>

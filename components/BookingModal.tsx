@@ -79,17 +79,17 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 bg-black/95 backdrop-blur-xl animate-fade-in-up sm:overflow-hidden overflow-y-auto"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 bg-black/95 backdrop-blur-xl animate-fade-in-up overflow-y-auto"
       onClick={onClose}
     >
       <div
         className="bg-gradient-to-b from-[#1A1425] to-black w-full min-h-full sm:h-full sm:max-w-7xl sm:max-h-[95vh] sm:rounded-3xl sm:overflow-hidden flex flex-col shadow-[0_0_100px_rgba(147,51,234,0.4)] sm:border-2 border-2 border-purple-500/60 animate-fade-in-up relative"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button - Top Right - Luxury Style */}
+        {/* Close Button - Top Right - Luxury Style - Mobile Optimized */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-purple-600 to-yellow-400 hover:from-yellow-400 hover:to-purple-600 text-white flex items-center justify-center transition-all duration-300 hover:rotate-90 hover:scale-110 shadow-lg shadow-purple-500/50 group"
+          className="absolute top-2 right-2 sm:top-4 sm:right-4 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-purple-600 to-yellow-400 hover:from-yellow-400 hover:to-purple-600 text-white flex items-center justify-center transition-all duration-300 hover:rotate-90 hover:scale-110 shadow-lg shadow-purple-500/50 group min-h-[48px] min-w-[48px]"
           aria-label="Close modal"
         >
           <svg
@@ -107,8 +107,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
         {/* Main Content Container */}
         <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
 
-          {/* LEFT SIDE - Bus Showcase */}
-          <div className="lg:w-2/5 bg-gradient-to-br from-[#1A1425] via-[#0F0A1F] to-black p-4 sm:p-6 lg:p-8 flex flex-col justify-between relative overflow-hidden lg:border-r-2 border-b-2 lg:border-b-0 border-purple-500/50 max-h-[40vh] lg:max-h-full">
+          {/* LEFT SIDE - Bus Showcase - Mobile Optimized */}
+          <div className="lg:w-2/5 bg-gradient-to-br from-[#1A1425] via-[#0F0A1F] to-black p-3 sm:p-4 md:p-6 lg:p-8 flex flex-col justify-between relative overflow-hidden lg:border-r-2 border-b-2 lg:border-b-0 border-purple-500/50 max-h-[35vh] sm:max-h-[40vh] lg:max-h-full">
 
             {/* Luxury Background Accents */}
             <div className="absolute top-0 left-0 w-72 h-72 bg-purple-600 opacity-15 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
@@ -234,12 +234,12 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
             </div>
           </div>
 
-          {/* RIGHT SIDE - Calendar */}
-          <div className="lg:w-3/5 flex flex-col bg-white sm:overflow-hidden overflow-visible flex-1">
+          {/* RIGHT SIDE - Calendar - Mobile Optimized */}
+          <div className="lg:w-3/5 flex flex-col bg-white overflow-visible sm:overflow-hidden flex-1">
 
-            {/* Calendar Header */}
-            <div className="bg-gradient-to-r from-purple-900 to-black border-b-2 border-purple-500/50 p-3 sm:p-4 lg:p-6">
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase text-white font-['Bebas_Neue'] tracking-wide">
+            {/* Calendar Header - Mobile Optimized */}
+            <div className="bg-gradient-to-r from-purple-900 to-black border-b-2 border-purple-500/50 p-3 sm:p-4 lg:p-6 flex-shrink-0">
+              <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black uppercase text-white font-['Bebas_Neue'] tracking-wide">
                 {isServiceMenu ? 'Select Your Service' : 'Choose Your Party Date'}
               </h3>
               <p className="text-gray-400 text-xs sm:text-sm mt-1">
@@ -247,10 +247,10 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
               </p>
             </div>
 
-            {/* Calendar Container */}
-            <div className="flex-1 bg-white p-0 sm:p-3 sm:p-4 lg:p-6 overflow-y-visible sm:overflow-y-auto min-h-0">
+            {/* Calendar Container - Mobile Optimized */}
+            <div className="flex-1 bg-white p-0 sm:p-3 md:p-4 lg:p-6 overflow-y-visible sm:overflow-y-auto min-h-0 w-full">
               {(isServiceMenu ? serviceMenuEmbedCode : bus?.calendarEmbedCode) ? (
-                <section id="pow-booking-section" className="pow-booking w-full h-full">
+                <section id="pow-booking-section" className="pow-booking w-full h-full min-h-[600px] sm:min-h-[500px]">
                   <div 
                     ref={iframeContainerRef}
                     className="pow-booking-frame-wrapper w-full overflow-visible"
@@ -358,7 +358,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
 
           <button
             onClick={onClose}
-            className="text-purple-400 hover:text-white font-black uppercase text-sm transition-colors tracking-wider px-4 py-2 border-2 border-purple-500/50 hover:bg-purple-600 hover:border-yellow-400 rounded"
+            className="text-purple-400 hover:text-white font-black uppercase text-sm transition-colors tracking-wider px-4 py-2 border-2 border-purple-500/50 hover:bg-purple-600 hover:border-yellow-400 rounded min-h-[44px] flex items-center justify-center"
           >
             Close
           </button>

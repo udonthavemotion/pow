@@ -53,20 +53,20 @@ const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
         <div className="md:col-span-3">
           <h4 className="font-bold text-white mb-5 sm:mb-6 tracking-wide text-sm uppercase">Quick Links</h4>
           <ul className="space-y-3 sm:space-y-4 font-medium text-sm sm:text-base">
-            <li><a href="#fleet" onClick={(e) => onLinkClick(e, 'fleet')} className="hover:text-yellow-400 transition-colors inline-block py-1 min-h-[44px] flex items-center">Our Fleet</a></li>
-            <li><a href="#how-it-works" onClick={(e) => onLinkClick(e, 'how-it-works')} className="hover:text-yellow-400 transition-colors inline-block py-1 min-h-[44px] flex items-center">How It Works</a></li>
-            <li><a href="#events" onClick={(e) => onLinkClick(e, 'events')} className="hover:text-yellow-400 transition-colors inline-block py-1 min-h-[44px] flex items-center">Events</a></li>
-            <li><a href="#faq" onClick={(e) => onLinkClick(e, 'faq')} className="hover:text-yellow-400 transition-colors inline-block py-1 min-h-[44px] flex items-center">FAQ</a></li>
+            <li><a href="#fleet" onClick={(e) => onLinkClick(e, 'fleet')} className="hover:text-yellow-400 transition-colors inline-block py-2 min-h-[48px] flex items-center">Our Fleet</a></li>
+            <li><a href="#how-it-works" onClick={(e) => onLinkClick(e, 'how-it-works')} className="hover:text-yellow-400 transition-colors inline-block py-2 min-h-[48px] flex items-center">How It Works</a></li>
+            <li><a href="#events" onClick={(e) => onLinkClick(e, 'events')} className="hover:text-yellow-400 transition-colors inline-block py-2 min-h-[48px] flex items-center">Events</a></li>
+            <li><a href="#faq" onClick={(e) => onLinkClick(e, 'faq')} className="hover:text-yellow-400 transition-colors inline-block py-2 min-h-[48px] flex items-center">FAQ</a></li>
           </ul>
         </div>
 
         <div className="md:col-span-4">
           <h4 className="font-bold text-white mb-5 sm:mb-6 tracking-wide text-sm uppercase">Contact Us</h4>
           <p className="mb-3 sm:mb-2 text-sm sm:text-base">Serving All Of Southern Louisiana</p>
-          <a href="tel:+19853339762" className="mb-3 sm:mb-2 text-lg sm:text-xl text-white font-bold hover:text-yellow-400 transition-colors block py-2 min-h-[44px] flex items-center">
+          <a href="tel:+19853339762" className="mb-3 sm:mb-2 text-base sm:text-lg md:text-xl text-white font-bold hover:text-yellow-400 transition-colors block py-2 min-h-[48px] flex items-center">
             +1 985-333-9762
           </a>
-          <a href="mailto:partyonwheelspow@gmail.com" className="text-sm hover:text-yellow-400 transition-colors inline-block py-2 min-h-[44px] flex items-center">
+          <a href="mailto:partyonwheelspow@gmail.com" className="text-sm hover:text-yellow-400 transition-colors inline-block py-2 min-h-[48px] flex items-center break-all">
             partyonwheelspow@gmail.com
           </a>
         </div>
