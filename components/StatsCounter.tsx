@@ -69,17 +69,17 @@ const StatsCounter: React.FC<StatsCounterProps> = ({ stats }) => {
   };
 
   return (
-    <div ref={sectionRef} className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 md:gap-16">
+    <div ref={sectionRef} className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 md:gap-12 lg:gap-16 px-2 sm:px-0">
       {stats.map((stat, index) => (
         <div
           key={index}
           className="text-center group"
         >
-          <div className="text-5xl sm:text-6xl mb-4 drop-shadow-lg">{stat.icon}</div>
-          <div className="text-5xl sm:text-6xl md:text-7xl font-black text-white font-['Bebas_Neue'] mb-3 drop-shadow-2xl">
+          <div className="text-4xl sm:text-5xl md:text-6xl mb-3 sm:mb-4 drop-shadow-lg">{stat.icon}</div>
+          <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white font-['Bebas_Neue'] mb-2 sm:mb-3 drop-shadow-2xl">
             {counters[index]}{stat.suffix}
           </div>
-          <div className="text-white/90 text-sm sm:text-base font-bold uppercase tracking-widest drop-shadow-lg">
+          <div className="text-white/90 text-xs sm:text-sm md:text-base font-bold uppercase tracking-widest drop-shadow-lg px-2">
             {stat.label}
           </div>
         </div>

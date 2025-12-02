@@ -103,7 +103,7 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
         </div>
 
         {/* Premium Glassmorphism Bus Cards - Optimized for 2-Card Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 xl:gap-16 max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-14 xl:gap-16 max-w-[1200px] mx-auto px-2 sm:px-0">
           {BUSES.map((bus, index) => (
             <div
                 key={bus.id}
@@ -140,20 +140,20 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
                           {/* Premium Glassmorphism Overlay - Enhanced */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-purple-900/30 to-transparent"></div>
 
-                          {/* Capacity Badge - Premium Glassmorphism */}
-                          <div className="absolute top-5 right-5 bg-gradient-to-br from-purple-600/90 to-purple-700/90 backdrop-blur-xl text-white font-bold px-5 py-3 rounded-xl text-sm uppercase tracking-[0.15em] border border-yellow-400/50 shadow-lg shadow-purple-500/50 group-hover:scale-105 transition-transform duration-500">
-                              <div className="flex items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-yellow-400">
+                          {/* Capacity Badge - Premium Glassmorphism - Mobile Optimized */}
+                          <div className="absolute top-3 right-3 sm:top-5 sm:right-5 bg-gradient-to-br from-purple-600/90 to-purple-700/90 backdrop-blur-xl text-white font-bold px-3 py-2 sm:px-5 sm:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm uppercase tracking-[0.15em] border border-yellow-400/50 shadow-lg shadow-purple-500/50 group-hover:scale-105 transition-transform duration-500">
+                              <div className="flex items-center gap-1.5 sm:gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400">
                                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                                 </svg>
                                 <span>{bus.capacity} Guests</span>
                               </div>
                           </div>
 
-                          {/* Pricing Badge - New Premium Addition */}
-                          <div className="absolute top-5 left-5 bg-gradient-to-br from-yellow-400/95 to-yellow-500/95 backdrop-blur-xl text-purple-950 font-black px-5 py-3 rounded-xl shadow-lg shadow-yellow-400/50 group-hover:scale-105 transition-transform duration-500">
-                            <div className="text-xs uppercase tracking-wider opacity-90">From</div>
-                            <div className="text-2xl font-['Bebas_Neue'] leading-none tracking-tight">${bus.hourlyRate}/hr</div>
+                          {/* Pricing Badge - New Premium Addition - Mobile Optimized */}
+                          <div className="absolute top-3 left-3 sm:top-5 sm:left-5 bg-gradient-to-br from-yellow-400/95 to-yellow-500/95 backdrop-blur-xl text-purple-950 font-black px-3 py-2 sm:px-5 sm:py-3 rounded-lg sm:rounded-xl shadow-lg shadow-yellow-400/50 group-hover:scale-105 transition-transform duration-500">
+                            <div className="text-[10px] sm:text-xs uppercase tracking-wider opacity-90">From</div>
+                            <div className="text-xl sm:text-2xl font-['Bebas_Neue'] leading-none tracking-tight">${bus.hourlyRate}/hr</div>
                           </div>
 
                           {/* Decorative Corner Accents - Enhanced */}
@@ -161,22 +161,22 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
                           <div className="absolute bottom-5 right-5 w-16 h-16 border-r-[3px] border-b-[3px] border-yellow-400/60 opacity-70 rounded-br-lg group-hover:border-yellow-400/90 transition-all duration-500"></div>
                       </div>
 
-                      {/* Details Section - Enhanced Layout & Typography */}
-                      <div className="p-7 sm:p-9 flex-1 flex flex-col relative bg-gradient-to-b from-purple-900/20 via-purple-900/10 to-black/40 backdrop-blur-sm">
+                      {/* Details Section - Enhanced Layout & Typography - Mobile Optimized */}
+                      <div className="p-5 sm:p-7 md:p-9 flex-1 flex flex-col relative bg-gradient-to-b from-purple-900/20 via-purple-900/10 to-black/40 backdrop-blur-sm">
 
-                          {/* Name & Tagline Section - Improved Hierarchy */}
-                          <div className="mb-5">
-                              <h3 className="text-4xl sm:text-5xl font-black text-white uppercase font-['Bebas_Neue'] leading-none drop-shadow-[0_2px_20px_rgba(168,85,247,0.5)] mb-2 tracking-tight">
+                          {/* Name & Tagline Section - Improved Hierarchy - Mobile Optimized */}
+                          <div className="mb-4 sm:mb-5">
+                              <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-white uppercase font-['Bebas_Neue'] leading-none drop-shadow-[0_2px_20px_rgba(168,85,247,0.5)] mb-2 tracking-tight">
                                 {bus.name}
                               </h3>
-                              <p className="text-yellow-400 font-bold tracking-wide uppercase text-sm sm:text-base flex items-center gap-2">
-                                <span className="w-8 h-[2px] bg-gradient-to-r from-yellow-400 to-transparent"></span>
+                              <p className="text-yellow-400 font-bold tracking-wide uppercase text-xs sm:text-sm md:text-base flex items-center gap-2">
+                                <span className="w-6 sm:w-8 h-[2px] bg-gradient-to-r from-yellow-400 to-transparent"></span>
                                 {bus.tagline}
                               </p>
                           </div>
 
-                          {/* Description - Enhanced Readability */}
-                          <p className="text-gray-300 mb-6 text-sm sm:text-base leading-relaxed line-clamp-3 font-light">
+                          {/* Description - Enhanced Readability - Mobile Optimized */}
+                          <p className="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed line-clamp-3 font-light">
                             {bus.description}
                           </p>
 

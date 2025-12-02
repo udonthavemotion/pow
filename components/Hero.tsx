@@ -70,9 +70,9 @@ const Hero: React.FC<HeroProps> = ({ onBookNow }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/60 via-black/40 to-black/90"></div>
       </div>
 
-      {/* Luxury Background Accents - Reduced size on mobile */}
-      <div className="absolute top-0 left-0 w-[400px] h-[400px] sm:w-[800px] sm:h-[800px] bg-purple-600 rounded-full mix-blend-screen filter blur-[150px] opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-yellow-400 rounded-full mix-blend-screen filter blur-[120px] opacity-15 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      {/* Luxury Background Accents - Reduced size on mobile - Performance Optimized */}
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] sm:w-[800px] sm:h-[800px] bg-purple-600 rounded-full mix-blend-screen filter blur-[150px] opacity-20 animate-pulse will-change-auto"></div>
+      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] bg-yellow-400 rounded-full mix-blend-screen filter blur-[120px] opacity-15 animate-pulse will-change-auto" style={{ animationDelay: '2s' }}></div>
 
       {/* Content - Optimized for full visibility on initial load */}
       <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4 sm:px-6 pt-16 sm:pt-20 md:pt-24 pb-8 sm:pb-12">
