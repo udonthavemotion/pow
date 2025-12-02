@@ -420,7 +420,8 @@ video {
 @media (max-width: 768px) {
   .pow-hero__overlay {
     display: block;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.25));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+    z-index: 5;
   }
 }
 
@@ -433,45 +434,70 @@ video {
     min-height: 100dvh; /* Dynamic viewport height for mobile */
   }
 
+  /* Reduce background video/image opacity on mobile for better text contrast */
+  .pow-hero video,
+  .pow-hero img {
+    opacity: 0.35 !important;
+  }
+
   .pow-hero__content {
-    padding: 1.5rem;
-    padding-top: calc(6rem + 85px); /* Account for fixed navbar, more top space */
+    padding: 0 1rem;
+    padding-top: calc(5rem + 85px); /* Account for fixed navbar */
+    padding-bottom: 2rem;
     justify-content: flex-start;
     align-items: center;
+  }
+
+  .pow-hero__content > div {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
   }
 }
 
 /* Hero Typography - Mobile */
 @media (max-width: 768px) {
   .pow-hero__title {
-    font-size: clamp(36px, 8vw, 48px) !important;
-    line-height: 1.1 !important;
+    font-size: clamp(42px, 12vw, 64px) !important;
+    line-height: 1.05 !important;
     text-align: center !important;
-    font-weight: 800 !important;
+    font-weight: 900 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.04em !important;
-    margin-bottom: 1.25rem !important;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5) !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 1.5rem !important;
+    padding: 0 !important;
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.7) !important;
   }
 
   .pow-hero__title br {
     display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .pow-hero__title span {
+    display: block;
+    margin-top: 0.25rem;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-image: linear-gradient(to right, #a78bfa, #c4b5fd, #fbbf24) !important;
   }
 
   .pow-hero__subtitle {
-    font-size: 15px !important;
-    line-height: 1.5 !important;
+    font-size: 16px !important;
+    line-height: 1.6 !important;
     text-align: center !important;
-    max-width: 20rem !important;
-    margin: 0 auto 1.75rem !important;
-    padding: 0 0.5rem !important;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8) !important;
+    max-width: 100% !important;
+    margin: 0 auto 2rem !important;
+    padding: 0 0.25rem !important;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9) !important;
   }
 
   .pow-hero__location {
-    font-size: 11px !important;
-    margin-bottom: 1.25rem !important;
-    letter-spacing: 0.1em !important;
+    font-size: 10px !important;
+    margin-bottom: 1.5rem !important;
+    letter-spacing: 0.12em !important;
+    opacity: 0.9;
   }
 }
 
@@ -480,58 +506,70 @@ video {
   .pow-hero__cta-row {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
+    gap: 14px !important;
     align-items: stretch !important;
     width: 100% !important;
     max-width: 100% !important;
     padding: 0 !important;
-    margin-bottom: 2rem !important;
+    margin: 0 auto 2.5rem !important;
   }
 
   .pow-hero__btn {
     width: 100% !important;
-    max-width: 20rem !important;
-    margin: 0 auto !important;
-    font-size: 15px !important;
-    padding: 0.85rem 1rem !important;
-    min-height: 48px !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    padding: 1rem 1.5rem !important;
+    min-height: 52px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .pow-hero__btn--primary {
-    box-shadow: 0 0 20px rgba(147, 51, 234, 0.4);
+    box-shadow: 0 4px 20px rgba(147, 51, 234, 0.5), 0 0 30px rgba(147, 51, 234, 0.3) !important;
+  }
+
+  .pow-hero__btn--secondary {
+    border-width: 2px !important;
   }
 
   .pow-hero__btn span {
-    font-size: 15px !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.1em !important;
   }
 }
 
 /* Stats Section - Mobile */
 @media (max-width: 768px) {
   .pow-stats {
-    padding: 1.5rem 1.5rem 2.5rem !important;
+    padding: 2rem 1rem 2.5rem !important;
     text-align: center !important;
-    margin-top: 1rem !important;
+    margin-top: 1.5rem !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2.5rem !important;
   }
 
   .pow-stats__container {
-    gap: 1.5rem !important;
+    gap: 2rem !important;
     padding: 0 !important;
   }
 
   .pow-stats__icon {
-    font-size: 2rem !important;
-    margin-bottom: 0.75rem !important;
+    font-size: 1.75rem !important;
+    margin-bottom: 0.5rem !important;
   }
 
   .pow-stats__value {
-    font-size: 2.5rem !important;
+    font-size: 2.25rem !important;
     margin-bottom: 0.5rem !important;
   }
 
   .pow-stats__label {
-    font-size: 11px !important;
-    padding: 0 0.5rem !important;
+    font-size: 10px !important;
+    padding: 0 0.25rem !important;
+    letter-spacing: 0.08em !important;
   }
 }
 

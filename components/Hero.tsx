@@ -85,7 +85,7 @@ const Hero: React.FC<HeroProps> = ({ onBookNow }) => {
           </span>
 
           {/* Enhanced Typography - Luxury Purple & Gold - Mobile Optimized */}
-          <h1 className="pow-hero__title text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-black text-white leading-[0.9] mb-3 sm:mb-4 md:mb-6 drop-shadow-2xl font-['Bebas_Neue'] tracking-tight animate-fade-in-up px-2" style={{ animationDelay: '0.1s' }}>
+          <h1 className="pow-hero__title text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] xl:text-[12rem] font-black text-white leading-[0.9] mb-3 sm:mb-4 md:mb-6 drop-shadow-2xl font-['Bebas_Neue'] tracking-tight animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
             LET THE GOOD <br/>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-purple-300 to-yellow-400">TIMES ROLL</span>
           </h1>
@@ -96,7 +96,7 @@ const Hero: React.FC<HeroProps> = ({ onBookNow }) => {
           </p>
 
           {/* Enhanced CTA Buttons - Luxury Gradient - Mobile Optimized */}
-          <div className="pow-hero__cta-row flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-2 sm:px-4 mb-4 sm:mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+          <div className="pow-hero__cta-row flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center mb-4 sm:mb-6 md:mb-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             <a
                 href="#fleet"
                 onClick={(e) => handleNavClick(e, 'fleet')}
