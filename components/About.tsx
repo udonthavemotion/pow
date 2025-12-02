@@ -55,18 +55,47 @@ const About: React.FC = () => {
           </div>
 
           <div className="mt-8 sm:mt-10">
-            <div className="flex flex-wrap gap-6 sm:gap-8 border-t border-gray-700 pt-6 sm:pt-8">
-                <div>
-                    <span className="block text-3xl sm:text-4xl font-bold text-white mb-1">4+</span>
-                    <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Custom Buses</span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+                {/* Stat Card 1 - Custom Buses */}
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B00] to-[#e56000] rounded-xl blur-sm opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+                  <div className="relative bg-gray-800 rounded-xl p-6 border-2 border-[#FF6B00] hover:border-[#39FF14] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#FF6B00]/20">
+                    <div className="flex items-center gap-4 mb-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#FF6B00] to-[#e56000] rounded-lg flex items-center justify-center text-2xl flex-shrink-0">
+                        🚌
+                      </div>
+                      <span className="text-4xl sm:text-5xl font-black text-white font-['Bebas_Neue']">4+</span>
+                    </div>
+                    <span className="text-xs sm:text-sm text-gray-300 uppercase tracking-widest font-bold">Custom Buses</span>
+                  </div>
                 </div>
-                <div>
-                    <span className="block text-3xl sm:text-4xl font-bold text-white mb-1">1000+</span>
-                    <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Parties Hosted</span>
+
+                {/* Stat Card 2 - Parties Hosted */}
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#39FF14] to-[#2dd10f] rounded-xl blur-sm opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+                  <div className="relative bg-gray-800 rounded-xl p-6 border-2 border-[#39FF14] hover:border-[#FF6B00] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#39FF14]/20">
+                    <div className="flex items-center gap-4 mb-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#39FF14] to-[#2dd10f] rounded-lg flex items-center justify-center text-2xl flex-shrink-0">
+                        🎉
+                      </div>
+                      <span className="text-4xl sm:text-5xl font-black text-white font-['Bebas_Neue']">1000+</span>
+                    </div>
+                    <span className="text-xs sm:text-sm text-gray-300 uppercase tracking-widest font-bold">Parties Hosted</span>
+                  </div>
                 </div>
-                <div>
-                    <span className="block text-3xl sm:text-4xl font-bold text-white mb-1">100%</span>
-                    <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Local</span>
+
+                {/* Stat Card 3 - Local */}
+                <div className="relative group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B00] via-[#e56000] to-[#39FF14] rounded-xl blur-sm opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
+                  <div className="relative bg-gray-800 rounded-xl p-6 border-2 border-[#FF6B00] hover:border-[#39FF14] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#FF6B00]/20">
+                    <div className="flex items-center gap-4 mb-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#FF6B00] to-[#39FF14] rounded-lg flex items-center justify-center text-2xl flex-shrink-0">
+                        📍
+                      </div>
+                      <span className="text-4xl sm:text-5xl font-black text-white font-['Bebas_Neue']">100%</span>
+                    </div>
+                    <span className="text-xs sm:text-sm text-gray-300 uppercase tracking-widest font-bold">Local</span>
+                  </div>
                 </div>
             </div>
           </div>

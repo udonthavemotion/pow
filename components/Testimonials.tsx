@@ -42,26 +42,46 @@ const Testimonials: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div 
+            <div
               key={index}
-              className="bg-gray-800 rounded-xl p-8 border border-gray-700 hover:border-[#FF6B00] transition-colors duration-300"
+              className="relative group hover:-translate-y-2 transition-all duration-300"
             >
-              {/* Stars */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="text-[#FF6B00] text-xl">★</span>
-                ))}
-              </div>
+              {/* Glow Effect */}
+              <div className="absolute -inset-1 bg-gradient-to-br from-[#FF6B00] via-[#e56000] to-[#39FF14] rounded-xl blur opacity-25 group-hover:opacity-50 transition-opacity duration-300"></div>
 
-              {/* Quote */}
-              <p className="text-gray-300 text-lg leading-relaxed mb-6 italic">
-                "{testimonial.text}"
-              </p>
+              {/* Card Content */}
+              <div className="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border-2 border-gray-700 hover:border-[#FF6B00] transition-colors duration-300 shadow-2xl">
+                {/* Decorative Quote Mark */}
+                <div className="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br from-[#FF6B00] to-[#39FF14] rounded-full flex items-center justify-center text-4xl text-black font-black shadow-lg">
+                  "
+                </div>
 
-              {/* Author */}
-              <div className="border-t border-gray-700 pt-4">
-                <p className="font-bold text-white text-lg">{testimonial.name}</p>
-                <p className="text-[#39FF14] text-sm uppercase tracking-wide">{testimonial.event}</p>
+                {/* Stars */}
+                <div className="flex gap-1 mb-6 mt-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <span key={i} className="text-[#FF6B00] text-2xl drop-shadow-lg">★</span>
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <p className="text-gray-200 text-lg leading-relaxed mb-6 font-medium">
+                  {testimonial.text}
+                </p>
+
+                {/* Author */}
+                <div className="border-t-2 border-gray-700 pt-5 mt-6 flex items-center gap-4">
+                  {/* Initial Avatar */}
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#39FF14] to-[#2dd10f] rounded-full flex items-center justify-center font-black text-xl text-black shadow-lg flex-shrink-0">
+                    {testimonial.name.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="font-bold text-white text-lg leading-tight">{testimonial.name}</p>
+                    <p className="text-[#39FF14] text-sm uppercase tracking-wider font-bold mt-1">{testimonial.event}</p>
+                  </div>
+                </div>
+
+                {/* Decorative Corner Accent */}
+                <div className="absolute bottom-3 right-3 w-8 h-8 border-r-2 border-b-2 border-[#39FF14] opacity-30"></div>
               </div>
             </div>
           ))}
