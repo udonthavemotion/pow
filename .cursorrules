@@ -1,0 +1,52 @@
+# Cursor AI Rules - Design Preferences
+
+## 🚫 NO TRANSPARENT BOXED CARDS
+
+**CRITICAL DESIGN RULE:** Never create transparent, boxed card components with glassmorphism effects.
+
+### What to Avoid:
+- Transparent backgrounds with backdrop blur (`bg-white/10 backdrop-blur-sm`, `bg-black/20 backdrop-blur-md`)
+- Rounded containers with borders (`rounded-xl`, `rounded-2xl` with `border border-white/20`)
+- Glassmorphism effects that create "floating card" appearance
+- Boxed containers that encapsulate content in transparent squares/rectangles
+
+### What to Do Instead:
+- Content sits directly on the background (flat design)
+- Use drop shadows (`drop-shadow-lg`, `drop-shadow-2xl`) for text visibility
+- Use spacing and typography hierarchy instead of containers
+- Let background gradients/patterns show through naturally
+
+### Examples:
+
+**❌ BAD:**
+```tsx
+<div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+  <h3>Title</h3>
+</div>
+```
+
+**✅ GOOD:**
+```tsx
+<div className="text-center">
+  <h3 className="text-white drop-shadow-2xl mb-4">Title</h3>
+  <p className="text-white/90 drop-shadow-lg">Content</p>
+</div>
+```
+
+### When Transparency IS Acceptable:
+- Overlays on images/videos (gradient overlays)
+- Modal backdrops (`bg-black/95` for modals)
+- Navigation bars with backdrop blur (when appropriate)
+- Background decorative elements (blurred orbs, gradients)
+
+### When Transparency is NOT Acceptable:
+- Content containers/cards
+- Stats displays
+- Feature boxes
+- Testimonial cards
+- Any component that creates a "floating box" appearance
+
+**Design Philosophy:** Prefer flat, integrated designs where content blends with the background rather than being contained in boxes.
+
+See `DESIGN_PREFERENCES.md` for detailed guidelines.
+
