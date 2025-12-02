@@ -109,7 +109,7 @@ const About: React.FC = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`} style={{ transitionDelay: '200ms' }}>
           <span className="text-yellow-400 font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-3 sm:mb-4 block text-sm sm:text-base">Locally Owned & Operated</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-4 sm:mb-6 md:mb-8 leading-tight font-['Bebas_Neue']">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black mb-4 sm:mb-6 md:mb-8 leading-tight font-['Bebas_Neue']">
             PARTY ON WHEELS <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-yellow-400">IS A LIFESTYLE</span>
           </h2>

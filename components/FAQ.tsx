@@ -58,7 +58,7 @@ const FAQ: React.FC = () => {
       <div className="max-w-[1000px] mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <span className="text-purple-600 font-bold tracking-widest uppercase text-sm sm:text-lg mb-3 sm:mb-4 block">Got Questions?</span>
-          <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4">
             Frequently Asked Questions
           </h2>
           <div className="w-20 sm:w-24 h-2 bg-gradient-to-r from-purple-500 to-yellow-400 mx-auto mt-3 sm:mt-4"></div>
@@ -72,7 +72,7 @@ const FAQ: React.FC = () => {
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-4 sm:px-6 py-4 sm:py-5 min-h-[56px] text-left flex justify-between items-center focus:outline-none group"
+                className="w-full px-4 sm:px-6 py-4 sm:py-5 min-h-[56px] text-left flex justify-between items-center focus:outline-none group touch-manipulation"
               >
                 <span className="font-bold text-gray-900 text-base sm:text-lg pr-6 sm:pr-8 group-hover:text-purple-600 transition-colors">
                   {faq.question}
@@ -151,7 +151,7 @@ const FAQ: React.FC = () => {
                 {/* Call Button */}
                 <a
                   href="tel:+19853339762"
-                  className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 to-yellow-400 text-white px-8 py-5 font-black uppercase tracking-widest rounded-xl hover:shadow-2xl hover:shadow-purple-600/30 transition-all duration-300 hover:-translate-y-1 text-base sm:text-lg w-full overflow-hidden"
+                  className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-purple-600 to-yellow-400 text-white px-6 sm:px-8 py-4 sm:py-5 min-h-[56px] font-black uppercase tracking-widest rounded-xl hover:shadow-2xl hover:shadow-purple-600/30 transition-all duration-300 hover:-translate-y-1 text-base sm:text-lg w-full overflow-hidden"
                 >
                   <span className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300">
