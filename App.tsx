@@ -7,22 +7,26 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import SocialProofBar from './components/SocialProofBar';
 import BusFleet from './components/BusFleet';
 import About from './components/About';
 import Events from './components/Events';
 import HowItWorks from './components/HowItWorks';
 import Testimonials from './components/Testimonials';
+import ViralMoment from './components/ViralMoment';
 import FAQ from './components/FAQ';
+import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
+import StickyCTA from './components/StickyCTA';
 import { Bus } from './types';
 
 function App() {
   const [selectedBus, setSelectedBus] = useState<Bus | null>(null);
   const [showServiceMenu, setShowServiceMenu] = useState(false);
 
-  // Service menu embed code
-  const SERVICE_MENU_EMBED = `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" style="width: 100%; border:none; overflow:hidden;" scrolling="no" id="690255e04359bf2cbf1cbad6_1764689368370"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`;
+  // Service menu embed code - refactored for mobile UX
+  const SERVICE_MENU_EMBED = `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" class="pow-booking-frame" loading="lazy" frameborder="0" scrolling="no" allowtransparency="true" id="pow-service-menu-iframe"></iframe><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`;
 
   // Handle navigation (clicks on Navbar or Footer links)
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
@@ -94,13 +98,25 @@ function App() {
           setShowServiceMenu(true);
           document.body.style.overflow = 'hidden';
         }} />
+        <SocialProofBar />
         <BusFleet onBusClick={handleBusClick} />
         <HowItWorks />
         <Events />
         <About />
         <Testimonials />
+        <ViralMoment />
         <FAQ />
+        <FinalCTA onBookNow={() => {
+          setShowServiceMenu(true);
+          document.body.style.overflow = 'hidden';
+        }} />
       </main>
+
+      {/* Sticky Mobile CTA */}
+      <StickyCTA onBookNow={() => {
+        setShowServiceMenu(true);
+        document.body.style.overflow = 'hidden';
+      }} />
 
       <Footer onLinkClick={handleNavClick} />
       

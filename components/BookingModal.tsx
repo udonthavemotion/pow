@@ -31,42 +31,65 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
   useEffect(() => {
     const embedCode = isServiceMenu ? serviceMenuEmbedCode : bus?.calendarEmbedCode;
     if (iframeContainerRef.current && embedCode) {
-      const iframe = iframeContainerRef.current.querySelector('iframe');
-      if (iframe) {
-        // Ensure iframe has proper attributes for visibility
-        iframe.style.width = '100%';
-        iframe.style.minHeight = '750px';
-        iframe.style.height = 'auto';
-        iframe.style.border = 'none';
-        iframe.setAttribute('scrolling', 'yes');
-      }
+      // Use setTimeout to ensure DOM is updated after dangerouslySetInnerHTML
+      const timeoutId = setTimeout(() => {
+        const iframe = iframeContainerRef.current?.querySelector('iframe');
+        if (iframe) {
+          // Ensure iframe has proper attributes for mobile scrolling
+          iframe.style.width = '100%';
+          iframe.style.border = 'none';
+          // Set scrolling="no" to avoid inner scrollbar - page scroll handles it
+          iframe.setAttribute('scrolling', 'no');
+          iframe.setAttribute('frameborder', '0');
+          iframe.setAttribute('allowtransparency', 'true');
+          // Add class if not already present
+          if (!iframe.classList.contains('pow-booking-frame')) {
+            iframe.classList.add('pow-booking-frame');
+          }
+          // Set ID for service menu iframe
+          if (isServiceMenu && !iframe.id) {
+            iframe.id = 'pow-service-menu-iframe';
+          }
+          // Set minimum height for mobile - GHL's form_embed.js will adjust
+          const isMobile = window.innerWidth <= 768;
+          iframe.style.minHeight = isMobile ? '100vh' : '90vh';
+        }
 
-      // Load any scripts in the embed code
-      const scripts = iframeContainerRef.current.querySelectorAll('script');
-      scripts.forEach((oldScript) => {
-        const newScript = document.createElement('script');
-        Array.from(oldScript.attributes).forEach(attr => {
-          newScript.setAttribute(attr.name, attr.value);
+        // Load any scripts in the embed code
+        const scripts = iframeContainerRef.current?.querySelectorAll('script');
+        scripts?.forEach((oldScript) => {
+          // Skip if script already executed
+          if (oldScript.getAttribute('data-executed') === 'true') return;
+          
+          const newScript = document.createElement('script');
+          Array.from(oldScript.attributes).forEach(attr => {
+            if (attr.name !== 'data-executed') {
+              newScript.setAttribute(attr.name, attr.value);
+            }
+          });
+          newScript.textContent = oldScript.textContent;
+          newScript.setAttribute('data-executed', 'true');
+          oldScript.parentNode?.replaceChild(newScript, oldScript);
         });
-        newScript.textContent = oldScript.textContent;
-        oldScript.parentNode?.replaceChild(newScript, oldScript);
-      });
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
     }
   }, [bus?.calendarEmbedCode, serviceMenuEmbedCode, isServiceMenu]);
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 bg-black/95 backdrop-blur-md animate-fade-in-up overflow-hidden"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 bg-black/95 backdrop-blur-xl animate-fade-in-up sm:overflow-hidden overflow-y-auto"
       onClick={onClose}
     >
       <div
-        className="bg-black w-full h-full sm:max-w-7xl sm:max-h-[95vh] sm:rounded-3xl overflow-hidden flex flex-col shadow-[0_0_100px_rgba(255,107,0,0.3)] sm:border-4 border-2 border-[#FF6B00] animate-fade-in-up relative"
+        className="bg-gradient-to-b from-[#1A1425] to-black w-full min-h-full sm:h-full sm:max-w-7xl sm:max-h-[95vh] sm:rounded-3xl sm:overflow-hidden flex flex-col shadow-[0_0_100px_rgba(147,51,234,0.4)] sm:border-2 border-2 border-purple-500/60 animate-fade-in-up relative"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button - Top Right */}
+        {/* Close Button - Top Right - Luxury Style */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#FF6B00] hover:bg-[#39FF14] text-black flex items-center justify-center transition-all duration-300 hover:rotate-90 hover:scale-110 shadow-lg group"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-purple-600 to-yellow-400 hover:from-yellow-400 hover:to-purple-600 text-white flex items-center justify-center transition-all duration-300 hover:rotate-90 hover:scale-110 shadow-lg shadow-purple-500/50 group"
           aria-label="Close modal"
         >
           <svg
@@ -75,7 +98,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
             viewBox="0 0 24 24"
             strokeWidth={3}
             stroke="currentColor"
-            className="w-6 h-6 sm:w-7 sm:h-7 group-hover:stroke-black"
+            className="w-6 h-6 sm:w-7 sm:h-7"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
@@ -85,18 +108,18 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
         <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
 
           {/* LEFT SIDE - Bus Showcase */}
-          <div className="lg:w-2/5 bg-gradient-to-br from-black via-zinc-900 to-black p-4 sm:p-6 lg:p-8 flex flex-col justify-between relative overflow-hidden lg:border-r-4 border-b-4 lg:border-b-0 border-[#FF6B00] max-h-[40vh] lg:max-h-full">
+          <div className="lg:w-2/5 bg-gradient-to-br from-[#1A1425] via-[#0F0A1F] to-black p-4 sm:p-6 lg:p-8 flex flex-col justify-between relative overflow-hidden lg:border-r-2 border-b-2 lg:border-b-0 border-purple-500/50 max-h-[40vh] lg:max-h-full">
 
-            {/* Animated Background Accents */}
-            <div className="absolute top-0 left-0 w-72 h-72 bg-[#FF6B00] opacity-10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#39FF14] opacity-10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse delay-1000"></div>
+            {/* Luxury Background Accents */}
+            <div className="absolute top-0 left-0 w-72 h-72 bg-purple-600 opacity-15 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-yellow-400 opacity-10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse delay-1000"></div>
 
             {/* Content */}
             <div className="relative z-10 space-y-3 sm:space-y-6">
               {/* Title Section */}
               <div className="space-y-1 sm:space-y-2">
-                <div className="inline-block bg-[#39FF14] px-3 sm:px-4 py-1 -skew-x-12 mb-1 sm:mb-2">
-                  <span className="text-black font-black text-xs sm:text-sm uppercase tracking-wider skew-x-12 inline-block">
+                <div className="inline-block bg-gradient-to-r from-purple-600 to-yellow-400 px-3 sm:px-4 py-1 -skew-x-12 mb-1 sm:mb-2">
+                  <span className="text-white font-black text-xs sm:text-sm uppercase tracking-wider skew-x-12 inline-block">
                     Book Now
                   </span>
                 </div>
@@ -105,7 +128,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                     <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight font-['Bebas_Neue'] text-white leading-none">
                       Choose Your Ride
                     </h2>
-                    <p className="text-[#FF6B00] text-lg sm:text-xl font-bold italic">
+                    <p className="text-yellow-400 text-lg sm:text-xl font-bold italic">
                       Select from our fleet
                     </p>
                   </>
@@ -114,7 +137,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                     <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight font-['Bebas_Neue'] text-white leading-none">
                       {bus.name}
                     </h2>
-                    <p className="text-[#FF6B00] text-lg sm:text-xl font-bold italic">
+                    <p className="text-yellow-400 text-lg sm:text-xl font-bold italic">
                       {bus.tagline}
                     </p>
                   </>
@@ -124,11 +147,11 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
               {/* Bus Image - Hidden on mobile to save space */}
               {!isServiceMenu && bus?.imageUrl && (
                 <div className="relative -mx-4 sm:-mx-6 lg:-mx-8 hidden sm:block">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-[#39FF14] opacity-20 mix-blend-overlay"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-yellow-400 opacity-20 mix-blend-overlay"></div>
                   <img
                     src={bus.imageUrl}
                     alt={bus.name}
-                    className="w-full h-40 sm:h-48 lg:h-56 object-cover border-y-2 sm:border-y-4 border-[#FF6B00]"
+                    className="w-full h-40 sm:h-48 lg:h-56 object-cover border-y-2 sm:border-y-2 border-purple-500/50"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black to-transparent"></div>
                 </div>
@@ -136,21 +159,21 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
 
               {/* Trust Signals - Hidden on mobile to save space */}
               <div className="hidden sm:grid grid-cols-3 gap-2 sm:gap-3">
-                <div className="bg-zinc-900 border-2 border-[#FF6B00] p-2 sm:p-3 text-center hover:bg-[#FF6B00] hover:text-black transition-all duration-300 group">
+                <div className="bg-black/40 backdrop-blur-sm border border-purple-500/50 p-2 sm:p-3 text-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
                   <div className="text-xl sm:text-2xl mb-1">⚡</div>
-                  <div className="text-xs font-bold uppercase text-white group-hover:text-black">
+                  <div className="text-xs font-bold uppercase text-white">
                     Instant Confirm
                   </div>
                 </div>
-                <div className="bg-zinc-900 border-2 border-[#39FF14] p-2 sm:p-3 text-center hover:bg-[#39FF14] hover:text-black transition-all duration-300 group">
+                <div className="bg-black/40 backdrop-blur-sm border border-yellow-400/50 p-2 sm:p-3 text-center hover:bg-yellow-400 hover:text-black transition-all duration-300 group">
                   <div className="text-xl sm:text-2xl mb-1">🔒</div>
                   <div className="text-xs font-bold uppercase text-white group-hover:text-black">
                     Secure Payment
                   </div>
                 </div>
-                <div className="bg-zinc-900 border-2 border-[#FF6B00] p-2 sm:p-3 text-center hover:bg-[#FF6B00] hover:text-black transition-all duration-300 group">
+                <div className="bg-black/40 backdrop-blur-sm border border-purple-500/50 p-2 sm:p-3 text-center hover:bg-purple-600 hover:text-white transition-all duration-300 group">
                   <div className="text-xl sm:text-2xl mb-1">🎉</div>
-                  <div className="text-xs font-bold uppercase text-white group-hover:text-black">
+                  <div className="text-xs font-bold uppercase text-white">
                     Party Ready
                   </div>
                 </div>
@@ -159,16 +182,16 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
               {/* Features Highlight - Hidden on mobile to save space */}
               {!isServiceMenu && bus?.features && (
                 <div className="space-y-2 sm:space-y-3 hidden sm:block">
-                  <h3 className="text-xl sm:text-2xl font-black uppercase text-[#39FF14] font-['Bebas_Neue'] tracking-wide">
+                  <h3 className="text-xl sm:text-2xl font-black uppercase text-yellow-400 font-['Bebas_Neue'] tracking-wide">
                     What's Included
                   </h3>
-                  <div className="space-y-2 max-h-32 sm:max-h-40 lg:max-h-48 overflow-y-auto scrollbar-thin scrollbar-thumb-[#FF6B00] scrollbar-track-zinc-900">
+                  <div className="space-y-2 max-h-32 sm:max-h-40 lg:max-h-48 overflow-y-auto scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-zinc-900">
                     {bus.features.slice(0, 8).map((feature, index) => (
                       <div
                         key={index}
-                        className="flex items-start gap-2 sm:gap-3 text-white group hover:text-[#39FF14] transition-colors"
+                        className="flex items-start gap-2 sm:gap-3 text-white group hover:text-yellow-400 transition-colors"
                       >
-                        <span className="text-[#FF6B00] text-lg sm:text-xl flex-shrink-0 group-hover:text-[#39FF14]">✓</span>
+                        <span className="text-purple-400 text-lg sm:text-xl flex-shrink-0 group-hover:text-yellow-400">✓</span>
                         <span className="text-xs sm:text-sm font-medium">{feature}</span>
                       </div>
                     ))}
@@ -176,17 +199,17 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                 </div>
               )}
 
-              {/* Pricing Card */}
+              {/* Pricing Card - Luxury Glassmorphism */}
               {!isServiceMenu && bus && (
-                <div className="bg-gradient-to-br from-[#FF6B00] to-[#e56000] p-3 sm:p-5 -skew-x-3 shadow-2xl border-2 border-[#39FF14]">
+                <div className="bg-gradient-to-br from-purple-600 to-yellow-400 p-3 sm:p-5 -skew-x-3 shadow-2xl border-2 border-white/20">
                   <div className="skew-x-3 space-y-1 sm:space-y-2">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-4xl sm:text-5xl font-black text-black font-['Bebas_Neue']">
+                      <span className="text-4xl sm:text-5xl font-black text-white font-['Bebas_Neue']">
                         ${bus.hourlyRate}
                       </span>
-                      <span className="text-lg sm:text-xl text-black/80 font-bold">/hour</span>
+                      <span className="text-lg sm:text-xl text-white/90 font-bold">/hour</span>
                     </div>
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-black text-xs sm:text-sm font-bold">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-white text-xs sm:text-sm font-bold">
                       <div className="flex items-center gap-1">
                         <span className="text-base sm:text-lg">⏱</span>
                         <span>{bus.minHours} hr minimum</span>
@@ -212,26 +235,32 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
           </div>
 
           {/* RIGHT SIDE - Calendar */}
-          <div className="lg:w-3/5 flex flex-col bg-white overflow-hidden flex-1">
+          <div className="lg:w-3/5 flex flex-col bg-white sm:overflow-hidden overflow-visible flex-1">
 
             {/* Calendar Header */}
-            <div className="bg-black border-b-2 sm:border-b-4 border-[#39FF14] p-3 sm:p-4 lg:p-6">
+            <div className="bg-gradient-to-r from-purple-900 to-black border-b-2 border-purple-500/50 p-3 sm:p-4 lg:p-6">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black uppercase text-white font-['Bebas_Neue'] tracking-wide">
                 {isServiceMenu ? 'Select Your Service' : 'Choose Your Party Date'}
               </h3>
-              <p className="text-zinc-400 text-xs sm:text-sm mt-1">
+              <p className="text-gray-400 text-xs sm:text-sm mt-1">
                 {isServiceMenu ? 'Browse our fleet and select your preferred bus' : 'Select your date and time to secure your booking'}
               </p>
             </div>
 
             {/* Calendar Container */}
-            <div className="flex-1 overflow-auto bg-white p-3 sm:p-4 lg:p-6">
+            <div className="flex-1 bg-white p-0 sm:p-3 sm:p-4 lg:p-6 overflow-y-visible sm:overflow-y-auto min-h-0">
               {(isServiceMenu ? serviceMenuEmbedCode : bus?.calendarEmbedCode) ? (
-                <div
-                  ref={iframeContainerRef}
-                  className="w-full min-h-[500px] sm:min-h-[600px] lg:min-h-[750px] bg-white rounded-lg shadow-inner border-2 border-zinc-200"
-                  dangerouslySetInnerHTML={{ __html: isServiceMenu ? serviceMenuEmbedCode! : bus!.calendarEmbedCode! }}
-                />
+                <section id="pow-booking-section" className="pow-booking w-full h-full">
+                  <div 
+                    ref={iframeContainerRef}
+                    className="pow-booking-frame-wrapper w-full overflow-visible"
+                  >
+                    <div
+                      className="w-full"
+                      dangerouslySetInnerHTML={{ __html: isServiceMenu ? serviceMenuEmbedCode! : bus!.calendarEmbedCode! }}
+                    />
+                  </div>
+                </section>
               ) : (
                 <div className="flex flex-col items-center justify-center min-h-[750px] text-center p-8">
                   {/* Fallback Content */}
@@ -298,22 +327,22 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
           </div>
         </div>
 
-        {/* Bottom Bar - Quick Info */}
-        <div className="bg-black border-t-4 border-[#39FF14] px-4 lg:px-8 py-4 flex flex-wrap gap-4 items-center justify-between text-white">
+        {/* Bottom Bar - Quick Info - Luxury Style */}
+        <div className="bg-gradient-to-r from-purple-900 to-black border-t-2 border-purple-500/50 px-4 lg:px-8 py-4 flex flex-wrap gap-4 items-center justify-between text-white">
           {!isServiceMenu && bus && (
             <div className="flex flex-wrap items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
-                <span className="text-[#FF6B00] text-lg">💰</span>
+                <span className="text-yellow-400 text-lg">💰</span>
                 <span className="font-bold">${bus.hourlyRate}/hr</span>
               </div>
-              <div className="h-4 w-px bg-zinc-700"></div>
+              <div className="h-4 w-px bg-purple-500/30"></div>
               <div className="flex items-center gap-2">
-                <span className="text-[#39FF14] text-lg">⏱</span>
+                <span className="text-purple-400 text-lg">⏱</span>
                 <span className="font-bold">{bus.minHours} hour minimum</span>
               </div>
-              <div className="h-4 w-px bg-zinc-700"></div>
+              <div className="h-4 w-px bg-purple-500/30"></div>
               <div className="flex items-center gap-2">
-                <span className="text-[#FF6B00] text-lg">👥</span>
+                <span className="text-yellow-400 text-lg">👥</span>
                 <span className="font-bold">Up to {bus.capacity} guests</span>
               </div>
             </div>
@@ -321,7 +350,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
           {isServiceMenu && (
             <div className="flex flex-wrap items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
-                <span className="text-[#FF6B00] text-lg">🚌</span>
+                <span className="text-yellow-400 text-lg">🚌</span>
                 <span className="font-bold">Multiple Buses Available</span>
               </div>
             </div>
@@ -329,7 +358,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
 
           <button
             onClick={onClose}
-            className="text-[#39FF14] hover:text-white font-black uppercase text-sm transition-colors tracking-wider px-4 py-2 border-2 border-[#39FF14] hover:bg-[#39FF14] hover:text-black rounded"
+            className="text-purple-400 hover:text-white font-black uppercase text-sm transition-colors tracking-wider px-4 py-2 border-2 border-purple-500/50 hover:bg-purple-600 hover:border-yellow-400 rounded"
           >
             Close
           </button>
