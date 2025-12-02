@@ -22,7 +22,7 @@ function App() {
   const [showServiceMenu, setShowServiceMenu] = useState(false);
 
   // Service menu embed code
-  const SERVICE_MENU_EMBED = `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="690255e04359bf2cbf1cbad6_1764628435392"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`;
+  const SERVICE_MENU_EMBED = `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" style="width: 100%; border:none; overflow:hidden;" scrolling="no" id="690255e04359bf2cbf1cbad6_1764689368370"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`;
 
   // Handle navigation (clicks on Navbar or Footer links)
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {

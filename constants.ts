@@ -39,9 +39,9 @@ export const BUSES: Bus[] = [
     features: ['Open Air Deck', 'Premium Sound System', 'LED Light Show', 'Coolers On Board'],
     
     // ------------------------------------------------------------------
-    // PASTE YOUR GOHIGHLEVEL CALENDAR EMBED CODE FOR "ORANGE JUICE" BELOW
+    // UNIFIED SERVICE MENU EMBED - ORANGE JUICE
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://app.partyonwheelspow.com/widget/booking/yK1kBBvBCJP64ex1AxT9" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="eVnwTNulhldzIaZuYCeh_1764626578838"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" style="width: 100%; border:none; overflow:hidden;" scrolling="no" id="690255e04359bf2cbf1cbad6_1764689368370"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b2',
@@ -60,9 +60,9 @@ export const BUSES: Bus[] = [
     features: ['Club Lighting', 'Bluetooth Audio', 'Dance Pole', 'AC/Heat'],
     
     // ------------------------------------------------------------------
-    // PASTE YOUR GOHIGHLEVEL CALENDAR EMBED CODE FOR "GREEN LIGHT" BELOW
+    // UNIFIED SERVICE MENU EMBED - GREEN LIGHT
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://app.partyonwheelspow.com/widget/booking/eQsFVZL3GQdwOiyxahv6" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="eVnwTNulhldzIaZuYCeh_1764626542840"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" style="width: 100%; border:none; overflow:hidden;" scrolling="no" id="690255e04359bf2cbf1cbad6_1764689368370"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b3',
@@ -77,9 +77,9 @@ export const BUSES: Bus[] = [
     features: ['Premium Sound System', 'LED Light Show', 'Dance Floor', 'Climate Control'],
     
     // ------------------------------------------------------------------
-    // PASTE YOUR GOHIGHLEVEL CALENDAR EMBED CODE FOR "KUTTIN LOOSE" (COCONUT) BELOW
+    // UNIFIED SERVICE MENU EMBED - KUTTIN LOOSE
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://app.partyonwheelspow.com/widget/booking/lxTcijWz1fWVLZHizAoC" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="eVnwTNulhldzIaZuYCeh_1764626564280"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>` 
+    calendarEmbedCode: `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" style="width: 100%; border:none; overflow:hidden;" scrolling="no" id="690255e04359bf2cbf1cbad6_1764689368370"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>` 
   }
   // TEMPORARILY REMOVED: Big Blue (b4) - waiting for image and details
   // {
