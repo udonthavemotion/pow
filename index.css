@@ -1,0 +1,611 @@
+/* Party On Wheels Booking Section - Mobile Optimized */
+
+.pow-booking {
+  padding: 0;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.pow-booking-frame-wrapper {
+  width: 100%;
+  overflow: visible;
+  position: relative;
+}
+
+.pow-booking-frame {
+  width: 100%;
+  border: none;
+  /* Minimum height so the user can see the whole widget without feeling cramped */
+  min-height: 90vh;
+  display: block;
+}
+
+/* Mobile / iPhone specific tweaks */
+@media (max-width: 768px) {
+  .pow-booking {
+    padding: 0;
+    margin-top: 0;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .pow-booking-frame-wrapper {
+    padding: 0;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .pow-booking-frame {
+    /* Full-screen-ish height minus any fixed header we have */
+    min-height: 100vh;
+    width: 100% !important;
+    max-width: 100vw !important;
+    border: none !important;
+  }
+
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  /* Ensure iframe parent containers don't cause overflow */
+  #pow-booking-section {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+}
+
+/* Extra small devices (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  .pow-booking-frame {
+    min-height: 90vh;
+  }
+}
+
+/* Ensure no parent containers clip the iframe */
+.pow-booking * {
+  max-width: 100%;
+}
+
+/* ==========================================
+   VIRAL LANDING PAGE ANIMATIONS & ENHANCEMENTS
+   ========================================== */
+
+/* Scroll-triggered fade-in animations */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+/* Sticky CTA slide-up animation */
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+}
+
+/* Marquee animation for recent bookings ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  display: inline-block;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Parallax effect for hero video */
+.hero-video-parallax {
+  transform: scale(1.1);
+  transition: transform 0.1s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-slide-up,
+  .animate-marquee {
+    animation: none;
+  }
+  
+  .hero-video-parallax {
+    transform: scale(1);
+  }
+}
+
+/* Scroll reveal utility classes */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced button hover effects */
+.button-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.button-ripple:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Border-3 utility (for thicker borders) */
+.border-3 {
+  border-width: 3px;
+}
+
+/* ==========================================
+   MOBILE OPTIMIZATION - Global Safeguards
+   ========================================== */
+
+/* Prevent horizontal overflow on all devices */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  position: relative;
+}
+
+/* Ensure all containers respect viewport width */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Mobile base font size for readability */
+@media (max-width: 768px) {
+  html {
+    font-size: 16px; /* Base 16px for mobile readability */
+  }
+  
+  body {
+    font-size: 15px; /* Slightly smaller body text */
+    line-height: 1.6; /* Improved line height for mobile */
+  }
+}
+
+/* Responsive typography scaling for mobile */
+@media (max-width: 768px) {
+  h1 {
+    font-size: clamp(2rem, 8vw, 3.5rem) !important;
+    line-height: 1.1 !important;
+  }
+  
+  h2 {
+    font-size: clamp(1.75rem, 7vw, 3rem) !important;
+    line-height: 1.2 !important;
+  }
+  
+  h3 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+    line-height: 1.3 !important;
+  }
+  
+  h4 {
+    font-size: clamp(1.25rem, 5vw, 2rem) !important;
+    line-height: 1.4 !important;
+  }
+}
+
+/* Ensure all images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ensure videos are responsive */
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Minimum tap target size for mobile (44px) */
+@media (max-width: 768px) {
+  button,
+  a[role="button"],
+  input[type="button"],
+  input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Improve form inputs on mobile */
+@media (max-width: 768px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px;
+    padding: 12px 16px;
+  }
+}
+
+/* Prevent text from being too small on mobile */
+@media (max-width: 768px) {
+  p, span, div {
+    font-size: clamp(14px, 4vw, 16px);
+  }
+  
+  /* Ensure readable text sizes */
+  .text-xs {
+    font-size: 12px !important;
+  }
+  
+  .text-sm {
+    font-size: 14px !important;
+  }
+  
+  .text-base {
+    font-size: 16px !important;
+  }
+}
+
+/* Touch-friendly interactions for mobile */
+@media (max-width: 768px) {
+  button,
+  a,
+  [role="button"] {
+    touch-action: manipulation; /* Prevents double-tap zoom */
+    -webkit-tap-highlight-color: rgba(147, 51, 234, 0.3); /* Purple tap highlight */
+  }
+  
+  /* Improve scrolling on mobile */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent layout shift on mobile */
+@media (max-width: 768px) {
+  /* Ensure containers don't cause horizontal scroll */
+  section,
+  div,
+  main {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  /* Fix for common overflow issues */
+  .container,
+  .max-w-\[1400px\],
+  .max-w-\[1600px\] {
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Improve spacing on very small screens */
+@media (max-width: 375px) {
+  section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Reduce excessive padding on small screens */
+  .px-4 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  .px-6 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Reduce gap spacing on very small screens */
+  .gap-8 {
+    gap: 1rem;
+  }
+  
+  .gap-10 {
+    gap: 1.25rem;
+  }
+  
+  .gap-12 {
+    gap: 1.5rem;
+  }
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile */
+  * {
+    will-change: auto;
+  }
+  
+  /* Optimize transforms for mobile */
+  .group-hover\:scale-105,
+  .group-hover\:scale-110,
+  .hover\:scale-105 {
+    transition: transform 0.2s ease-out;
+  }
+  
+  /* Reduce blur effects on mobile for better performance */
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl {
+    backdrop-filter: blur(8px);
+  }
+  
+  /* Optimize shadows for mobile */
+  .shadow-2xl,
+  .shadow-lg {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================
+   HERO SECTION - MOBILE OPTIMIZATION
+   ========================================== */
+
+/* Mobile Gradient Overlay for Better Text Readability */
+.pow-hero__overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .pow-hero__overlay {
+    display: block;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+    z-index: 5;
+  }
+}
+
+/* Hero Layout & Spacing - Mobile */
+@media (max-width: 768px) {
+  .pow-hero {
+    padding: 0;
+    text-align: center;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  /* Reduce background video/image opacity on mobile for better text contrast */
+  .pow-hero video,
+  .pow-hero img {
+    opacity: 0.35 !important;
+  }
+
+  .pow-hero__content {
+    padding: 0 1rem;
+    padding-top: calc(5rem + 85px); /* Account for fixed navbar */
+    padding-bottom: 2rem;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .pow-hero__content > div {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+/* Hero Typography - Mobile */
+@media (max-width: 768px) {
+  .pow-hero__title {
+    font-size: clamp(42px, 12vw, 64px) !important;
+    line-height: 1.05 !important;
+    text-align: center !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    margin-bottom: 1.5rem !important;
+    padding: 0 !important;
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 0, 0, 0.7) !important;
+  }
+
+  .pow-hero__title br {
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .pow-hero__title span {
+    display: block;
+    margin-top: 0.25rem;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-image: linear-gradient(to right, #a78bfa, #c4b5fd, #fbbf24) !important;
+  }
+
+  .pow-hero__subtitle {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    max-width: 100% !important;
+    margin: 0 auto 2rem !important;
+    padding: 0 0.25rem !important;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9) !important;
+  }
+
+  .pow-hero__location {
+    font-size: 10px !important;
+    margin-bottom: 1.5rem !important;
+    letter-spacing: 0.12em !important;
+    opacity: 0.9;
+  }
+}
+
+/* Hero CTA Buttons - Mobile */
+@media (max-width: 768px) {
+  .pow-hero__cta-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto 2.5rem !important;
+  }
+
+  .pow-hero__btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    font-size: 16px !important;
+    padding: 1rem 1.5rem !important;
+    min-height: 52px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .pow-hero__btn--primary {
+    box-shadow: 0 4px 20px rgba(147, 51, 234, 0.5), 0 0 30px rgba(147, 51, 234, 0.3) !important;
+  }
+
+  .pow-hero__btn--secondary {
+    border-width: 2px !important;
+  }
+
+  .pow-hero__btn span {
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.1em !important;
+  }
+}
+
+/* Stats Section - Mobile */
+@media (max-width: 768px) {
+  .pow-stats {
+    padding: 2rem 1rem 2.5rem !important;
+    text-align: center !important;
+    margin-top: 1.5rem !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2.5rem !important;
+  }
+
+  .pow-stats__container {
+    gap: 2rem !important;
+    padding: 0 !important;
+  }
+
+  .pow-stats__icon {
+    font-size: 1.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .pow-stats__value {
+    font-size: 2.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .pow-stats__label {
+    font-size: 10px !important;
+    padding: 0 0.25rem !important;
+    letter-spacing: 0.08em !important;
+  }
+}
+
+/* Ensure no horizontal scroll on hero */
+.pow-hero,
+.pow-hero * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .pow-hero {
+    overflow-x: hidden;
+    width: 100vw;
+    position: relative;
+  }
+
+  .pow-hero__content {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+
+  .pow-hero__content > div {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Prevent any child from causing overflow */
+  .pow-hero h1,
+  .pow-hero p,
+  .pow-hero span,
+  .pow-hero a {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
