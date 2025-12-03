@@ -4,7 +4,11 @@
 */
 
 import React, { useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Bus } from '../types';
+import { useConfetti } from '../hooks/useConfetti';
+import { useFocusTrap } from '../hooks/useFocusTrap';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 interface BookingModalProps {
   bus?: Bus | null;
@@ -15,6 +19,20 @@ interface BookingModalProps {
 const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, onClose }) => {
   const isServiceMenu = !bus && serviceMenuEmbedCode;
   const iframeContainerRef = useRef<HTMLDivElement>(null);
+  const { celebrateBooking } = useConfetti();
+  const focusTrapRef = useFocusTrap(true);
+  const prefersReducedMotion = useReducedMotion();
+
+  // Trigger confetti celebration when modal opens (only if not reduced motion)
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+
+    // Delay confetti slightly to allow modal animation to start
+    const timer = setTimeout(() => {
+      celebrateBooking();
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [prefersReducedMotion]);
 
   // Handle escape key
   useEffect(() => {
@@ -54,20 +72,79 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
     }
   }, [bus?.calendarEmbedCode, serviceMenuEmbedCode, isServiceMenu]);
 
+  // Simplified animations for reduced motion
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.3 },
+    },
+    exit: {
+      opacity: 0,
+      transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.2 },
+    },
+  };
+
+  const modalVariants = {
+    hidden: {
+      opacity: prefersReducedMotion ? 1 : 0,
+      scale: prefersReducedMotion ? 1 : 0.8,
+      y: prefersReducedMotion ? 0 : 50,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: prefersReducedMotion
+        ? { duration: 0 }
+        : {
+            type: 'spring',
+            stiffness: 300,
+            damping: 30,
+            staggerChildren: 0.1,
+          },
+    },
+    exit: {
+      opacity: 0,
+      scale: prefersReducedMotion ? 1 : 0.8,
+      y: prefersReducedMotion ? 0 : 50,
+      transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.2 },
+    },
+  };
+
   return (
-    <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 bg-black/95 backdrop-blur-md animate-fade-in-up overflow-hidden"
+    <motion.div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-4 bg-black/95 backdrop-blur-md overflow-hidden"
       onClick={onClose}
+      variants={backdropVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
     >
-      <div
-        className="bg-black w-full h-full sm:max-w-7xl sm:max-h-[95vh] sm:rounded-3xl overflow-hidden flex flex-col shadow-[0_0_100px_rgba(255,107,0,0.3)] sm:border-4 border-2 border-[#FF6B00] animate-fade-in-up relative"
+      <motion.div
+        ref={focusTrapRef}
+        className="bg-black w-full h-full sm:max-w-7xl sm:max-h-[95vh] sm:rounded-3xl overflow-hidden flex flex-col shadow-[0_0_100px_rgba(255,107,0,0.3)] sm:border-4 border-2 border-[#FF6B00] relative"
         onClick={(e) => e.stopPropagation()}
+        variants={modalVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        style={{
+          willChange: prefersReducedMotion ? 'auto' : 'transform, opacity',
+        }}
       >
         {/* Close Button - Top Right */}
-        <button
+        <motion.button
           onClick={onClose}
-          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#FF6B00] hover:bg-[#39FF14] text-black flex items-center justify-center transition-all duration-300 hover:rotate-90 hover:scale-110 shadow-lg group"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#FF6B00] hover:bg-[#39FF14] text-black flex items-center justify-center shadow-lg group"
           aria-label="Close modal"
+          whileHover={{ rotate: 90, scale: 1.1, backgroundColor: '#39FF14' }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +156,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
-        </button>
+        </motion.button>
 
         {/* Main Content Container */}
         <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
@@ -102,19 +179,31 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                 </div>
                 {isServiceMenu ? (
                   <>
-                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight font-['Bebas_Neue'] text-white leading-none">
+                    <h2
+                      id="modal-title"
+                      className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight font-['Bebas_Neue'] text-white leading-none"
+                    >
                       Choose Your Ride
                     </h2>
-                    <p className="text-[#FF6B00] text-lg sm:text-xl font-bold italic">
+                    <p
+                      id="modal-description"
+                      className="text-[#FF6B00] text-lg sm:text-xl font-bold italic"
+                    >
                       Select from our fleet
                     </p>
                   </>
                 ) : (
                   <>
-                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight font-['Bebas_Neue'] text-white leading-none">
+                    <h2
+                      id="modal-title"
+                      className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight font-['Bebas_Neue'] text-white leading-none"
+                    >
                       {bus.name}
                     </h2>
-                    <p className="text-[#FF6B00] text-lg sm:text-xl font-bold italic">
+                    <p
+                      id="modal-description"
+                      className="text-[#FF6B00] text-lg sm:text-xl font-bold italic"
+                    >
                       {bus.tagline}
                     </p>
                   </>
@@ -334,8 +423,8 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
             Close
           </button>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

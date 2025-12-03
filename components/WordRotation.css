@@ -1,0 +1,145 @@
+/**
+ * Word Rotation Animation Component
+ * CSS-only vertical word rotation with smooth fade transitions
+ */
+
+:root {
+  --loader-bg: #1f2937; /* Default background for fade mask (gray-800) */
+  --word-rotation-duration: 8s; /* Animation duration */
+}
+
+.word-loader {
+  display: inline-block;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.word-loader-static {
+  display: inline;
+}
+
+.word-loader-dynamic {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: baseline;
+  height: 1.2em; /* Match line height */
+}
+
+.word-loader-words {
+  display: flex;
+  flex-direction: column;
+  animation: word-rotate var(--word-rotation-duration) infinite;
+  will-change: transform;
+}
+
+.word-loader-word {
+  display: block;
+  white-space: nowrap;
+  padding: 0 0.1em;
+  height: 1.2em;
+  line-height: 1.2em;
+}
+
+/* Vertical sliding animation */
+/* Supports 2-8 words (adjust percentages based on word count) */
+/* For 8 words: 7 unique + 1 duplicate for seamless loop */
+/* Each word visible for ~14.28% of animation (100% / 7 unique words) */
+@keyframes word-rotate {
+  0% {
+    transform: translateY(0%);
+  }
+  14.28% {
+    transform: translateY(-14.28%);
+  }
+  28.57% {
+    transform: translateY(-28.57%);
+  }
+  42.85% {
+    transform: translateY(-42.85%);
+  }
+  57.14% {
+    transform: translateY(-57.14%);
+  }
+  71.42% {
+    transform: translateY(-71.42%);
+  }
+  85.71% {
+    transform: translateY(-85.71%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* Gradient fade mask for smooth transitions */
+.word-loader-dynamic::before,
+.word-loader-dynamic::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0.4em;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.word-loader-dynamic::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--loader-bg), transparent);
+}
+
+.word-loader-dynamic::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--loader-bg), transparent);
+}
+
+/* Customization for different backgrounds */
+.word-loader-dynamic.light-bg::before,
+.word-loader-dynamic.light-bg::after {
+  --loader-bg: #ffffff;
+}
+
+.word-loader-dynamic.dark-bg::before,
+.word-loader-dynamic.dark-bg::after {
+  --loader-bg: #1f2937;
+}
+
+.word-loader-dynamic.gray-900-bg::before,
+.word-loader-dynamic.gray-900-bg::after {
+  --loader-bg: #111827;
+}
+
+/* Transparent variant - no fade masks */
+.word-loader-dynamic.transparent::before,
+.word-loader-dynamic.transparent::after {
+  display: none;
+}
+
+/* Faster animation option */
+.word-loader-dynamic.fast {
+  --word-rotation-duration: 5s;
+}
+
+/* Slower animation option */
+.word-loader-dynamic.slow {
+  --word-rotation-duration: 12s;
+}
+
+/* Text glow effect (optional) */
+.word-loader-word.glow {
+  text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .word-loader-dynamic {
+    height: 1.1em;
+  }
+  
+  .word-loader-word {
+    height: 1.1em;
+    line-height: 1.1em;
+  }
+}
+

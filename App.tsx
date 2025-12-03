@@ -4,18 +4,25 @@
 */
 
 
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import BusFleet from './components/BusFleet';
-import About from './components/About';
-import Events from './components/Events';
-import HowItWorks from './components/HowItWorks';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
 import Footer from './components/Footer';
-import BookingModal from './components/BookingModal';
+import ReadyToPartyBanner from './components/ReadyToPartyBanner';
+import ContactCTA from './components/ContactCTA';
+import CTASection from './components/CTASection';
+import HowItWorks from './components/HowItWorks';
+import ErrorBoundary from './components/ErrorBoundary';
+import { BusLoadingAnimation } from './components/BusLoadingAnimation';
 import { Bus } from './types';
+
+// Lazy load heavy components for better performance
+const BusFleet = lazy(() => import('./components/BusFleet'));
+const About = lazy(() => import('./components/About'));
+const Events = lazy(() => import('./components/Events'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const FAQ = lazy(() => import('./components/FAQ'));
+const BookingModal = lazy(() => import('./components/BookingModal'));
 
 function App() {
   const [selectedBus, setSelectedBus] = useState<Bus | null>(null);
@@ -86,32 +93,101 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-[#1a1a1a]">
-      <Navbar onNavClick={handleNavClick} onBookNow={handleOpenServiceMenu} />
-      
-      <main>
-        <Hero onBookNow={() => {
-          setShowServiceMenu(true);
-          document.body.style.overflow = 'hidden';
-        }} />
-        <BusFleet onBusClick={handleBusClick} />
-        <HowItWorks />
-        <Events />
-        <About />
-        <Testimonials />
-        <FAQ />
-      </main>
+    <ErrorBoundary>
+      <div className="min-h-screen bg-white font-sans text-[#1a1a1a]">
+        <Navbar onNavClick={handleNavClick} onBookNow={handleOpenServiceMenu} />
 
-      <Footer onLinkClick={handleNavClick} />
-      
-      {(selectedBus || showServiceMenu) && (
-        <BookingModal 
-          bus={selectedBus} 
-          serviceMenuEmbedCode={showServiceMenu ? SERVICE_MENU_EMBED : undefined}
-          onClose={handleCloseModal} 
-        />
-      )}
-    </div>
+        <main>
+          <Hero
+            onBookNow={() => {
+              setShowServiceMenu(true);
+              document.body.style.overflow = 'hidden';
+            }}
+          />
+
+          {/* Lazy loaded components with loading fallback */}
+          <Suspense
+            fallback={
+              <div className="min-h-[400px] flex items-center justify-center">
+                <BusLoadingAnimation text="Loading our fleet..." />
+              </div>
+            }
+          >
+            <BusFleet onBusClick={handleBusClick} />
+          </Suspense>
+
+          <CTASection
+            title="Ready to book your ride?"
+            subtitle="Questions? We're here to help!"
+            onBookNow={handleOpenServiceMenu}
+          />
+
+          <HowItWorks />
+
+          <Suspense
+            fallback={
+              <div className="min-h-[300px] flex items-center justify-center">
+                <BusLoadingAnimation text="Loading events..." size="sm" />
+              </div>
+            }
+          >
+            <Events />
+          </Suspense>
+
+          <ReadyToPartyBanner onBookNow={handleOpenServiceMenu} />
+
+          <Suspense
+            fallback={
+              <div className="min-h-[300px] flex items-center justify-center">
+                <BusLoadingAnimation text="Loading about..." size="sm" />
+              </div>
+            }
+          >
+            <About />
+          </Suspense>
+
+          <Suspense
+            fallback={
+              <div className="min-h-[300px] flex items-center justify-center">
+                <BusLoadingAnimation text="Loading testimonials..." size="sm" />
+              </div>
+            }
+          >
+            <Testimonials />
+          </Suspense>
+
+          <Suspense
+            fallback={
+              <div className="min-h-[300px] flex items-center justify-center">
+                <BusLoadingAnimation text="Loading FAQ..." size="sm" />
+              </div>
+            }
+          >
+            <FAQ />
+          </Suspense>
+
+          <ContactCTA onBookNow={handleOpenServiceMenu} />
+        </main>
+
+        <Footer onLinkClick={handleNavClick} />
+
+        {(selectedBus || showServiceMenu) && (
+          <Suspense
+            fallback={
+              <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95">
+                <BusLoadingAnimation text="Opening booking..." />
+              </div>
+            }
+          >
+            <BookingModal
+              bus={selectedBus}
+              serviceMenuEmbedCode={showServiceMenu ? SERVICE_MENU_EMBED : undefined}
+              onClose={handleCloseModal}
+            />
+          </Suspense>
+        )}
+      </div>
+    </ErrorBoundary>
   );
 }
 

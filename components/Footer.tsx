@@ -13,8 +13,12 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
   return (
-    <footer className="bg-black pt-16 sm:pt-24 pb-8 sm:pb-12 px-4 sm:px-6 text-gray-400 border-t border-gray-800">
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12">
+    <footer className="bg-gradient-to-b from-black via-gray-900 to-black pt-16 sm:pt-24 pb-8 sm:pb-12 px-4 sm:px-6 text-gray-400 border-t border-gray-800 relative overflow-hidden">
+      {/* Subtle accent glows */}
+      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-[#FF6B00] opacity-5 blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-[#39FF14] opacity-5 blur-3xl"></div>
+      
+      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 sm:gap-12 relative z-10">
 
         <div className="md:col-span-5">
           <img
@@ -48,30 +52,44 @@ const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
         </div>
 
         <div className="md:col-span-3">
-          <h4 className="font-bold text-white mb-5 sm:mb-6 tracking-wide text-sm uppercase">Quick Links</h4>
+          <h4 className="font-bold text-white mb-5 sm:mb-6 tracking-wide text-sm uppercase">QUICK LINKS</h4>
           <ul className="space-y-3 sm:space-y-4 font-medium text-sm sm:text-base">
-            <li><a href="#fleet" onClick={(e) => onLinkClick(e, 'fleet')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">Our Fleet</a></li>
-            <li><a href="#how-it-works" onClick={(e) => onLinkClick(e, 'how-it-works')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">How It Works</a></li>
-            <li><a href="#events" onClick={(e) => onLinkClick(e, 'events')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">Events</a></li>
-            <li><a href="#faq" onClick={(e) => onLinkClick(e, 'faq')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">FAQ</a></li>
+            <li><a href="#fleet" onClick={(e) => onLinkClick(e, 'fleet')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center group">
+              <span className="group-hover:translate-x-1 transition-transform inline-block">Our Fleet</span>
+            </a></li>
+            <li><a href="#how-it-works" onClick={(e) => onLinkClick(e, 'how-it-works')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center group">
+              <span className="group-hover:translate-x-1 transition-transform inline-block">How It Works</span>
+            </a></li>
+            <li><a href="#events" onClick={(e) => onLinkClick(e, 'events')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center group">
+              <span className="group-hover:translate-x-1 transition-transform inline-block">Events</span>
+            </a></li>
+            <li><a href="#faq" onClick={(e) => onLinkClick(e, 'faq')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center group">
+              <span className="group-hover:translate-x-1 transition-transform inline-block">FAQ</span>
+            </a></li>
           </ul>
         </div>
 
         <div className="md:col-span-4">
-          <h4 className="font-bold text-white mb-5 sm:mb-6 tracking-wide text-sm uppercase">Contact Us</h4>
+          <h4 className="font-bold text-white mb-5 sm:mb-6 tracking-wide text-sm uppercase">CONTACT US</h4>
           <p className="mb-3 sm:mb-2 text-sm sm:text-base">Serving All Of Southern Louisiana</p>
-          <a href="tel:+19853339762" className="mb-3 sm:mb-2 text-lg sm:text-xl text-white font-bold hover:text-[#FF6B00] transition-colors block py-2 min-h-[44px] flex items-center">
-            +1 985-333-9762
+          <a href="tel:+19853339762" className="mb-3 sm:mb-2 text-lg sm:text-xl text-white font-bold hover:text-[#FF6B00] transition-colors block py-2 min-h-[44px] flex items-center group">
+            <span className="group-hover:scale-105 transition-transform inline-block">+1 985-333-9762</span>
           </a>
-          <a href="mailto:partyonwheelspow@gmail.com" className="text-sm hover:text-[#39FF14] transition-colors inline-block py-2 min-h-[44px] flex items-center">
-            partyonwheelspow@gmail.com
+          <a href="mailto:partyonwheelspow@gmail.com" className="text-sm hover:text-[#39FF14] transition-colors inline-block py-2 min-h-[44px] flex items-center group">
+            <span className="group-hover:scale-105 transition-transform inline-block">partyonwheelspow@gmail.com</span>
           </a>
         </div>
       </div>
 
-      <div className="max-w-[1600px] mx-auto mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-gray-800">
+      {/* Gradient separator line */}
+      <div className="max-w-[1600px] mx-auto mt-12 sm:mt-16">
+        <div className="h-px bg-gradient-to-r from-transparent via-[#FF6B00] via-[#39FF14] to-transparent"></div>
+      </div>
+
+      {/* Bottom footer bar */}
+      <div className="max-w-[1600px] mx-auto mt-8 sm:mt-10 pt-6 sm:pt-8">
         <div className="flex flex-col items-center gap-3 sm:gap-2 text-xs sm:text-sm text-center px-4">
-          <p className="text-gray-400">
+          <p className="text-gray-300 font-medium">
             Serving All Of Southern Louisiana - <a href="tel:+19853339762" className="text-white hover:text-[#FF6B00] transition-colors font-bold">+1 985-333-9762</a> - <a href="mailto:partyonwheelspow@gmail.com" className="hover:text-[#39FF14] transition-colors">partyonwheelspow@gmail.com</a>
           </p>
           <p className="text-gray-500">

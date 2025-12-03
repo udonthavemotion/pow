@@ -5,6 +5,10 @@
 
 
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer, staggerItem, buttonHover, buttonTap } from '../utils/animations';
+import { MagneticButton } from './MagneticButton';
+import { TextReveal } from './TextReveal';
 
 const HowItWorks: React.FC = () => {
   const steps = [
@@ -31,19 +35,38 @@ const HowItWorks: React.FC = () => {
   return (
     <section id="how-it-works" className="py-16 sm:py-24 px-4 sm:px-6 md:px-12 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-[1400px] mx-auto">
-        <div className="text-center mb-12 sm:mb-16">
+        <motion.div
+          className="text-center mb-12 sm:mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUp}
+        >
           <span className="text-[#FF6B00] font-bold tracking-widest uppercase text-sm sm:text-lg mb-3 sm:mb-4 block">Simple Process</span>
           <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4">
-            How It Works
+            <TextReveal
+              text="How It Works"
+              splitType="words"
+              staggerDelay={0.1}
+            />
           </h2>
           <div className="w-20 sm:w-24 h-2 bg-[#39FF14] mx-auto mt-3 sm:mt-4"></div>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-8 lg:gap-12">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-8 lg:gap-12"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
           {steps.map((step, index) => (
-            <div
+            <motion.div
               key={index}
-              className="relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100 group"
+              className="relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100 group"
+              variants={staggerItem}
+              whileHover={{ y: -8, boxShadow: '0 20px 25px -5px rgba(255, 107, 0, 0.2)' }}
+              transition={{ duration: 0.3 }}
             >
               {/* Number Badge */}
               <div className="absolute -top-5 sm:-top-6 -left-5 sm:-left-6 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-[#FF6B00] to-[#39FF14] rounded-full flex items-center justify-center text-white font-black text-xl sm:text-2xl font-['Bebas_Neue'] shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -65,19 +88,27 @@ const HowItWorks: React.FC = () => {
               {index < steps.length - 1 && (
                 <div className="hidden md:block absolute top-1/2 -right-6 w-12 h-0.5 bg-gradient-to-r from-[#FF6B00] to-[#39FF14] transform -translate-y-1/2"></div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* CTA */}
-        <div className="text-center mt-12 sm:mt-16">
-          <a
+        <motion.div
+          className="text-center mt-12 sm:mt-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
+          <MagneticButton
             href="#fleet"
-            className="inline-block bg-[#FF6B00] text-white px-8 sm:px-10 py-4 sm:py-5 min-h-[56px] font-bold uppercase tracking-widest text-base sm:text-lg hover:bg-[#e56000] transition-colors -skew-x-12 shadow-lg hover:shadow-xl"
+            className="inline-block bg-[#FF6B00] text-white px-8 sm:px-10 py-4 sm:py-5 min-h-[56px] font-bold uppercase tracking-widest text-base sm:text-lg hover:bg-[#e56000] hover:scale-105 active:scale-95 transition-all -skew-x-12 shadow-lg"
+            strength={0.4}
+            range={120}
           >
             <span className="block skew-x-12">Get Started Now</span>
-          </a>
-        </div>
+          </MagneticButton>
+        </motion.div>
       </div>
     </section>
   );

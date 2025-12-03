@@ -5,72 +5,113 @@
 
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import { OWNER_NAME } from '../constants';
+import { fadeInUp, fadeInLeft, fadeInRight } from '../utils/animations';
+import { useCounter } from '../hooks/useCounter';
+import { useParallax } from '../hooks/useParallax';
+import { TextReveal } from './TextReveal';
 
 const About: React.FC = () => {
+  const busesCount = useCounter({ end: 4, duration: 2000, suffix: '+' });
+  const partiesCount = useCounter({ end: 1000, duration: 2500, suffix: '+' });
+  const localPercent = useCounter({ end: 100, duration: 2000, suffix: '%' });
+
+  const { ref: parallaxRef1, y: parallaxY1 } = useParallax({ speed: 60, direction: 'up' });
+  const { ref: parallaxRef2, y: parallaxY2 } = useParallax({ speed: 80, direction: 'down' });
+
   return (
     <section id="about" className="bg-gray-900 text-white py-16 sm:py-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
 
-      {/* Abstract Shapes */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF6B00] rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#39FF14] rounded-full mix-blend-multiply filter blur-[120px] opacity-10"></div>
+      {/* Abstract Shapes with Parallax */}
+      <motion.div
+        ref={parallaxRef1 as React.RefObject<HTMLDivElement>}
+        style={{ y: parallaxY1 }}
+        className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF6B00] rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-pulse"
+      />
+      <motion.div
+        ref={parallaxRef2 as React.RefObject<HTMLDivElement>}
+        style={{ y: parallaxY2 }}
+        className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#39FF14] rounded-full mix-blend-multiply filter blur-[120px] opacity-10"
+      />
 
       <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center gap-10 sm:gap-16 md:gap-24 relative z-10">
 
-        <div className="md:w-1/2 w-full">
-             <div className="relative">
-                <div className="absolute -top-2 sm:-top-4 -left-2 sm:-left-4 w-full h-full border-2 sm:border-4 border-[#39FF14] rounded-xl"></div>
-                {/* ABOUT VIDEO: Party bus lifestyle video */}
-                <video
-                    src="/videos/about-video.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="relative w-full rounded-xl shadow-2xl object-cover"
-                    style={{ aspectRatio: '16/9', minHeight: '250px' }}
-                >
-                    Your browser does not support the video tag.
-                </video>
-             </div>
-        </div>
+        <motion.div
+          className="md:w-1/2 w-full flex justify-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInLeft}
+        >
+          {/* Vertical Video - Full Display */}
+          <video
+            src="/videos/about-video.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full max-w-[400px] md:max-w-[500px] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] object-cover"
+            style={{ aspectRatio: '9/16', minHeight: '400px' }}
+          >
+            Your browser does not support the video tag.
+          </video>
+        </motion.div>
 
-        <div className="md:w-1/2 w-full">
-          <span className="text-[#FF6B00] font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-3 sm:mb-4 block text-sm sm:text-base">Locally Owned & Operated</span>
-          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-6 sm:mb-8 leading-none font-['Bebas_Neue']">
-            PARTY ON WHEELS <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#39FF14]">IS A LIFESTYLE</span>
+        <motion.div
+          className="md:w-1/2 w-full flex flex-col justify-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInRight}
+        >
+          {/* Modern 2025 Typography - Refined Badge */}
+          <div className="mb-6">
+            <span className="inline-block text-[#FF6B00] font-semibold tracking-[0.2em] uppercase mb-5 text-xs sm:text-sm relative pl-4 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-4 before:bg-[#FF6B00]">
+              Locally Owned & Operated
+            </span>
+          </div>
+
+          {/* Modern Heading with Better Hierarchy */}
+          <h2 className="text-5xl sm:text-6xl md:text-8xl font-black mb-8 sm:mb-10 leading-[0.9] tracking-tight font-['Bebas_Neue']">
+            <TextReveal
+              text="PARTY ON WHEELS"
+              splitType="words"
+              staggerDelay={0.06}
+            />
           </h2>
 
-          <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-300 font-light">
-            <p>
-                Owned by <strong>Deric Hebert</strong>, Party On Wheels was built with one simple mission: to bring loud, unapologetic fun to South Louisiana.
+          {/* Refined Body Text - 2025 Style */}
+          <div className="space-y-5 sm:space-y-6 mb-10 sm:mb-12">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-100 font-light leading-relaxed tracking-tight">
+              Owned by <span className="font-semibold text-white">Deric Hebert</span>, Party On Wheels was built with one simple mission: to bring loud, unapologetic fun to South Louisiana.
             </p>
-            <p>
-                We aren't just a transportation company. We are the pre-game, the main event, and the after-party all rolled into one. Whether you are rolling through Houma, Thibodaux, or heading down to the Big Easy, our fleet is designed to keep the energy high.
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 font-light leading-relaxed tracking-tight">
+              We aren't just a transportation company. We are the pre-game, the main event, and the after-party all rolled into one. Whether you are rolling through Houma, Thibodaux, or heading down to the Big Easy, our fleet is designed to keep the energy high.
             </p>
-            <p>
-                Every bus is equipped with top-tier sound systems and lighting because we know that down here, we don't do quiet.
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-200 font-light leading-relaxed tracking-tight">
+              Every bus is equipped with top-tier sound systems and lighting because we know that down here, we don't do quiet.
             </p>
           </div>
 
+          {/* Modern Statistics Grid - 2025 Design */}
           <div className="mt-8 sm:mt-10">
-            <div className="flex flex-wrap gap-6 sm:gap-8 border-t border-gray-700 pt-6 sm:pt-8">
-                <div>
-                    <span className="block text-3xl sm:text-4xl font-bold text-white mb-1">4+</span>
-                    <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Custom Buses</span>
-                </div>
-                <div>
-                    <span className="block text-3xl sm:text-4xl font-bold text-white mb-1">1000+</span>
-                    <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Parties Hosted</span>
-                </div>
-                <div>
-                    <span className="block text-3xl sm:text-4xl font-bold text-white mb-1">100%</span>
-                    <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Local</span>
-                </div>
+            <div className="grid grid-cols-3 gap-6 sm:gap-8 pt-8 sm:pt-10 border-t border-white/10">
+              <div ref={busesCount.ref} className="text-center md:text-left">
+                <span className="block text-4xl sm:text-5xl md:text-6xl font-black text-white mb-2 leading-none tracking-tight">{busesCount.count}</span>
+                <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-[0.15em] font-medium">Custom Buses</span>
+              </div>
+              <div ref={partiesCount.ref} className="text-center md:text-left">
+                <span className="block text-4xl sm:text-5xl md:text-6xl font-black text-white mb-2 leading-none tracking-tight">{partiesCount.count}</span>
+                <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-[0.15em] font-medium">Parties Hosted</span>
+              </div>
+              <div ref={localPercent.ref} className="text-center md:text-left">
+                <span className="block text-4xl sm:text-5xl md:text-6xl font-black text-white mb-2 leading-none tracking-tight">{localPercent.count}</span>
+                <span className="text-xs sm:text-sm text-gray-400 uppercase tracking-[0.15em] font-medium">Local</span>
+              </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -6,7 +6,12 @@
       "Bash(git add:*)",
       "Bash(git push:*)",
       "Bash(git rev-parse:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(git clean:*)",
+      "Bash(npm install:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run dev:*)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []

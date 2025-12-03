@@ -20,29 +20,30 @@ export const OWNER_NAME = 'Deric Hebert';
 export const LOGO_URL = '/images/logo/pow-logo.png'; // Change filename if different
 
 export const BUSES: Bus[] = [
-  {
-    id: 'b1',
-    name: 'Orange Juice',
-    tagline: 'The Main Squeeze.',
-    description: 'Our flagship ride. Hard to miss and impossible not to have fun in. Features wrap-around seating, premium sound, and an open-air back deck for the ultimate cruise.',
-    hourlyRate: 125,
-    minHours: 4,
-    capacity: 40,
-    // IMAGE: Orange Juice bus photos
-    imageUrl: '/images/buses/orange-juice-main.jpeg',
-    // GALLERY: Multiple images of Orange Juice bus
-    gallery: [
-      '/images/buses/orange-juice-gallery-1.jpeg',
-      '/images/buses/orange-juice-gallery-2.jpeg',
-      '/images/buses/orange-juice-gallery-3.jpeg',
-    ],
-    features: ['Open Air Deck', 'Premium Sound System', 'LED Light Show', 'Coolers On Board'],
-    
-    // ------------------------------------------------------------------
-    // UNIFIED SERVICE MENU EMBED - ORANGE JUICE
-    // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" style="width: 100%; border:none; overflow:hidden;" scrolling="no" id="690255e04359bf2cbf1cbad6_1764689368370"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`
-  },
+  // TEMPORARILY REMOVED: Orange Juice bus has been sold. Remove this comment when ready to add replacement bus.
+  // {
+  //   id: 'b1',
+  //   name: 'Orange Juice',
+  //   tagline: 'The Main Squeeze.',
+  //   description: 'Our flagship ride. Hard to miss and impossible not to have fun in. Features wrap-around seating, premium sound, and an open-air back deck for the ultimate cruise.',
+  //   hourlyRate: 125,
+  //   minHours: 4,
+  //   capacity: 40,
+  //   // IMAGE: Orange Juice bus photos
+  //   imageUrl: '/images/buses/orange-juice-main.jpeg',
+  //   // GALLERY: Multiple images of Orange Juice bus
+  //   gallery: [
+  //     '/images/buses/orange-juice-gallery-1.jpeg',
+  //     '/images/buses/orange-juice-gallery-2.jpeg',
+  //     '/images/buses/orange-juice-gallery-3.jpeg',
+  //   ],
+  //   features: ['Open Air Deck', 'Premium Sound System', 'LED Light Show', 'Coolers On Board'],
+  //   
+  //   // ------------------------------------------------------------------
+  //   // UNIFIED SERVICE MENU EMBED - ORANGE JUICE
+  //   // ------------------------------------------------------------------
+  //   calendarEmbedCode: `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" style="width: 100%; border:none; overflow:hidden;" scrolling="no" id="690255e04359bf2cbf1cbad6_1764689368370"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`
+  // },
   {
     id: 'b2',
     name: 'Green Light',
