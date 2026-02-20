@@ -21,8 +21,8 @@ function App() {
   const [selectedBus, setSelectedBus] = useState<Bus | null>(null);
   const [showServiceMenu, setShowServiceMenu] = useState(false);
 
-  // Service menu embed code
-  const SERVICE_MENU_EMBED = `<iframe src="https://app.partyonwheelspow.com/widget/service-menu/690255e04359bf2cbf1cbad6" style="width: 100%; border:none; overflow:hidden;" scrolling="no" id="690255e04359bf2cbf1cbad6_1764689368370"></iframe><br><script src="https://app.partyonwheelspow.com/js/form_embed.js" type="text/javascript"></script>`;
+  // Service menu embed code - ZeroMotion Marketing main calendar showing all buses
+  const SERVICE_MENU_EMBED = `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sc/69973c8861f69e3db6e9664f?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69973c8861f69e3db6e9664f_1771570530498"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
 
   // Handle navigation (clicks on Navbar or Footer links)
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
