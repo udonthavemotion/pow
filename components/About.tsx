@@ -13,13 +13,13 @@ const About: React.FC = () => {
 
       {/* Abstract Shapes */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF6B00] rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#39FF14] rounded-full mix-blend-multiply filter blur-[120px] opacity-10"></div>
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#b9ff66] rounded-full mix-blend-multiply filter blur-[120px] opacity-10"></div>
 
       <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center gap-10 sm:gap-16 md:gap-24 relative z-10">
 
         <div className="md:w-1/2 w-full">
              <div className="relative">
-                <div className="absolute -top-2 sm:-top-4 -left-2 sm:-left-4 w-full h-full border-2 sm:border-4 border-[#39FF14] rounded-xl"></div>
+                <div className="absolute -top-2 sm:-top-4 -left-2 sm:-left-4 w-full h-full border-2 sm:border-4 border-[#b9ff66] rounded-xl"></div>
                 {/* ABOUT VIDEO: Party bus lifestyle video */}
                 <video
                     src="/videos/about-video.mp4"
@@ -39,7 +39,7 @@ const About: React.FC = () => {
           <span className="text-[#FF6B00] font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase mb-3 sm:mb-4 block text-sm sm:text-base">Locally Owned & Operated</span>
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-6 sm:mb-8 leading-none font-['Bebas_Neue']">
             PARTY ON WHEELS <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#39FF14]">IS A LIFESTYLE</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF6B00] to-[#b9ff66]">IS A LIFESTYLE</span>
           </h2>
 
           <div className="space-y-4 sm:space-y-6 text-base sm:text-lg text-gray-300 font-light">

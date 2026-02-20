@@ -33,7 +33,7 @@ const Testimonials: React.FC = () => {
     <section id="testimonials" className="py-24 px-6 md:px-12 bg-gray-900 text-white">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-16">
-          <span className="text-[#39FF14] font-bold tracking-widest uppercase text-lg mb-4 block">What People Say</span>
+          <span className="text-[#b9ff66] font-bold tracking-widest uppercase text-lg mb-4 block">What People Say</span>
           <h2 className="text-6xl md:text-8xl font-black text-white font-['Bebas_Neue'] uppercase mb-4">
             Rave Reviews
           </h2>
@@ -61,7 +61,7 @@ const Testimonials: React.FC = () => {
               {/* Author */}
               <div className="border-t border-gray-700 pt-4">
                 <p className="font-bold text-white text-lg">{testimonial.name}</p>
-                <p className="text-[#39FF14] text-sm uppercase tracking-wide">{testimonial.event}</p>
+                <p className="text-[#b9ff66] text-sm uppercase tracking-wide">{testimonial.event}</p>
               </div>
             </div>
           ))}

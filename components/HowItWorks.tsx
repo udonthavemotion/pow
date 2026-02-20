@@ -36,7 +36,7 @@ const HowItWorks: React.FC = () => {
           <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4">
             How It Works
           </h2>
-          <div className="w-20 sm:w-24 h-2 bg-[#39FF14] mx-auto mt-3 sm:mt-4"></div>
+          <div className="w-20 sm:w-24 h-2 bg-[#b9ff66] mx-auto mt-3 sm:mt-4"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-8 lg:gap-12">
@@ -46,7 +46,7 @@ const HowItWorks: React.FC = () => {
               className="relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100 group"
             >
               {/* Number Badge */}
-              <div className="absolute -top-5 sm:-top-6 -left-5 sm:-left-6 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-[#FF6B00] to-[#39FF14] rounded-full flex items-center justify-center text-white font-black text-xl sm:text-2xl font-['Bebas_Neue'] shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <div className="absolute -top-5 sm:-top-6 -left-5 sm:-left-6 w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-[#FF6B00] to-[#b9ff66] rounded-full flex items-center justify-center text-white font-black text-xl sm:text-2xl font-['Bebas_Neue'] shadow-lg group-hover:scale-110 transition-transform duration-300">
                 {step.number}
               </div>
 
@@ -63,7 +63,7 @@ const HowItWorks: React.FC = () => {
 
               {/* Decorative Line */}
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -right-6 w-12 h-0.5 bg-gradient-to-r from-[#FF6B00] to-[#39FF14] transform -translate-y-1/2"></div>
+                <div className="hidden md:block absolute top-1/2 -right-6 w-12 h-0.5 bg-gradient-to-r from-[#FF6B00] to-[#b9ff66] transform -translate-y-1/2"></div>
               )}
             </div>
           ))}

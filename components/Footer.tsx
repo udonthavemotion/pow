@@ -50,10 +50,10 @@ const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
         <div className="md:col-span-3">
           <h4 className="font-bold text-white mb-5 sm:mb-6 tracking-wide text-sm uppercase">Quick Links</h4>
           <ul className="space-y-3 sm:space-y-4 font-medium text-sm sm:text-base">
-            <li><a href="#fleet" onClick={(e) => onLinkClick(e, 'fleet')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">Our Fleet</a></li>
-            <li><a href="#how-it-works" onClick={(e) => onLinkClick(e, 'how-it-works')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">How It Works</a></li>
-            <li><a href="#events" onClick={(e) => onLinkClick(e, 'events')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">Events</a></li>
-            <li><a href="#faq" onClick={(e) => onLinkClick(e, 'faq')} className="hover:text-[#39FF14] transition-colors inline-block py-1 min-h-[44px] flex items-center">FAQ</a></li>
+            <li><a href="#fleet" onClick={(e) => onLinkClick(e, 'fleet')} className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">Our Fleet</a></li>
+            <li><a href="#how-it-works" onClick={(e) => onLinkClick(e, 'how-it-works')} className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">How It Works</a></li>
+            <li><a href="#events" onClick={(e) => onLinkClick(e, 'events')} className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">Events</a></li>
+            <li><a href="#faq" onClick={(e) => onLinkClick(e, 'faq')} className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">FAQ</a></li>
           </ul>
         </div>
 
@@ -63,7 +63,7 @@ const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
           <a href="tel:+19853339762" className="mb-3 sm:mb-2 text-lg sm:text-xl text-white font-bold hover:text-[#FF6B00] transition-colors block py-2 min-h-[44px] flex items-center">
             +1 985-333-9762
           </a>
-          <a href="mailto:partyonwheelspow@gmail.com" className="text-sm hover:text-[#39FF14] transition-colors inline-block py-2 min-h-[44px] flex items-center">
+          <a href="mailto:partyonwheelspow@gmail.com" className="text-sm hover:text-[#b9ff66] transition-colors inline-block py-2 min-h-[44px] flex items-center">
             partyonwheelspow@gmail.com
           </a>
         </div>
@@ -72,7 +72,7 @@ const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
       <div className="max-w-[1600px] mx-auto mt-12 sm:mt-20 pt-6 sm:pt-8 border-t border-gray-800">
         <div className="flex flex-col items-center gap-3 sm:gap-2 text-xs sm:text-sm text-center px-4">
           <p className="text-gray-400">
-            Serving All Of Southern Louisiana - <a href="tel:+19853339762" className="text-white hover:text-[#FF6B00] transition-colors font-bold">+1 985-333-9762</a> - <a href="mailto:partyonwheelspow@gmail.com" className="hover:text-[#39FF14] transition-colors">partyonwheelspow@gmail.com</a>
+            Serving All Of Southern Louisiana - <a href="tel:+19853339762" className="text-white hover:text-[#FF6B00] transition-colors font-bold">+1 985-333-9762</a> - <a href="mailto:partyonwheelspow@gmail.com" className="hover:text-[#b9ff66] transition-colors">partyonwheelspow@gmail.com</a>
           </p>
           <p className="text-gray-500">
             Website Developed By <a href="https://zeromotionmarketing.com" target="_blank" rel="noopener noreferrer" className="font-bold text-white hover:text-[#FF6B00] transition-colors">ZeroMotion Marketing</a> &copy; 2025 Party On Wheels Inc.

@@ -61,7 +61,7 @@ const FAQ: React.FC = () => {
           <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4">
             Frequently Asked Questions
           </h2>
-          <div className="w-20 sm:w-24 h-2 bg-[#39FF14] mx-auto mt-3 sm:mt-4"></div>
+          <div className="w-20 sm:w-24 h-2 bg-[#b9ff66] mx-auto mt-3 sm:mt-4"></div>
         </div>
 
         <div className="space-y-3 sm:space-y-4">
@@ -105,7 +105,7 @@ const FAQ: React.FC = () => {
         </div>
 
         {/* Still have questions CTA */}
-        <div className="mt-10 sm:mt-12 text-center bg-gradient-to-r from-[#FF6B00] to-[#39FF14] rounded-xl p-6 sm:p-8 text-white">
+        <div className="mt-10 sm:mt-12 text-center bg-gradient-to-r from-[#FF6B00] to-[#b9ff66] rounded-xl p-6 sm:p-8 text-white">
           <h3 className="text-2xl sm:text-3xl font-black uppercase mb-3 sm:mb-4 font-['Bebas_Neue']">Still Have Questions?</h3>
           <p className="text-base sm:text-lg mb-5 sm:mb-6 opacity-90">We're here to help! Give us a call or send us a message.</p>
           <a

@@ -51,15 +51,15 @@ const BusBooking: React.FC<BusBookingProps> = ({ bus, onBack }) => {
                 <h3 className="text-xl font-bold uppercase mb-6 text-gray-900">Bus Specs</h3>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <li className="flex items-center gap-3 text-gray-700">
-                        <span className="w-2 h-2 bg-[#39FF14] rounded-full"></span>
+                        <span className="w-2 h-2 bg-[#b9ff66] rounded-full"></span>
                         Capacity: {bus.capacity} Guests
                     </li>
                     <li className="flex items-center gap-3 text-gray-700">
-                        <span className="w-2 h-2 bg-[#39FF14] rounded-full"></span>
+                        <span className="w-2 h-2 bg-[#b9ff66] rounded-full"></span>
                         Rate: ${bus.hourlyRate}/hr
                     </li>
                     <li className="flex items-center gap-3 text-gray-700">
-                        <span className="w-2 h-2 bg-[#39FF14] rounded-full"></span>
+                        <span className="w-2 h-2 bg-[#b9ff66] rounded-full"></span>
                         Min Time: {bus.minHours} Hours
                     </li>
                     {bus.features.map((feat, idx) => (

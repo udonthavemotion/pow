@@ -57,7 +57,7 @@ const Assistant: React.FC = () => {
           {/* Header */}
           <div className="bg-black p-5 flex justify-between items-center">
             <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-[#39FF14] rounded-full animate-pulse"></div>
+                <div className="w-3 h-3 bg-[#b9ff66] rounded-full animate-pulse"></div>
                 <span className="font-bold text-white text-lg uppercase tracking-wider">POW Assistant</span>
             </div>
             <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white transition-colors">
@@ -120,14 +120,14 @@ const Assistant: React.FC = () => {
 
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-black border-2 border-[#39FF14] text-white w-16 h-16 flex items-center justify-center rounded-full shadow-2xl hover:scale-105 hover:rotate-12 transition-all duration-300 z-50"
+        className="bg-black border-2 border-[#b9ff66] text-white w-16 h-16 flex items-center justify-center rounded-full shadow-2xl hover:scale-105 hover:rotate-12 transition-all duration-300 z-50"
       >
         {isOpen ? (
              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
              </svg>
         ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8 text-[#39FF14]">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-8 h-8 text-[#b9ff66]">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
             </svg>
         )}

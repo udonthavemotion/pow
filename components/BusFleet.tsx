@@ -4,7 +4,7 @@
 */
 
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BUSES } from '../constants';
 import { Bus } from '../types';
 
@@ -13,53 +13,120 @@ interface BusFleetProps {
 }
 
 const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
-  return (
-    <section id="fleet" className="py-16 sm:py-24 px-4 sm:px-6 md:px-12 bg-white relative">
-      <div className="max-w-[1600px] mx-auto">
+  const [visibleCards, setVisibleCards] = useState<Set<string>>(new Set());
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
-        {/* Header Area */}
-        <div className="flex flex-col items-center text-center mb-12 sm:mb-20 space-y-3 sm:space-y-4">
-          <span className="text-[#FF6B00] font-bold tracking-widest uppercase text-sm sm:text-lg">Choose Your Ride</span>
-          <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 font-['Bebas_Neue']">THE FLEET</h2>
-          <div className="w-20 sm:w-24 h-2 bg-[#39FF14] mt-2 sm:mt-4"></div>
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const busId = entry.target.getAttribute('data-bus-id');
+          if (busId && entry.isIntersecting) {
+            setVisibleCards((prev) => new Set([...prev, busId]));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    cardRefs.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleImageLoad = (busId: string) => {
+    setLoadedImages((prev) => new Set([...prev, busId]));
+  };
+
+  return (
+    <section id="fleet" className="py-20 sm:py-32 px-4 sm:px-6 md:px-12 bg-white relative overflow-hidden">
+      {/* Subtle background accent */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF6B00] opacity-[0.02] rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#b9ff66] opacity-[0.02] rounded-full blur-3xl"></div>
+
+      <div className="max-w-[1600px] mx-auto relative">
+
+        {/* Header Area - Enhanced spacing */}
+        <div className="flex flex-col items-center text-center mb-16 sm:mb-28 space-y-4 sm:space-y-6">
+          <span className="text-[#FF6B00] font-bold tracking-[0.3em] uppercase text-sm sm:text-lg animate-fade-in-up">Choose Your Ride</span>
+          <h2 className="text-6xl sm:text-7xl md:text-9xl font-black text-gray-900 font-['Bebas_Neue'] tracking-tight animate-fade-in-up" style={{ animationDelay: '0.1s' }}>THE FLEET</h2>
+          <div className="w-24 sm:w-32 h-2 bg-[#b9ff66] mt-3 sm:mt-6 animate-fade-in-up" style={{ animationDelay: '0.2s' }}></div>
         </div>
 
-        {/* Large Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
-          {BUSES.map(bus => (
+        {/* Large Grid - Enhanced spacing */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-14 lg:gap-20">
+          {BUSES.map((bus, index) => (
             <div
                 key={bus.id}
-                className="group cursor-pointer flex flex-col bg-gray-50 border border-gray-100 shadow-xl hover:shadow-2xl hover:shadow-[#FF6B00]/20 transition-all duration-500 rounded-xl overflow-hidden"
+                ref={(el) => {
+                  if (el) cardRefs.current.set(bus.id, el);
+                }}
+                data-bus-id={bus.id}
+                className={`group cursor-pointer flex flex-col bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-xl hover:shadow-2xl hover:shadow-[#FF6B00]/30 transition-all duration-700 rounded-2xl overflow-hidden transform hover:-translate-y-2 ${
+                  visibleCards.has(bus.id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{
+                  transitionDelay: visibleCards.has(bus.id) ? `${index * 0.1}s` : '0s',
+                }}
                 onClick={() => onBusClick(bus)}
             >
-                {/* Image */}
-                <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-200">
+                {/* Image with loading state */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200">
+                    {/* Skeleton loader */}
+                    {!loadedImages.has(bus.id) && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-pulse"></div>
+                    )}
+
                     <img
                       src={bus.imageUrl}
                       alt={bus.name}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                      loading="lazy"
+                      onLoad={() => handleImageLoad(bus.id)}
+                      className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-105 ${
+                        loadedImages.has(bus.id) ? 'opacity-100' : 'opacity-0'
+                      }`}
                     />
-                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-[#39FF14] text-black font-bold px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm uppercase tracking-wide">
-                        {bus.capacity} Passengers
+
+                    {/* Gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+
+                    {/* Capacity badge with pulse animation */}
+                    <div className="absolute top-4 sm:top-5 right-4 sm:right-5 bg-[#b9ff66] text-black font-bold px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm uppercase tracking-wide shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:shadow-[#b9ff66]/50 group-hover:shadow-xl">
+                        <span className="inline-block group-hover:animate-pulse">{bus.capacity} Passengers</span>
                     </div>
+
                 </div>
 
-                {/* Details */}
-                <div className="p-6 sm:p-8 flex-1 flex flex-col">
-                    <div className="flex justify-between items-start mb-2 gap-3">
-                        <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 uppercase font-['Bebas_Neue']">{bus.name}</h3>
-                        <span className="text-lg sm:text-xl font-bold text-[#FF6B00] whitespace-nowrap">${bus.hourlyRate}/hr</span>
+                {/* Details - Enhanced spacing */}
+                <div className="p-8 sm:p-10 flex-1 flex flex-col">
+                    <div className="flex justify-between items-start mb-3 gap-4">
+                        <h3 className="text-4xl sm:text-5xl font-bold text-gray-900 uppercase font-['Bebas_Neue'] group-hover:text-[#FF6B00] transition-colors duration-300">{bus.name}</h3>
+                        <span className="text-xl sm:text-2xl font-bold text-[#FF6B00] whitespace-nowrap group-hover:scale-110 transition-transform duration-300">${bus.hourlyRate}/hr</span>
                     </div>
 
-                    <p className="text-gray-500 font-medium tracking-wide uppercase text-xs sm:text-sm mb-3 sm:mb-4">{bus.tagline}</p>
-                    <p className="text-gray-600 mb-6 sm:mb-8 line-clamp-2 text-sm sm:text-base">{bus.description}</p>
+                    <p className="text-gray-500 font-bold tracking-[0.15em] uppercase text-xs sm:text-sm mb-4 sm:mb-5">{bus.tagline}</p>
+                    <p className="text-gray-600 mb-8 sm:mb-10 line-clamp-2 text-sm sm:text-base leading-relaxed">{bus.description}</p>
 
                     <div className="mt-auto">
                         <button
                             onClick={() => onBusClick(bus)}
-                            className="w-full py-4 sm:py-5 min-h-[56px] bg-black text-white font-bold uppercase tracking-widest hover:bg-[#FF6B00] transition-colors rounded-lg text-sm sm:text-base"
+                            className="relative w-full py-5 sm:py-6 min-h-[60px] bg-black text-white font-bold uppercase tracking-[0.2em] rounded-xl text-sm sm:text-base overflow-hidden group/btn transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF6B00]/50"
                         >
-                            Book This Bus
+                            {/* Animated background on hover */}
+                            <span className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-[#ff8533] transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-500 origin-left"></span>
+
+                            {/* Button text */}
+                            <span className="relative z-10 inline-block group-hover/btn:scale-105 transition-transform duration-300">
+                              Book This Bus
+                            </span>
+
+                            {/* Shine effect */}
+                            <span className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-700">
+                              <span className="absolute inset-0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></span>
+                            </span>
                         </button>
                     </div>
                 </div>

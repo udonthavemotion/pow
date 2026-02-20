@@ -36,7 +36,7 @@ const Events: React.FC = () => {
                     {/* Content Overlay */}
                     <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 text-white">
                         <div className="transform translate-y-2 sm:translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <span className="text-[#39FF14] font-bold uppercase tracking-wider text-xs sm:text-sm mb-2 block">{event.subtitle}</span>
+                            <span className="text-[#b9ff66] font-bold uppercase tracking-wider text-xs sm:text-sm mb-2 block">{event.subtitle}</span>
                             <h3 className="text-3xl sm:text-4xl font-black uppercase mb-3 sm:mb-4 font-['Bebas_Neue'] leading-none">{event.title}</h3>
                             <p className="text-gray-200 text-sm sm:text-base opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
                                 {event.description}
