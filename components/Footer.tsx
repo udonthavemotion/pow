@@ -20,6 +20,7 @@ const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
           <img
             src={LOGO_URL}
             alt={`${BRAND_NAME} Logo`}
+            loading="lazy"
             className="h-14 sm:h-16 w-auto mb-5 sm:mb-6 object-contain"
           />
           <p className="max-w-xs font-medium leading-relaxed mb-5 sm:mb-6 text-sm sm:text-base">

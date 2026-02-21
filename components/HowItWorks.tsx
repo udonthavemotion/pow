@@ -4,23 +4,11 @@
 */
 
 
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
+import { useInView } from '../hooks/useInView';
 
 const HowItWorks: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+  const { isInView: isVisible, ref: sectionRef } = useInView({ threshold: 0.2 });
 
   const steps = [
     {
@@ -55,7 +43,8 @@ const HowItWorks: React.FC = () => {
   ];
 
   return (
-    <section ref={sectionRef} id="how-it-works" className="py-16 sm:py-24 px-4 sm:px-6 md:px-12 bg-gradient-to-b from-white to-gray-50">
+    <section
+      ref={sectionRef} id="how-it-works" className="py-16 sm:py-24 px-4 sm:px-6 md:px-12 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <span className="text-[#FF6B00] font-bold tracking-widest uppercase text-sm sm:text-lg mb-3 sm:mb-4 block">Simple Process</span>

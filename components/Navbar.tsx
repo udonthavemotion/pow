@@ -4,23 +4,24 @@
 */
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, startTransition } from 'react';
 import { BRAND_NAME, LOGO_URL } from '../constants';
 
 interface NavbarProps {
   onNavClick: (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => void;
   onBookNow?: () => void;
+  onBookNowHover?: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow }) => {
+const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      startTransition(() => setScrolled(window.scrollY > 50));
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -82,6 +83,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow }) => {
                     handleLinkClick(e, 'fleet');
                   }
                 }}
+                onMouseEnter={onBookNowHover}
+                onFocus={onBookNowHover}
                 className="hidden md:inline-block bg-[#FF6B00] text-white px-6 py-3 font-bold uppercase tracking-widest text-sm hover:bg-[#e56000] transition-colors -skew-x-12"
             >
                 <span className="skew-x-12 inline-block">Book Now</span>
@@ -125,6 +128,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow }) => {
                     handleLinkClick(e, 'fleet');
                   }
                 }}
+                onMouseEnter={onBookNowHover}
+                onFocus={onBookNowHover}
                 className="bg-[#FF6B00] text-white px-10 py-5 text-xl sm:text-2xl mt-8 -skew-x-12 min-h-[56px] flex items-center justify-center"
             >
                 <span className="skew-x-12 inline-block">Book A Ride</span>

@@ -128,7 +128,7 @@ const FAQ: React.FC = () => {
                 if (el) itemRefs.current.set(index, el);
               }}
               data-index={index}
-              className={`bg-gray-50 rounded-lg border border-gray-200 overflow-hidden
+              className={`content-visibility-faq-item bg-gray-50 rounded-lg border border-gray-200 overflow-hidden
                 transition-all duration-300 hover:border-[#FF6B00] hover:shadow-lg ${
                 visibleItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               } ${openIndex === index ? 'border-l-4 border-l-[#FF6B00] shadow-md' : ''}`}

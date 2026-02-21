@@ -12,31 +12,65 @@ interface BookingModalProps {
   onClose: () => void;
 }
 
+const FOCUSABLE_SELECTOR = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, onClose }) => {
   const isServiceMenu = !bus && serviceMenuEmbedCode;
   const iframeContainerRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const onCloseRef = useRef(onClose);
   const [isVisible, setIsVisible] = useState(false);
   const [isCalendarLoading, setIsCalendarLoading] = useState(true);
   const scriptLoadedRef = useRef(false);
 
+  onCloseRef.current = onClose;
+
   useEffect(() => {
-    // Reset loading state when modal opens
     setIsCalendarLoading(true);
-    // Trigger entrance animation
     const timer = setTimeout(() => setIsVisible(true), 50);
     return () => clearTimeout(timer);
   }, []);
 
-  // Handle escape key
+  // Focus trap + focus close button when modal opens
+  useEffect(() => {
+    if (!isVisible) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    closeBtnRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab' || !modalRef.current) return;
+      const focusables = modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [isVisible]);
+
+  // Handle escape key - ref pattern avoids re-subscribing when onClose changes
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
+      if (e.key === 'Escape') onCloseRef.current();
     };
     window.addEventListener('keydown', handleEscape);
     return () => window.removeEventListener('keydown', handleEscape);
-  }, [onClose]);
+  }, []);
 
   // Properly load GoHighLevel calendar embed with external script
   useEffect(() => {
@@ -126,16 +160,12 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
 
     script.onload = () => {
       scriptLoadedRef.current = true;
-      console.log('GoHighLevel form_embed.js loaded successfully');
-
-      // Force a re-render of GoHighLevel elements
       if (window.dispatchEvent) {
         window.dispatchEvent(new Event('resize'));
       }
     };
 
     script.onerror = () => {
-      console.error('Failed to load GoHighLevel form_embed.js');
       setIsCalendarLoading(false);
     };
 
@@ -159,6 +189,10 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
       onClick={onClose}
     >
       <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="booking-modal-title"
         className={`bg-white w-full h-full sm:max-w-[100vw] sm:max-h-[100vh] overflow-hidden flex flex-col shadow-2xl relative transition-all duration-500 ${
           isVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8'
         } ${
@@ -169,6 +203,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
       >
         {/* Close Button - Optimized for Mobile Touch */}
         <button
+          ref={closeBtnRef}
           onClick={onClose}
           className="absolute top-3 right-3 sm:top-6 sm:right-6 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-sm hover:bg-white text-gray-600 hover:text-gray-900 flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-xl active:scale-95"
           aria-label="Close modal"
@@ -200,7 +235,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
               <div className="space-y-2">
                 {isServiceMenu ? (
                   <>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                    <h2 id="booking-modal-title" className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                       Choose Your Ride
                     </h2>
                     <p className="text-gray-600 text-base sm:text-lg">
@@ -209,7 +244,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                   </>
                 ) : (
                   <>
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                    <h2 id="booking-modal-title" className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                       {bus.name}
                     </h2>
                     <p className="text-gray-600 text-base sm:text-lg">

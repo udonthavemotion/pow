@@ -10,9 +10,10 @@ import { Bus } from '../types';
 
 interface BusFleetProps {
   onBusClick: (bus: Bus) => void;
+  onCardHover?: () => void;
 }
 
-const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
+const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
   const [visibleCards, setVisibleCards] = useState<Set<string>>(new Set());
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [headerVisible, setHeaderVisible] = useState(false);
@@ -103,13 +104,15 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick }) => {
                   if (el) cardRefs.current.set(bus.id, el);
                 }}
                 data-bus-id={bus.id}
-                className={`group cursor-pointer flex flex-col bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-xl hover:shadow-2xl hover:shadow-[#FF6B00]/30 transition-all duration-700 rounded-2xl overflow-hidden transform hover:-translate-y-2 ${
+                className={`content-visibility-fleet-card group cursor-pointer flex flex-col bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-xl hover:shadow-2xl hover:shadow-[#FF6B00]/30 transition-all duration-700 rounded-2xl overflow-hidden transform hover:-translate-y-2 ${
                   visibleCards.has(bus.id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{
                   transitionDelay: visibleCards.has(bus.id) ? `${index * 0.1}s` : '0s',
                 }}
                 onClick={() => onBusClick(bus)}
+                onMouseEnter={onCardHover}
+                onFocus={onCardHover}
             >
                 {/* Image with loading state */}
                 <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 transform-gpu"

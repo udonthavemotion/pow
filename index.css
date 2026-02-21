@@ -289,6 +289,70 @@ h1, h2, h3, h4 {
   transform-origin: center bottom;
 }
 
+/* Hero-specific keyframes (hoisted for caching) */
+@keyframes pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(57, 255, 20, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px rgba(57, 255, 20, 0.8));
+  }
+}
+
+@keyframes subtitle-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes buttons-slide {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes trust-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-subtitle-fade {
+  animation: subtitle-fade 0.8s ease-out forwards;
+}
+
+.animate-buttons-slide {
+  animation: buttons-slide 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-trust-pop {
+  animation: trust-pop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
 @keyframes orangeGlow {
   0%, 100% {
     text-shadow:
@@ -599,6 +663,22 @@ h1, h2, h3, h4 {
   .animate-arrowPulse {
     animation: none !important;
   }
+}
+
+/* Modal open - prevent body scroll */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* content-visibility for long lists (off-screen rendering perf) */
+.content-visibility-fleet-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 420px;
+}
+
+.content-visibility-faq-item {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 80px;
 }
 
 /* Performance Optimizations */

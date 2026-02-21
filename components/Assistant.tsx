@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useTransition } from 'react';
 import { ChatMessage } from '../types';
 import { sendMessageToGemini } from '../services/geminiService';
 
@@ -13,7 +13,7 @@ const Assistant: React.FC = () => {
     { role: 'model', text: 'Hey there! Ready to plan your night out? Ask me anything about our buses!', timestamp: Date.now() }
   ]);
   const [inputValue, setInputValue] = useState('');
-  const [isThinking, setIsThinking] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,25 +22,24 @@ const Assistant: React.FC = () => {
     }
   }, [messages, isOpen]);
 
-  const handleSend = async () => {
+  const handleSend = () => {
     if (!inputValue.trim()) return;
 
     const userMsg: ChatMessage = { role: 'user', text: inputValue, timestamp: Date.now() };
-    setMessages(prev => [...prev, userMsg]);
+    const updatedMessages = [...messages, userMsg];
+    setMessages(updatedMessages);
     setInputValue('');
-    setIsThinking(true);
 
-    try {
-      const history = messages.map(m => ({ role: m.role, text: m.text }));
-      const responseText = await sendMessageToGemini(history, userMsg.text);
-      
-      const aiMsg: ChatMessage = { role: 'model', text: responseText, timestamp: Date.now() };
-      setMessages(prev => [...prev, aiMsg]);
-    } catch (error) {
+    startTransition(async () => {
+      try {
+        const history = updatedMessages.map(m => ({ role: m.role, text: m.text }));
+        const responseText = await sendMessageToGemini(history, userMsg.text);
+        const aiMsg: ChatMessage = { role: 'model', text: responseText, timestamp: Date.now() };
+        setMessages(prev => [...prev, aiMsg]);
+      } catch {
         // Error handled in service
-    } finally {
-      setIsThinking(false);
-    }
+      }
+    });
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -69,8 +68,8 @@ const Assistant: React.FC = () => {
 
           {/* Chat Area */}
           <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-gray-100" ref={scrollRef}>
-            {messages.map((msg, idx) => (
-              <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+            {messages.map((msg) => (
+              <div key={msg.timestamp} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div 
                   className={`max-w-[85%] p-4 text-sm font-medium ${
                     msg.role === 'user' 
@@ -82,7 +81,7 @@ const Assistant: React.FC = () => {
                 </div>
               </div>
             ))}
-            {isThinking && (
+            {isPending && (
                <div className="flex justify-start">
                  <div className="bg-white border border-gray-200 p-4 flex gap-1 items-center shadow-sm rounded-r-xl rounded-tl-xl">
                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
@@ -106,7 +105,7 @@ const Assistant: React.FC = () => {
               />
               <button 
                 onClick={handleSend}
-                disabled={!inputValue.trim() || isThinking}
+                disabled={!inputValue.trim() || isPending}
                 className="bg-black text-white px-4 rounded-lg hover:bg-[#FF6B00] transition-colors disabled:opacity-50"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">

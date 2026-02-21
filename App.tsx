@@ -4,105 +4,100 @@
 */
 
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import BusFleet from './components/BusFleet';
-import About from './components/About';
 import Events from './components/Events';
-import HowItWorks from './components/HowItWorks';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import { Bus } from './types';
+
+const HowItWorks = lazy(() => import('./components/HowItWorks'));
+const About = lazy(() => import('./components/About'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const FAQ = lazy(() => import('./components/FAQ'));
+
+// Service menu embed code - ZeroMotion Marketing main calendar showing all buses (hoisted for perf)
+const SERVICE_MENU_EMBED = `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sc/69973c8861f69e3db6e9664f?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69973c8861f69e3db6e9664f_1771570530498"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
 
 function App() {
   const [selectedBus, setSelectedBus] = useState<Bus | null>(null);
   const [showServiceMenu, setShowServiceMenu] = useState(false);
 
-  // Service menu embed code - ZeroMotion Marketing main calendar showing all buses
-  const SERVICE_MENU_EMBED = `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sc/69973c8861f69e3db6e9664f?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69973c8861f69e3db6e9664f_1771570530498"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
+  const preloadBookingModal = useCallback(() => {
+    void import('./components/BookingModal');
+  }, []);
 
-  // Handle navigation (clicks on Navbar or Footer links)
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault();
-    
-    // Check if this is a "Book Now" button by checking href and text content
-    const linkText = e.currentTarget.textContent?.toLowerCase() || '';
-    const href = e.currentTarget.getAttribute('href') || '';
-    
-    // If clicking "Book Now" or "Book A Ride" button (targetId is 'fleet'), show service menu
-    if (targetId === 'fleet' && (linkText.includes('book') || href === '#fleet')) {
-      // Only show service menu if it's explicitly a booking button, not just a fleet link
-      // Check if parent has booking-related classes or if it's from navbar Book Now button
-      const parent = e.currentTarget.closest('nav');
-      if (parent || linkText.includes('book')) {
-        setShowServiceMenu(true);
-        document.body.style.overflow = 'hidden';
-        return;
-      }
-    }
-    
-    scrollToSection(targetId);
-  };
-  
-  // Handler specifically for opening service menu
-  const handleOpenServiceMenu = () => {
+  const handleOpenServiceMenu = useCallback(() => {
     setShowServiceMenu(true);
-    document.body.style.overflow = 'hidden';
-  };
+    document.body.classList.add('modal-open');
+  }, []);
 
-  const scrollToSection = (targetId: string) => {
+  const handleCloseModal = useCallback(() => {
+    setSelectedBus(null);
+    setShowServiceMenu(false);
+    document.body.classList.remove('modal-open');
+  }, []);
+
+  const scrollToSection = useCallback((targetId: string) => {
     if (!targetId) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     }
-    
     const element = document.getElementById(targetId);
     if (element) {
-      // Manual scroll calculation to account for fixed header
       const headerOffset = 85;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth"
+        behavior: 'smooth'
       });
     }
-  };
+  }, []);
 
-  const handleBusClick = (bus: Bus) => {
+  // Handle navigation (clicks on Navbar or Footer links)
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const linkText = e.currentTarget.textContent?.toLowerCase() || '';
+    const href = e.currentTarget.getAttribute('href') || '';
+    if (targetId === 'fleet' && (linkText.includes('book') || href === '#fleet')) {
+      const parent = e.currentTarget.closest('nav');
+      if (parent || linkText.includes('book')) {
+        setShowServiceMenu(true);
+        document.body.classList.add('modal-open');
+        return;
+      }
+    }
+    scrollToSection(targetId);
+  }, [scrollToSection]);
+
+  const handleBusClick = useCallback((bus: Bus) => {
     setSelectedBus(bus);
-    // Prevent body scroll when modal is open
-    document.body.style.overflow = 'hidden';
-  };
-
-  const handleCloseModal = () => {
-    setSelectedBus(null);
-    setShowServiceMenu(false);
-    document.body.style.overflow = 'unset';
-  };
+    document.body.classList.add('modal-open');
+  }, []);
 
   return (
     <div className="min-h-screen bg-white font-sans text-[#1a1a1a]">
-      <Navbar onNavClick={handleNavClick} onBookNow={handleOpenServiceMenu} />
+      <Navbar onNavClick={handleNavClick} onBookNow={handleOpenServiceMenu} onBookNowHover={preloadBookingModal} />
       
       <main>
-        <Hero onBookNow={() => {
-          setShowServiceMenu(true);
-          document.body.style.overflow = 'hidden';
-        }} />
-        <BusFleet onBusClick={handleBusClick} />
-        <HowItWorks />
-        <Events onBookNow={() => {
-          setShowServiceMenu(true);
-          document.body.style.overflow = 'hidden';
-        }} />
-        <About />
-        <Testimonials />
-        <FAQ />
+        <Hero onBookNow={handleOpenServiceMenu} onBookNowHover={preloadBookingModal} />
+        <BusFleet onBusClick={handleBusClick} onCardHover={preloadBookingModal} />
+        <Suspense fallback={<div className="min-h-[400px]" aria-hidden />}>
+          <HowItWorks />
+        </Suspense>
+        <Events onBookNow={handleOpenServiceMenu} onBookNowHover={preloadBookingModal} />
+        <Suspense fallback={<div className="min-h-[400px]" aria-hidden />}>
+          <About />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[300px]" aria-hidden />}>
+          <Testimonials />
+        </Suspense>
+        <Suspense fallback={<div className="min-h-[300px]" aria-hidden />}>
+          <FAQ />
+        </Suspense>
       </main>
 
       <Footer onLinkClick={handleNavClick} />

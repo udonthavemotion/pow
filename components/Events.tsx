@@ -9,9 +9,10 @@ import { EVENTS } from '../constants';
 
 interface EventsProps {
   onBookNow?: () => void;
+  onBookNowHover?: () => void;
 }
 
-const Events: React.FC<EventsProps> = ({ onBookNow }) => {
+const Events: React.FC<EventsProps> = ({ onBookNow, onBookNowHover }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState(0);
@@ -139,6 +140,7 @@ const Events: React.FC<EventsProps> = ({ onBookNow }) => {
                   <img
                     src={event.image}
                     alt={event.title}
+                    loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 brightness-75 group-hover:brightness-50"
                   />
 
@@ -195,6 +197,7 @@ const Events: React.FC<EventsProps> = ({ onBookNow }) => {
               <img
                 src={event.image}
                 alt={event.title}
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-3">
@@ -208,6 +211,8 @@ const Events: React.FC<EventsProps> = ({ onBookNow }) => {
             <p className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 uppercase">Ready to party on one of our wheels?</p>
             <button
                 onClick={onBookNow}
+                onMouseEnter={onBookNowHover}
+                onFocus={onBookNowHover}
                 className="inline-block bg-[#FF6B00] text-white px-8 py-4 text-2xl sm:text-3xl font-black uppercase hover:bg-[#e56000] transition-colors -skew-x-12 shadow-lg hover:shadow-xl"
             >
                 <span className="skew-x-12 inline-block">Book Now</span>
