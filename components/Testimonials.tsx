@@ -64,12 +64,12 @@ const Testimonials: React.FC = () => {
         <div ref={headerRef} className="text-center mb-16">
           <span className={`text-[#FF6B00] font-bold tracking-widest uppercase text-lg mb-4 block
             transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            What People Say
+            Customer Reviews
           </span>
           <h2 className={`text-6xl md:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-4
             transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
             style={{ transitionDelay: '0.15s' }}>
-            Word on the Street
+            What Our Riders Say
           </h2>
           <div className={`w-24 h-2 bg-[#b9ff66] mx-auto mt-4 transition-all duration-700
             ${headerVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
