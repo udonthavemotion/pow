@@ -96,7 +96,10 @@ function App() {
         }} />
         <BusFleet onBusClick={handleBusClick} />
         <HowItWorks />
-        <Events />
+        <Events onBookNow={() => {
+          setShowServiceMenu(true);
+          document.body.style.overflow = 'hidden';
+        }} />
         <About />
         <Testimonials />
         <FAQ />

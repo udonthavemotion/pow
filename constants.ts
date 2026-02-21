@@ -28,6 +28,7 @@ export const BUSES: Bus[] = [
     hourlyRate: 135,
     minHours: 4,
     capacity: 40,
+    nameColor: '#FF6B00', // Orange like the bus
     // IMAGE: The Juice bus photos
     imageUrl: '/images/buses/The Juice/Orange Juice.jpeg',
     // GALLERY: Multiple images of The Juice bus
@@ -41,7 +42,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // THE JUICE - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/7NxO0xQcbWUYT09lswfT/sv/6997f3cd13de2126c1af475b" style="width: 100%; border:none; overflow:hidden; min-height: 750px;" scrolling="yes"></iframe>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f3cd13de2126c1af475b?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f3cd13de2126c1af475b_1771615404908"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b2',
@@ -51,6 +52,7 @@ export const BUSES: Bus[] = [
     hourlyRate: 125,
     minHours: 4,
     capacity: 40,
+    nameColor: '#228B22', // Green
     // IMAGE: Kuttin Loose bus photo
     imageUrl: '/images/buses/The Kuttin Loose/KuttinLoose.png',
     features: ['Premium Sound System', 'LED Light Show', 'Dance Floor', 'Climate Control'],
@@ -58,7 +60,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // KUTTIN LOOSE - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/7NxO0xQcbWUYT09lswfT/sv/6997f987b7155aae6f37abed" style="width: 100%; border:none; overflow:hidden; min-height: 750px;" scrolling="yes"></iframe>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f987b7155aae6f37abed?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f987b7155aae6f37abed_1771615298073"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b3',
@@ -68,6 +70,7 @@ export const BUSES: Bus[] = [
     hourlyRate: 110,
     minHours: 4,
     capacity: 40,
+    nameColor: '#FF69B4', // Pink/Blue gradient - we'll use pink as primary
     // IMAGE: The Cotton Candy bus photo
     imageUrl: '/images/buses/The Cotton Candy/CottonCandy.jpeg',
     features: ['Vibrant Interior', 'Premium Sound System', 'LED Lighting', 'Climate Control'],
@@ -75,7 +78,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // THE COTTON CANDY - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/7NxO0xQcbWUYT09lswfT/sv/6997f8e90a59e3eff7ea08a8" style="width: 100%; border:none; overflow:hidden; min-height: 750px;" scrolling="yes"></iframe>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f8e90a59e3eff7ea08a8?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f8e90a59e3eff7ea08a8_1771615328444"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b4',
@@ -85,6 +88,7 @@ export const BUSES: Bus[] = [
     hourlyRate: 100,
     minHours: 4,
     capacity: 40,
+    nameColor: '#C0C0C0', // Metallic silver
     // IMAGE: Rackz bus photo
     imageUrl: '/images/buses/The Rackz/TheRackz.jpeg',
     features: ['VIP Seating', 'Premium Audio', 'LED Light Show', 'AC/Heat'],
@@ -92,7 +96,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // RACKZ - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/7NxO0xQcbWUYT09lswfT/sv/6997f558375466488a063555" style="width: 100%; border:none; overflow:hidden; min-height: 750px;" scrolling="yes"></iframe>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f558375466488a063555?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f558375466488a063555_1771615387203"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b5',
@@ -102,6 +106,7 @@ export const BUSES: Bus[] = [
     hourlyRate: 90,
     minHours: 4,
     capacity: 40,
+    nameColor: '#FFA500', // School bus orange
     // IMAGE: The Dirty Dancer bus photo
     imageUrl: '/images/buses/Dirty Dancer/DirtyDancer.jpeg',
     features: ['Dance Floor', 'Dance Pole', 'Club Sound System', 'Premium Lighting', 'Climate Control'],
@@ -109,7 +114,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // THE DIRTY DANCER - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/7NxO0xQcbWUYT09lswfT/sv/6997f5980a59e3a7e6e925b1" style="width: 100%; border:none; overflow:hidden; min-height: 750px;" scrolling="yes"></iframe>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f5980a59e3a7e6e925b1?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f5980a59e3a7e6e925b1_1771615368878"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b6',
@@ -119,6 +124,7 @@ export const BUSES: Bus[] = [
     hourlyRate: 80,
     minHours: 3,
     capacity: 20,
+    nameColor: '#1C1C1C', // Black like a classic limo
     // IMAGE: The Limo photo
     imageUrl: '/images/buses/Limo/Limo.jpeg',
     features: ['Luxury Seating', 'Premium Sound', 'Mood Lighting', 'Climate Control', 'Mini Bar'],
@@ -126,7 +132,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // THE LIMO - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/7NxO0xQcbWUYT09lswfT/sv/6997f691f6ab8f441ceaf29d" style="width: 100%; border:none; overflow:hidden; min-height: 750px;" scrolling="yes"></iframe>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f691f6ab8f441ceaf29d?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f691f6ab8f441ceaf29d_1771615349252"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   }
   // NOTE: Green Light and The Coconut removed as they were not in the updated fleet list
   // If you need to add them back, use the booking calendar widget format from ZeroMotion Marketing

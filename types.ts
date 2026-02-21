@@ -16,8 +16,9 @@ export interface Bus {
   imageUrl: string;
   gallery?: string[];
   features: string[];
+  nameColor?: string; // Color to match the actual bus color
   // Paste your GoHighLevel Embed Code (iframe) into this string in constants.ts
-  calendarEmbedCode?: string; 
+  calendarEmbedCode?: string;
 }
 
 export interface EventItem {

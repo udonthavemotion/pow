@@ -16,8 +16,12 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
   const isServiceMenu = !bus && serviceMenuEmbedCode;
   const iframeContainerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isCalendarLoading, setIsCalendarLoading] = useState(true);
+  const scriptLoadedRef = useRef(false);
 
   useEffect(() => {
+    // Reset loading state when modal opens
+    setIsCalendarLoading(true);
     // Trigger entrance animation
     const timer = setTimeout(() => setIsVisible(true), 50);
     return () => clearTimeout(timer);
@@ -34,50 +38,139 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
     return () => window.removeEventListener('keydown', handleEscape);
   }, [onClose]);
 
-  // Ensure iframe loads and adjust height dynamically
+  // Properly load GoHighLevel calendar embed with external script
   useEffect(() => {
     const embedCode = isServiceMenu ? serviceMenuEmbedCode : bus?.calendarEmbedCode;
-    if (iframeContainerRef.current && embedCode) {
-      const iframe = iframeContainerRef.current.querySelector('iframe');
-      if (iframe) {
-        // Ensure iframe has proper attributes for visibility
-        iframe.style.width = '100%';
-        iframe.style.minHeight = '750px';
-        iframe.style.height = 'auto';
-        iframe.style.border = 'none';
-        iframe.setAttribute('scrolling', 'yes');
+
+    if (!iframeContainerRef.current || !embedCode) {
+      setIsCalendarLoading(false);
+      return;
+    }
+
+    const container = iframeContainerRef.current;
+
+    // Clear previous content completely
+    container.innerHTML = '';
+    setIsCalendarLoading(true);
+
+    // Parse the embed code to extract iframe and script
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = embedCode;
+
+    // Get iframe element
+    const iframe = tempDiv.querySelector('iframe');
+    if (iframe) {
+      // Create a new iframe with fresh attributes
+      const newIframe = document.createElement('iframe');
+
+      // Copy all attributes from the original iframe
+      Array.from(iframe.attributes).forEach(attr => {
+        // Update the ID with a unique timestamp to prevent caching
+        if (attr.name === 'id') {
+          newIframe.setAttribute(attr.name, `${attr.value}_${Date.now()}`);
+        } else if (attr.name === 'src') {
+          // Add cache-busting parameter to the URL
+          const url = new URL(attr.value);
+          url.searchParams.set('_t', Date.now().toString());
+          newIframe.setAttribute(attr.name, url.toString());
+        } else {
+          newIframe.setAttribute(attr.name, attr.value);
+        }
+      });
+
+      // Force iframe to take full space - responsive for mobile
+      newIframe.style.width = '100%';
+      newIframe.style.height = '100%';
+      newIframe.style.minHeight = window.innerWidth < 768 ? '600px' : '900px';
+      newIframe.style.border = 'none';
+      newIframe.style.display = 'block';
+
+      // Mobile-specific optimizations
+      if (window.innerWidth < 768) {
+        newIframe.setAttribute('scrolling', 'auto');
+        (newIframe.style as any).WebkitOverflowScrolling = 'touch';
       }
 
-      // Load any scripts in the embed code
-      const scripts = iframeContainerRef.current.querySelectorAll('script');
-      scripts.forEach((oldScript) => {
-        const newScript = document.createElement('script');
-        Array.from(oldScript.attributes).forEach(attr => {
-          newScript.setAttribute(attr.name, attr.value);
-        });
-        newScript.textContent = oldScript.textContent;
-        oldScript.parentNode?.replaceChild(newScript, oldScript);
+      // Append iframe to container
+      container.appendChild(newIframe);
+
+      // Add load event listener to iframe
+      newIframe.addEventListener('load', () => {
+        // Small delay to ensure content is rendered
+        setTimeout(() => {
+          setIsCalendarLoading(false);
+        }, 500);
       });
+
+      // Fallback timeout in case load event doesn't fire
+      setTimeout(() => {
+        setIsCalendarLoading(false);
+      }, 3000);
     }
+
+    // Always reload the GoHighLevel script to ensure proper initialization
+    const scriptSrc = 'https://link.zeromotionmarketing.com/js/form_embed.js';
+
+    // Remove existing script if present
+    const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
+    if (existingScript) {
+      existingScript.remove();
+      scriptLoadedRef.current = false;
+    }
+
+    // Add script fresh each time
+    const script = document.createElement('script');
+    script.src = scriptSrc;
+    script.type = 'text/javascript';
+    script.async = true;
+
+    script.onload = () => {
+      scriptLoadedRef.current = true;
+      console.log('GoHighLevel form_embed.js loaded successfully');
+
+      // Force a re-render of GoHighLevel elements
+      if (window.dispatchEvent) {
+        window.dispatchEvent(new Event('resize'));
+      }
+    };
+
+    script.onerror = () => {
+      console.error('Failed to load GoHighLevel form_embed.js');
+      setIsCalendarLoading(false);
+    };
+
+    document.body.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      // Clean up when modal closes
+      if (container) {
+        container.innerHTML = '';
+      }
+    };
+
   }, [bus?.calendarEmbedCode, serviceMenuEmbedCode, isServiceMenu]);
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center p-0 sm:p-6 bg-black/40 backdrop-blur-md overflow-hidden transition-all duration-300 ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center p-0 bg-black/50 backdrop-blur-sm overflow-hidden transition-all duration-300 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       onClick={onClose}
     >
       <div
-        className={`bg-white w-full h-full sm:max-w-7xl sm:max-h-[90vh] sm:rounded-2xl overflow-hidden flex flex-col shadow-2xl relative transition-all duration-500 ${
+        className={`bg-white w-full h-full sm:max-w-[100vw] sm:max-h-[100vh] overflow-hidden flex flex-col shadow-2xl relative transition-all duration-500 ${
           isVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8'
+        } ${
+          // On mobile, ensure full screen coverage
+          'fixed inset-0 sm:relative'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Close Button - Minimal and Clean */}
+        {/* Close Button - Optimized for Mobile Touch */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 backdrop-blur-sm hover:bg-white text-gray-500 hover:text-gray-700 flex items-center justify-center transition-all duration-200 shadow-lg"
+          className="absolute top-3 right-3 sm:top-6 sm:right-6 z-50 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-sm hover:bg-white text-gray-600 hover:text-gray-900 flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-xl active:scale-95"
           aria-label="Close modal"
         >
           <svg
@@ -93,10 +186,10 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
         </button>
 
         {/* Main Content Container */}
-        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden h-full">
 
-          {/* LEFT SIDE - Minimal Bus Info with Blue Gradient */}
-          <div className="lg:w-2/5 bg-gradient-to-br from-blue-50 via-white to-blue-50/30 p-6 sm:p-8 lg:p-10 flex flex-col justify-between relative overflow-hidden max-h-[35vh] lg:max-h-full">
+          {/* LEFT SIDE - Minimal Bus Info with Blue Gradient - Collapsed on Mobile */}
+          <div className="hidden lg:flex lg:w-[35%] bg-gradient-to-br from-blue-50 via-white to-blue-50/30 p-6 sm:p-8 lg:p-10 flex-col justify-between relative overflow-y-auto lg:overflow-hidden lg:max-h-full">
 
             {/* Subtle Background Accent */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100/20 to-transparent rounded-full blur-3xl"></div>
@@ -212,11 +305,31 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
             </div>
           </div>
 
-          {/* RIGHT SIDE - Calendar - Completely Seamless */}
-          <div className="lg:w-3/5 flex flex-col bg-white overflow-hidden flex-1">
+          {/* RIGHT SIDE - Calendar - Full Width on Mobile */}
+          <div className="w-full lg:w-[65%] flex flex-col bg-white overflow-hidden flex-1">
+
+            {/* Mobile Header - Shows bus info on small screens */}
+            <div className="lg:hidden bg-gradient-to-r from-blue-50 to-white p-4 border-b border-gray-100">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900">
+                    {isServiceMenu ? 'Party On Wheels' : bus?.name}
+                  </h2>
+                  <p className="text-sm text-gray-600">
+                    {isServiceMenu ? 'Choose Your Ride' : bus?.tagline}
+                  </p>
+                </div>
+                {!isServiceMenu && bus && (
+                  <div className="text-right">
+                    <div className="text-lg font-bold text-gray-900">${bus.hourlyRate}/hr</div>
+                    <div className="text-xs text-gray-600">{bus.minHours}hr min</div>
+                  </div>
+                )}
+              </div>
+            </div>
 
             {/* Calendar Header - Minimal */}
-            <div className="bg-gradient-to-r from-blue-50 to-white p-4 sm:p-6">
+            <div className="bg-gradient-to-r from-blue-50 to-white p-4 sm:p-6 border-b border-gray-100">
               <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                 {isServiceMenu ? 'Select Your Service' : 'Schedule Your Booking'}
               </h3>
@@ -225,16 +338,35 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
               </p>
             </div>
 
-            {/* Calendar Container - No Borders, Completely Seamless */}
-            <div className="flex-1 overflow-auto bg-white p-4 sm:p-6">
+            {/* Calendar Container - Optimized for Mobile & Desktop */}
+            <div className="flex-1 bg-white overflow-hidden relative min-h-0">
               {(isServiceMenu ? serviceMenuEmbedCode : bus?.calendarEmbedCode) ? (
-                <div
-                  ref={iframeContainerRef}
-                  className="w-full min-h-[500px] sm:min-h-[600px] lg:min-h-[750px] bg-white"
-                  dangerouslySetInnerHTML={{ __html: isServiceMenu ? serviceMenuEmbedCode! : bus!.calendarEmbedCode! }}
-                />
+                <>
+                  {/* Loading Spinner */}
+                  {isCalendarLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-white z-10">
+                      <div className="text-center space-y-4">
+                        <div className="inline-block w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+                        <p className="text-gray-600 font-medium">Loading calendar...</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Calendar iframe container - Full height on mobile */}
+                  <div className="h-full w-full overflow-y-auto overflow-x-hidden -webkit-overflow-scrolling-touch">
+                    <div
+                      ref={iframeContainerRef}
+                      className="w-full min-h-full bg-white"
+                      style={{
+                        minHeight: '100%',
+                        height: 'auto'
+                      }}
+                    />
+                  </div>
+                </>
               ) : (
-                <div className="flex flex-col items-center justify-center min-h-[600px] text-center p-8 max-w-md mx-auto">
+                <div className="h-full overflow-y-auto flex items-center justify-center p-8">
+                  <div className="flex flex-col items-center text-center max-w-md mx-auto">
                   {/* Fallback Content - Minimal Design */}
                   <div className="mb-8">
                     <div className="w-20 h-20 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center">
@@ -268,10 +400,10 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                       Call to Book
                     </p>
                     <a
-                      href="tel:+19853339762"
+                      href="tel:+19858561860"
                       className="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors block mb-2"
                     >
-                      985-333-9762
+                      985-856-1860
                     </a>
                     <p className="text-sm text-gray-500">
                       Available 24/7
@@ -289,41 +421,13 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                       <div className="text-xs text-gray-500 mt-1">Quick Reply</div>
                     </button>
                   </div>
+                  </div>
                 </div>
               )}
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar - Mobile Only - Minimal */}
-        <div className="lg:hidden bg-gradient-to-r from-blue-50 to-white px-5 py-4">
-          {!isServiceMenu && bus && (
-            <div className="flex items-center justify-between text-sm">
-              <div className="flex items-center gap-4 text-gray-600">
-                <span className="font-semibold text-gray-900">${bus.hourlyRate}/hr</span>
-                <span className="text-gray-400">•</span>
-                <span>{bus.minHours}hr min</span>
-              </div>
-              <button
-                onClick={onClose}
-                className="text-gray-600 hover:text-gray-900 font-medium uppercase text-xs tracking-wider"
-              >
-                Close
-              </button>
-            </div>
-          )}
-          {isServiceMenu && (
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-700 font-medium">Choose your bus</span>
-              <button
-                onClick={onClose}
-                className="text-gray-600 hover:text-gray-900 font-medium uppercase text-xs tracking-wider"
-              >
-                Close
-              </button>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );

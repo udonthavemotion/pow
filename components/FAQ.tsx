@@ -4,7 +4,7 @@
 */
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface FAQItem {
   question: string;
@@ -13,6 +13,29 @@ interface FAQItem {
 
 const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [visibleItems, setVisibleItems] = useState<Set<number>>(new Set());
+  const itemRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Number(entry.target.getAttribute('data-index'));
+          if (entry.isIntersecting && !isNaN(index)) {
+            setVisibleItems((prev) => new Set([...prev, index]));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    itemRefs.current.forEach((item) => {
+      if (item) observer.observe(item);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const faqs: FAQItem[] = [
     {
@@ -53,22 +76,63 @@ const FAQ: React.FC = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  const [headerVisible, setHeaderVisible] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setHeaderVisible(true);
+      },
+      { threshold: 0.2 }
+    );
+
+    if (headerRef.current) observer.observe(headerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="faq" className="py-16 sm:py-24 px-4 sm:px-6 md:px-12 bg-white">
       <div className="max-w-[1000px] mx-auto">
-        <div className="text-center mb-12 sm:mb-16">
-          <span className="text-[#FF6B00] font-bold tracking-widest uppercase text-sm sm:text-lg mb-3 sm:mb-4 block">Got Questions?</span>
-          <h2 className="text-5xl sm:text-6xl md:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4">
-            Frequently Asked Questions
+        <div ref={headerRef} className="text-center mb-12 sm:mb-16">
+          <span className={`text-[#FF6B00] font-bold tracking-widest uppercase text-sm sm:text-lg mb-3 sm:mb-4 block
+            transition-all duration-700 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            Got Questions?
+          </span>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 font-['Bebas_Neue'] uppercase mb-3 sm:mb-4 whitespace-normal">
+            {["Frequently", "Asked", "Questions"].map((word, index) => (
+              <span
+                key={index}
+                className={`inline-block transition-all duration-700 ${
+                  headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                } ${index === 1 ? 'text-[#FF6B00]' : ''}`}
+                style={{
+                  transitionDelay: `${0.1 + index * 0.15}s`,
+                  marginRight: index < 2 ? '0.3em' : '0'
+                }}
+              >
+                {word}
+              </span>
+            ))}
           </h2>
-          <div className="w-20 sm:w-24 h-2 bg-[#b9ff66] mx-auto mt-3 sm:mt-4"></div>
+          <div className={`w-20 sm:w-24 h-2 bg-[#b9ff66] mx-auto mt-3 sm:mt-4 transition-all duration-700
+            ${headerVisible ? 'opacity-100 scale-x-100' : 'opacity-0 scale-x-0'}`}
+            style={{ transitionDelay: '0.2s' }}></div>
         </div>
 
         <div className="space-y-3 sm:space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:border-[#FF6B00]"
+              ref={(el) => {
+                if (el) itemRefs.current.set(index, el);
+              }}
+              data-index={index}
+              className={`bg-gray-50 rounded-lg border border-gray-200 overflow-hidden
+                transition-all duration-300 hover:border-[#FF6B00] hover:shadow-lg ${
+                visibleItems.has(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              } ${openIndex === index ? 'border-l-4 border-l-[#FF6B00] shadow-md' : ''}`}
+              style={{ transitionDelay: `${Math.min(index * 0.05, 0.3)}s` }}
             >
               <button
                 onClick={() => toggleFAQ(index)}
@@ -92,11 +156,11 @@ const FAQ: React.FC = () => {
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  openIndex === index ? 'max-h-96' : 'max-h-0'
                 }`}
               >
-                <div className="px-4 sm:px-6 pb-4 sm:pb-5 text-gray-600 leading-relaxed text-sm sm:text-base">
+                <div className={`px-4 sm:px-6 pb-4 sm:pb-5 text-gray-600 leading-relaxed text-sm sm:text-base`}>
                   {faq.answer}
                 </div>
               </div>
@@ -109,10 +173,10 @@ const FAQ: React.FC = () => {
           <h3 className="text-2xl sm:text-3xl font-black uppercase mb-3 sm:mb-4 font-['Bebas_Neue']">Still Have Questions?</h3>
           <p className="text-base sm:text-lg mb-5 sm:mb-6 opacity-90">We're here to help! Give us a call or send us a message.</p>
           <a
-            href="tel:+19853339762"
+            href="tel:+19858561860"
             className="inline-block bg-white text-[#FF6B00] px-6 sm:px-8 py-4 min-h-[56px] font-bold uppercase tracking-widest rounded-lg hover:bg-gray-100 transition-colors text-sm sm:text-base"
           >
-            Call Us: 985-333-9762
+            Call Us: 985-856-1860
           </a>
         </div>
       </div>
