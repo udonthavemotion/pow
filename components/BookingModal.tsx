@@ -183,7 +183,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center p-0 bg-black/50 backdrop-blur-sm overflow-hidden overscroll-none transition-all duration-300 ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center p-0 bg-black/50 backdrop-blur-sm overflow-hidden transition-all duration-300 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       onClick={onClose}
@@ -193,7 +193,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
         role="dialog"
         aria-modal="true"
         aria-labelledby="booking-modal-title"
-        className={`bg-white w-full h-full sm:max-w-[100%] sm:max-h-[100dvh] overflow-hidden flex flex-col shadow-2xl relative transition-all duration-500 ${
+        className={`bg-white w-full h-full sm:max-w-[100vw] sm:max-h-[100vh] overflow-hidden flex flex-col shadow-2xl relative transition-all duration-500 ${
           isVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8'
         } ${
           // On mobile, ensure full screen coverage
@@ -388,7 +388,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                   )}
 
                   {/* Calendar iframe container - Full height on mobile */}
-                  <div className="h-full w-full overflow-y-auto overflow-x-hidden overscroll-behavior-contain -webkit-overflow-scrolling-touch">
+                  <div className="h-full w-full overflow-y-auto overflow-x-hidden -webkit-overflow-scrolling-touch">
                     <div
                       ref={iframeContainerRef}
                       className="w-full min-h-full bg-white"

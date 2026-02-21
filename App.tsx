@@ -4,7 +4,7 @@
 */
 
 
-import React, { useState, useCallback, useRef, Suspense, lazy } from 'react';
+import React, { useState, useCallback, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import BusFleet from './components/BusFleet';
@@ -24,42 +24,21 @@ const SERVICE_MENU_EMBED = `<iframe src="https://link.zeromotionmarketing.com/bo
 function App() {
   const [selectedBus, setSelectedBus] = useState<Bus | null>(null);
   const [showServiceMenu, setShowServiceMenu] = useState(false);
-  const scrollYRef = useRef(0);
 
   const preloadBookingModal = useCallback(() => {
     void import('./components/BookingModal');
   }, []);
 
-  const lockBodyScroll = useCallback(() => {
-    scrollYRef.current = window.scrollY;
-    document.documentElement.classList.add('modal-open');
-    document.body.classList.add('modal-open');
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollYRef.current}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-  }, []);
-
-  const unlockBodyScroll = useCallback(() => {
-    document.documentElement.classList.remove('modal-open');
-    document.body.classList.remove('modal-open');
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    window.scrollTo(0, scrollYRef.current);
-  }, []);
-
   const handleOpenServiceMenu = useCallback(() => {
     setShowServiceMenu(true);
-    lockBodyScroll();
-  }, [lockBodyScroll]);
+    document.body.classList.add('modal-open');
+  }, []);
 
   const handleCloseModal = useCallback(() => {
     setSelectedBus(null);
     setShowServiceMenu(false);
-    unlockBodyScroll();
-  }, [unlockBodyScroll]);
+    document.body.classList.remove('modal-open');
+  }, []);
 
   const scrollToSection = useCallback((targetId: string) => {
     if (!targetId) {
@@ -87,17 +66,17 @@ function App() {
       const parent = e.currentTarget.closest('nav');
       if (parent || linkText.includes('book')) {
         setShowServiceMenu(true);
-        lockBodyScroll();
+        document.body.classList.add('modal-open');
         return;
       }
     }
     scrollToSection(targetId);
-  }, [scrollToSection, lockBodyScroll]);
+  }, [scrollToSection]);
 
   const handleBusClick = useCallback((bus: Bus) => {
     setSelectedBus(bus);
-    lockBodyScroll();
-  }, [lockBodyScroll]);
+    document.body.classList.add('modal-open');
+  }, []);
 
   return (
     <div className="min-h-screen bg-white font-sans text-[#1a1a1a]">
