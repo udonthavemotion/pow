@@ -665,9 +665,16 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Modal open - prevent body scroll */
+/* Modal open - lock scroll on html + body (iOS/mobile needs both) */
+html.modal-open,
 body.modal-open {
   overflow: hidden;
+  overflow-x: hidden;
+}
+
+/* Prevent overscroll/rubber-band from chaining to viewport */
+body.modal-open {
+  overscroll-behavior: none;
 }
 
 /* content-visibility for long lists (off-screen rendering perf) */
