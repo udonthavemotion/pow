@@ -129,38 +129,38 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
           </div>
 
           {/* Subtitle with better spacing */}
-          <p className="max-w-2xl mx-auto text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-100 font-medium mb-10 sm:mb-14 drop-shadow-lg px-4 leading-relaxed animate-subtitle-fade"
+          <p className="max-w-2xl mx-auto text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-100 font-medium mb-6 sm:mb-8 drop-shadow-lg px-4 leading-relaxed animate-subtitle-fade"
              style={{ animationDelay: '1s', opacity: 0 }}>
             The wildest party buses in South Louisiana. <br className="hidden sm:block"/>
             <span className="text-[#b9ff66] font-bold">Loud music, good vibes, and unforgettable nights.</span>
           </p>
 
           {/* CTA Buttons with enhanced effects */}
-          <div className="flex flex-col sm:flex-row gap-5 sm:gap-7 justify-center px-4 animate-buttons-slide"
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center px-4 animate-buttons-slide"
                style={{ animationDelay: '1.4s', opacity: 0 }}>
             <a
                 href="#fleet"
                 onClick={(e) => handleNavClick(e, 'fleet')}
                 onMouseEnter={onBookNowHover}
                 onFocus={onBookNowHover}
-                className="group relative px-10 sm:px-12 py-5 sm:py-6 min-h-[64px] bg-[#FF6B00] text-white -skew-x-12 hover:bg-[#ff8533] transition-all duration-300 shadow-[0_0_30px_rgba(255,107,0,0.5)] hover:shadow-[0_0_50px_rgba(255,107,0,0.9)] flex items-center justify-center transform hover:scale-[1.03] active:scale-[0.98] overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF6B00]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                className="group relative px-7 sm:px-9 py-3.5 sm:py-4 min-h-[52px] bg-[#FF6B00] text-white -skew-x-12 hover:bg-[#ff8533] transition-all duration-300 shadow-[0_0_30px_rgba(255,107,0,0.5)] hover:shadow-[0_0_50px_rgba(255,107,0,0.9)] flex items-center justify-center transform hover:scale-[1.03] active:scale-[0.98] overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF6B00]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
                 {/* Button glow effect */}
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out"></span>
 
-                <span className="block skew-x-12 text-xl sm:text-2xl font-bold tracking-[0.2em] uppercase relative z-10">
+                <span className="block skew-x-12 text-base sm:text-lg font-bold tracking-[0.2em] uppercase relative z-10">
                   Pick Your Bus
                 </span>
             </a>
             <a
                 href="#about"
                 onClick={(e) => handleNavClick(e, 'about')}
-                className="group relative px-10 sm:px-12 py-5 sm:py-6 min-h-[64px] bg-transparent border-3 border-white text-white -skew-x-12 hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center transform hover:scale-[1.03] active:scale-[0.98] overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                className="group relative px-7 sm:px-9 py-3.5 sm:py-4 min-h-[52px] bg-transparent border-3 border-white text-white -skew-x-12 hover:bg-white hover:text-black transition-all duration-300 flex items-center justify-center transform hover:scale-[1.03] active:scale-[0.98] overflow-hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
             >
                 {/* Border glow on hover */}
                 <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[inset_0_0_20px_rgba(255,255,255,0.5)]"></span>
 
-                <span className="block skew-x-12 text-xl sm:text-2xl font-bold tracking-[0.2em] uppercase relative z-10">
+                <span className="block skew-x-12 text-base sm:text-lg font-bold tracking-[0.2em] uppercase relative z-10">
                   Learn More
                 </span>
             </a>
