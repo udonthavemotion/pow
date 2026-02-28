@@ -237,7 +237,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                     <h2 id="booking-modal-title" className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                       Choose Your Ride
                     </h2>
-                    <p className="text-gray-600 text-base sm:text-lg">
+                    <p className="text-black text-base sm:text-lg">
                       Select from our premium fleet
                     </p>
                   </>
@@ -246,7 +246,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                     <h2 id="booking-modal-title" className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                       {bus.name}
                     </h2>
-                    <p className="text-gray-600 text-base sm:text-lg">
+                    <p className="text-black text-base sm:text-lg">
                       {bus.tagline}
                     </p>
                   </>
@@ -349,7 +349,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                   <h2 className="text-xl font-bold text-gray-900">
                     {isServiceMenu ? 'Party On Wheels' : bus?.name}
                   </h2>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-black">
                     {isServiceMenu ? 'Choose Your Ride' : bus?.tagline}
                   </p>
                 </div>
@@ -367,7 +367,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
               <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                 {isServiceMenu ? 'Select Your Service' : 'Schedule Your Booking'}
               </h3>
-              <p className="text-gray-600 text-sm sm:text-base mt-1">
+              <p className="text-black text-sm sm:text-base mt-1">
                 {isServiceMenu ? 'Browse our fleet and select your preferred bus' : 'Choose your date and time to reserve'}
               </p>
             </div>
@@ -424,7 +424,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                   <h4 className="text-2xl font-semibold text-gray-900 mb-3">
                     Online Booking Coming Soon
                   </h4>
-                  <p className="text-gray-600 mb-8">
+                  <p className="text-black mb-8">
                     Call us directly to reserve {bus ? <span className="font-medium text-gray-900">{bus.name}</span> : 'your bus'}
                   </p>
 
