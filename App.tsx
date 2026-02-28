@@ -21,9 +21,13 @@ const FAQ = lazy(() => import('./components/FAQ'));
 // Service menu embed code - ZeroMotion Marketing main calendar showing all buses (hoisted for perf)
 const SERVICE_MENU_EMBED = `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sc/69973c8861f69e3db6e9664f?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69973c8861f69e3db6e9664f_1771570530498"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
 
+// Limo booking embed code
+const LIMO_EMBED = `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f691f6ab8f441ceaf29d?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f691f6ab8f441ceaf29d_1772247347849"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
+
 function App() {
   const [selectedBus, setSelectedBus] = useState<Bus | null>(null);
   const [showServiceMenu, setShowServiceMenu] = useState(false);
+  const [showLimoBooking, setShowLimoBooking] = useState(false);
 
   const preloadBookingModal = useCallback(() => {
     void import('./components/BookingModal');
@@ -37,6 +41,7 @@ function App() {
   const handleCloseModal = useCallback(() => {
     setSelectedBus(null);
     setShowServiceMenu(false);
+    setShowLimoBooking(false);
     document.body.classList.remove('modal-open');
   }, []);
 
@@ -62,6 +67,15 @@ function App() {
     e.preventDefault();
     const linkText = e.currentTarget.textContent?.toLowerCase() || '';
     const href = e.currentTarget.getAttribute('href') || '';
+
+    // Handle limo booking
+    if (targetId === 'limos') {
+      setShowLimoBooking(true);
+      document.body.classList.add('modal-open');
+      return;
+    }
+
+    // Handle fleet/bus booking
     if (targetId === 'fleet' && (linkText.includes('book') || href === '#fleet')) {
       const parent = e.currentTarget.closest('nav');
       if (parent || linkText.includes('book')) {
@@ -102,11 +116,11 @@ function App() {
 
       <Footer onLinkClick={handleNavClick} />
       
-      {(selectedBus || showServiceMenu) && (
-        <BookingModal 
-          bus={selectedBus} 
-          serviceMenuEmbedCode={showServiceMenu ? SERVICE_MENU_EMBED : undefined}
-          onClose={handleCloseModal} 
+      {(selectedBus || showServiceMenu || showLimoBooking) && (
+        <BookingModal
+          bus={selectedBus}
+          serviceMenuEmbedCode={showServiceMenu ? SERVICE_MENU_EMBED : showLimoBooking ? LIMO_EMBED : undefined}
+          onClose={handleCloseModal}
         />
       )}
     </div>

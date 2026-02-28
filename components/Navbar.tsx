@@ -65,7 +65,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
           
           {/* Center Links - Desktop */}
           <div className={`hidden md:flex items-center gap-12 text-lg font-bold tracking-wider uppercase ${textClasses}`}>
-            <a href="#fleet" onClick={(e) => handleLinkClick(e, 'fleet')} className="hover:text-[#FF6B00] transition-colors">The Fleet</a>
+            <a href="#fleet" onClick={(e) => handleLinkClick(e, 'fleet')} className="hover:text-[#FF6B00] transition-colors">Our Buses</a>
+            <a href="#limos" onClick={(e) => handleLinkClick(e, 'limos')} className="hover:text-[#FF6B00] transition-colors">Our Limos</a>
             <a href="#how-it-works" onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors">How It Works</a>
             <a href="#events" onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors">Events</a>
             <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors">FAQ</a>
@@ -115,6 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
       }`}>
           <div className="flex flex-col items-center space-y-6 text-3xl sm:text-4xl font-bold font-serif text-gray-900 uppercase px-6">
             <a href="#fleet" onClick={(e) => handleLinkClick(e, 'fleet')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Our Buses</a>
+            <a href="#limos" onClick={(e) => handleLinkClick(e, 'limos')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Our Limos</a>
             <a href="#how-it-works" onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">How It Works</a>
             <a href="#events" onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Events</a>
             <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">FAQ</a>
