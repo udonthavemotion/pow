@@ -85,7 +85,7 @@ export const BUSES: Bus[] = [
     name: 'Rackz',
     tagline: 'Make it rain on wheels.',
     description: 'Bring the VIP experience wherever you go with Rackz. This sleek party bus is designed for those who want to make a statement with style, sound, and comfort.',
-    hourlyRate: 100,
+    hourlyRate: 90,
     minHours: 4,
     capacity: 40,
     nameColor: '#C0C0C0', // Metallic silver
@@ -103,7 +103,7 @@ export const BUSES: Bus[] = [
     name: 'The Dirty Dancer',
     tagline: 'Dance like nobody is watching.',
     description: 'Turn up the heat with The Dirty Dancer. This party bus features an expansive dance floor, pole, and club-quality sound system for the ultimate moving nightclub experience.',
-    hourlyRate: 90,
+    hourlyRate: 80,
     minHours: 4,
     capacity: 40,
     nameColor: '#FFA500', // School bus orange
