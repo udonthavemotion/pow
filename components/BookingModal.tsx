@@ -122,7 +122,6 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
       // Mobile-specific optimizations
       if (window.innerWidth < 768) {
         newIframe.setAttribute('scrolling', 'auto');
-        (newIframe.style as any).WebkitOverflowScrolling = 'touch';
       }
 
       // Append iframe to container

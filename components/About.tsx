@@ -91,12 +91,6 @@ const About: React.FC = () => {
               Your browser does not support the video tag.
             </video>
 
-            {/* Play indicator overlay */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                <div className="w-0 h-0 border-l-[20px] border-l-white border-y-[12px] border-y-transparent ml-1"></div>
-              </div>
-            </div>
           </div>
         </div>
 
