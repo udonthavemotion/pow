@@ -155,8 +155,8 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
                         <span className="text-xl sm:text-2xl font-bold text-[#FF6B00] whitespace-nowrap group-hover:scale-110 transition-transform duration-300">${bus.hourlyRate}/hr</span>
                     </div>
 
-                    <p className="text-gray-500 font-bold tracking-[0.15em] uppercase text-xs sm:text-sm mb-4 sm:mb-5">{bus.tagline}</p>
-                    <p className="text-gray-600 mb-8 sm:mb-10 line-clamp-2 text-sm sm:text-base leading-relaxed">{bus.description}</p>
+                    <p className="text-black font-bold tracking-[0.15em] uppercase text-xs sm:text-sm mb-4 sm:mb-5">{bus.tagline}</p>
+                    <p className="text-black mb-8 sm:mb-10 line-clamp-2 text-sm sm:text-base leading-relaxed">{bus.description}</p>
 
                     <div className="mt-auto">
                         <button
