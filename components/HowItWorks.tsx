@@ -102,14 +102,14 @@ const HowItWorks: React.FC = () => {
               key={index}
               className={`relative bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 border group ${
                 step.isCustom ? 'border-[#b9ff66] border-2' : 'border-gray-100'
-              } ${isVisible ? 'animate-wave-cascade' : 'opacity-0'}`}
-              style={{ animationDelay: `${index * 0.15}s` }}
+              } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={{ transitionDelay: `${index * 0.15}s` }}
             >
               {/* Number Badge with Animation */}
-              <div className={`absolute -top-5 sm:-top-6 -left-5 sm:-left-6 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-white font-black text-xl sm:text-2xl font-['Bebas_Neue'] shadow-lg group-hover:scale-110 transition-transform duration-300 ${
+              <div className={`absolute -top-5 sm:-top-6 -left-5 sm:-left-6 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center text-white font-black text-xl sm:text-2xl font-['Bebas_Neue'] shadow-lg group-hover:scale-110 transition-all duration-300 ${
                 step.isCustom ? 'bg-[#b9ff66] text-gray-900' : 'bg-gradient-to-br from-[#FF6B00] to-[#FF8533]'
-              } ${isVisible ? 'animate-zoomInRotate' : 'scale-0 opacity-0'}`}
-              style={{ animationDelay: `${index * 0.15 + 0.2}s` }}>
+              } ${isVisible ? 'scale-100' : 'scale-0'}`}
+              style={{ transitionDelay: `${index * 0.15 + 0.1}s` }}>
                 {step.number}
               </div>
 
