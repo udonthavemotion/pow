@@ -113,19 +113,35 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
           </h1>
 
           {/* Location badge - between TIMES ROLL and subtitle */}
-          <div className="inline-block text-base sm:text-xl md:text-2xl font-bold uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#b9ff66] mb-6 sm:mb-8 drop-shadow-[0_0_15px_rgba(57,255,20,0.5)]">
-            {"Houma • Thibodaux • New Orleans".split('').map((letter, index) => (
-              <span
-                key={index}
-                className="inline-block animate-wave-cascade"
-                style={{
-                  animationDelay: `${(index + 22) * 40}ms`,
-                  opacity: 0
-                }}
-              >
-                {letter === ' ' ? '\u00A0' : letter}
-              </span>
-            ))}
+          <div className="text-base sm:text-xl md:text-2xl font-bold uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#b9ff66] mb-6 sm:mb-8 drop-shadow-[0_0_15px_rgba(57,255,20,0.5)] text-center">
+            <div className="block">
+              {"Houma • Thibodaux".split('').map((letter, index) => (
+                <span
+                  key={index}
+                  className="inline-block animate-wave-cascade"
+                  style={{
+                    animationDelay: `${(index + 22) * 40}ms`,
+                    opacity: 0
+                  }}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span>
+              ))}
+            </div>
+            <div className="block mt-2">
+              {"New Orleans".split('').map((letter, index) => (
+                <span
+                  key={index}
+                  className="inline-block animate-wave-cascade"
+                  style={{
+                    animationDelay: `${(index + 38) * 40}ms`,
+                    opacity: 0
+                  }}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Subtitle with better spacing */}
