@@ -119,9 +119,19 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
       newIframe.style.border = 'none';
       newIframe.style.display = 'block';
 
+      // Prevent horizontal scrolling on mobile
+      newIframe.style.maxWidth = '100vw';
+      newIframe.style.overflowX = 'hidden';
+
+      // Add class for CSS targeting
+      newIframe.className = 'booking-iframe';
+
       // Mobile-specific optimizations
       if (window.innerWidth < 768) {
         newIframe.setAttribute('scrolling', 'auto');
+        // Additional mobile constraints
+        newIframe.style.position = 'relative';
+        newIframe.style.transform = 'translateZ(0)'; // Hardware acceleration
       }
 
       // Append iframe to container
@@ -182,7 +192,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
 
   return (
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center p-0 bg-black/50 backdrop-blur-sm overflow-hidden transition-all duration-300 ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center p-0 bg-black/50 backdrop-blur-sm overflow-hidden transition-all duration-300 booking-modal-container ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
       onClick={onClose}
@@ -387,13 +397,15 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
                   )}
 
                   {/* Calendar iframe container - Full height on mobile */}
-                  <div className="h-full w-full overflow-y-auto overflow-x-hidden -webkit-overflow-scrolling-touch">
+                  <div className="h-full w-full overflow-y-auto overflow-x-hidden -webkit-overflow-scrolling-touch iframe-wrapper">
                     <div
                       ref={iframeContainerRef}
-                      className="w-full min-h-full bg-white"
+                      className="w-full min-h-full bg-white iframe-container"
                       style={{
                         minHeight: '100%',
-                        height: 'auto'
+                        height: 'auto',
+                        maxWidth: '100vw',
+                        overflowX: 'hidden'
                       }}
                     />
                   </div>
