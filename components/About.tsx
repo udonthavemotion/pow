@@ -148,7 +148,7 @@ const About: React.FC = () => {
               }`}
               style={{ transitionDelay: '0.4s' }}
             >
-              Owned by <strong>Deric Hebert</strong>, Party On Wheels was built with one simple mission: to bring loud, unapologetic fun to South Louisiana.
+              Party On Wheels was built with one simple mission: to bring loud, unapologetic fun to South Louisiana.
             </p>
             <p
               className={`transition-all duration-700 ${
