@@ -9,13 +9,19 @@
  * 2. Run: node optimize-images.js
  */
 
-const sharp = require('sharp');
-const fs = require('fs');
-const path = require('path');
+import sharp from 'sharp';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const IMAGES_DIR = './public/images';
-const MAX_WIDTH = 1920;
-const QUALITY = 85;
+const MAX_WIDTH = 2400; // Higher resolution for retina displays
+const JPEG_QUALITY = 90; // Higher quality to preserve image perfection
+const PNG_QUALITY = 95; // Even higher for PNG to avoid artifacts
 
 // Recursively get all image files
 function getAllImageFiles(dir, fileList = []) {
@@ -40,22 +46,48 @@ async function optimizeImage(filePath) {
     const stats = fs.statSync(filePath);
     const fileSizeMB = stats.size / (1024 * 1024);
 
-    console.log(`Processing: ${filePath} (${fileSizeMB.toFixed(2)} MB)`);
+    // Skip if already optimized (less than 500KB)
+    if (fileSizeMB < 0.5) {
+      console.log(`Skipping ${path.basename(filePath)} - already optimized (${fileSizeMB.toFixed(2)} MB)`);
+      return;
+    }
+
+    console.log(`Processing: ${path.basename(filePath)} (${fileSizeMB.toFixed(2)} MB)`);
 
     // Create a backup of the original
     const backupPath = filePath + '.original';
     if (!fs.existsSync(backupPath)) {
       fs.copyFileSync(filePath, backupPath);
+      console.log(`  → Created backup: ${path.basename(backupPath)}`);
     }
 
-    // Optimize the image
-    await sharp(backupPath)
+    const ext = path.extname(filePath).toLowerCase();
+    const isJpeg = ext === '.jpg' || ext === '.jpeg';
+    const isPng = ext === '.png';
+
+    let pipeline = sharp(backupPath)
       .resize(MAX_WIDTH, null, {
         withoutEnlargement: true,
-        fit: 'inside'
-      })
-      .jpeg({ quality: QUALITY, mozjpeg: true })
-      .toFile(filePath + '.tmp');
+        fit: 'inside',
+        kernel: 'lanczos3' // Best quality resize algorithm
+      });
+
+    // Apply format-specific optimization
+    if (isJpeg) {
+      pipeline = pipeline.jpeg({
+        quality: JPEG_QUALITY,
+        mozjpeg: true,
+        progressive: true // Progressive loading for better perceived performance
+      });
+    } else if (isPng) {
+      pipeline = pipeline.png({
+        quality: PNG_QUALITY,
+        compressionLevel: 9, // Max compression
+        progressive: true
+      });
+    }
+
+    await pipeline.toFile(filePath + '.tmp');
 
     // Replace original with optimized version
     fs.renameSync(filePath + '.tmp', filePath);
@@ -85,12 +117,8 @@ async function main() {
   console.log('Note: Original files have been backed up with .original extension');
 }
 
-// Check if sharp is installed
-try {
-  require.resolve('sharp');
-  main();
-} catch (e) {
-  console.error('❌ Sharp is not installed!');
-  console.error('Please run: npm install --save-dev sharp');
+// Run the optimization
+main().catch(error => {
+  console.error('❌ Error running optimization:', error);
   process.exit(1);
-}
+});
