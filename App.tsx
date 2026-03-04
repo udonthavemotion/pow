@@ -10,9 +10,9 @@ import Hero from './components/Hero';
 import BusFleet from './components/BusFleet';
 import Events from './components/Events';
 import Footer from './components/Footer';
-import BookingModal from './components/BookingModal';
 import { Bus } from './types';
 
+const BookingModal = lazy(() => import('./components/BookingModal'));
 const HowItWorks = lazy(() => import('./components/HowItWorks'));
 const About = lazy(() => import('./components/About'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
@@ -118,11 +118,13 @@ function App() {
       <Footer onLinkClick={handleNavClick} />
       
       {(selectedBus || showServiceMenu || showLimoBooking) && (
-        <BookingModal
-          bus={selectedBus}
-          serviceMenuEmbedCode={showServiceMenu ? SERVICE_MENU_EMBED : showLimoBooking ? LIMO_EMBED : undefined}
-          onClose={handleCloseModal}
-        />
+        <Suspense fallback={<div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><div className="text-white">Loading...</div></div>}>
+          <BookingModal
+            bus={selectedBus}
+            serviceMenuEmbedCode={showServiceMenu ? SERVICE_MENU_EMBED : showLimoBooking ? LIMO_EMBED : undefined}
+            onClose={handleCloseModal}
+          />
+        </Suspense>
       )}
     </div>
   );
