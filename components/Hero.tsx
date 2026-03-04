@@ -14,11 +14,96 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     // Trigger entrance animation after mount
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    // Comprehensive mobile video autoplay solution
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Force video attributes for mobile compatibility
+    video.setAttribute('playsinline', 'true');
+    video.setAttribute('muted', 'true');
+    video.setAttribute('autoplay', 'true');
+    video.setAttribute('loop', 'true');
+    video.setAttribute('preload', 'auto');
+
+    // Remove all controls
+    video.removeAttribute('controls');
+    video.controls = false;
+
+    // Disable text track (captions) that might show controls
+    if (video.textTracks) {
+      Array.from(video.textTracks).forEach(track => {
+        track.mode = 'disabled';
+      });
+    }
+
+    // Aggressive autoplay enforcement for mobile browsers
+    const forcePlay = async () => {
+      try {
+        // Ensure video is muted (required for autoplay on mobile)
+        video.muted = true;
+        video.volume = 0;
+
+        // Try to play
+        const playPromise = video.play();
+
+        if (playPromise !== undefined) {
+          await playPromise;
+          console.log('Video autoplay successful');
+        }
+      } catch (error) {
+        console.warn('Video autoplay failed, retrying...', error);
+
+        // Retry after a short delay
+        setTimeout(() => {
+          video.muted = true;
+          video.play().catch(e => console.error('Video play retry failed:', e));
+        }, 100);
+      }
+    };
+
+    // Initial play attempt
+    forcePlay();
+
+    // Handle various mobile browser events
+    const events = ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'];
+    events.forEach(event => {
+      video.addEventListener(event, forcePlay);
+    });
+
+    // Handle visibility change (mobile browser tab switching)
+    const handleVisibilityChange = () => {
+      if (!document.hidden && video.paused) {
+        forcePlay();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Prevent pause on mobile (some browsers try to pause on certain events)
+    const preventPause = (e: Event) => {
+      e.preventDefault();
+      if (video.paused) {
+        forcePlay();
+      }
+    };
+    video.addEventListener('pause', preventPause);
+
+    // Cleanup
+    return () => {
+      events.forEach(event => {
+        video.removeEventListener(event, forcePlay);
+      });
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      video.removeEventListener('pause', preventPause);
+    };
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
@@ -49,14 +134,28 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
       {/* Background Video - Party Bus Hero Video */}
       <div className="absolute inset-0 w-full h-full">
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
+          controls={false}
+          preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
+          x5-playsinline="true"
+          webkit-playsinline="true"
           onLoadedData={() => setVideoLoaded(true)}
-          className={`w-full h-full object-cover transition-opacity duration-1000 ${
+          className={`w-full h-full object-cover transition-opacity duration-1000 mobile-video-no-controls ${
             videoLoaded ? 'opacity-60' : 'opacity-0'
           }`}
+          style={{
+            pointerEvents: 'none',
+            WebkitMediaControls: 'none',
+            MozMediaControls: 'none',
+            msMediaControls: 'none'
+          } as React.CSSProperties}
+          aria-hidden="true"
         >
           <source src="/videos/hero-video.mp4" type="video/mp4" />
         </video>
