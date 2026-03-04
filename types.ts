@@ -14,6 +14,7 @@ export interface Bus {
   minHours: number;
   capacity: number;
   imageUrl: string;
+  images?: string[]; // Array of images for alternating display on card
   gallery?: string[];
   features: string[];
   nameColor?: string; // Color to match the actual bus color

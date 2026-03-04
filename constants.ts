@@ -22,16 +22,23 @@ export const LOGO_URL = '/images/logo/pow-logo.png'; // Change filename if diffe
 export const BUSES: Bus[] = [
   {
     id: 'b1',
-    name: 'The Juice',
+    name: 'Orange Juice',
     tagline: 'The Main Squeeze.',
     description: 'Our flagship ride. Hard to miss and impossible not to have fun in. Features wrap-around seating, premium sound, and an open-air back deck for the ultimate cruise.',
     hourlyRate: 135,
     minHours: 4,
     capacity: 40,
     nameColor: '#FF6B00', // Orange like the bus
-    // IMAGE: The Juice bus photos
+    // IMAGE: Orange Juice bus photos
     imageUrl: '/images/buses/The Juice/Orange Juice.jpeg',
-    // GALLERY: Multiple images of The Juice bus
+    // IMAGES: Multiple images for alternating display
+    images: [
+      '/images/buses/The Juice/Orange Juice.jpeg',
+      '/images/buses/The Juice/IMG_3389-1772650503830.png',
+      '/images/buses/The Juice/IMG_3387 - Edited.png',
+      '/images/buses/The Juice/IMG_0557 - Edited.png'
+    ],
+    // GALLERY: Multiple images of Orange Juice bus
     gallery: [
       '/images/buses/orange-juice-gallery-1.jpeg',
       '/images/buses/orange-juice-gallery-2.jpeg',
@@ -40,9 +47,9 @@ export const BUSES: Bus[] = [
     features: ['Open Air Deck', 'Premium Sound System', 'LED Light Show', 'Coolers On Board'],
 
     // ------------------------------------------------------------------
-    // THE JUICE - CALENDAR EMBED
+    // ORANGE JUICE - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f3cd13de2126c1af475b?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f3cd13de2126c1af475b_1771615404908"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a73da8ab0c5f869f4e3ba8?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a73da8ab0c5f869f4e3ba8_1772651362455"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b2',
@@ -52,19 +59,30 @@ export const BUSES: Bus[] = [
     hourlyRate: 125,
     minHours: 4,
     capacity: 40,
-    nameColor: '#228B22', // Green
+    nameColor: '#407e3d',
     // IMAGE: Kuttin Loose bus photo
     imageUrl: '/images/buses/The Kuttin Loose/KuttinLoose.png',
+    // IMAGES: Multiple images for alternating display
+    images: [
+      '/images/buses/The Kuttin Loose/KuttinLoose.png',
+      '/images/buses/The Kuttin Loose/IMG_3394-1772650507435.jpeg',
+      '/images/buses/The Kuttin Loose/IMG_3395-1772650503734 (1).png',
+      '/images/buses/The Kuttin Loose/IMG_0526.jpeg',
+      '/images/buses/The Kuttin Loose/IMG_0527.jpeg',
+      '/images/buses/The Kuttin Loose/IMG_0528.jpeg',
+      '/images/buses/The Kuttin Loose/IMG_0529.jpeg',
+      '/images/buses/The Kuttin Loose/IMG_0530.jpeg'
+    ],
     features: ['Premium Sound System', 'LED Light Show', 'Dance Floor', 'Climate Control'],
 
     // ------------------------------------------------------------------
     // KUTTIN LOOSE - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f987b7155aae6f37abed?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f987b7155aae6f37abed_1771615298073"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a78d9d7132f3629284deed?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78d9d7132f3629284deed_1772651375530"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b3',
-    name: 'The Cotton Candy',
+    name: 'Cotton Candy',
     tagline: 'Sweet rides, sweeter memories.',
     description: 'Step into a world of sweetness with The Cotton Candy. This vibrant party bus delivers a fun, festive atmosphere perfect for birthdays, bachelorette parties, and special celebrations.',
     hourlyRate: 110,
@@ -78,7 +96,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // THE COTTON CANDY - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f8e90a59e3eff7ea08a8?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f8e90a59e3eff7ea08a8_1771615328444"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a78c3f85c0159b524cac2c?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78c3f85c0159b524cac2c_1772651337096"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b4',
@@ -88,19 +106,24 @@ export const BUSES: Bus[] = [
     hourlyRate: 90,
     minHours: 4,
     capacity: 40,
-    nameColor: '#C0C0C0', // Metallic silver
+    nameColor: '#800020', // Maroon red
     // IMAGE: Rackz bus photo
     imageUrl: '/images/buses/The Rackz/TheRackz.jpeg',
+    // IMAGES: Multiple images for alternating display
+    images: [
+      '/images/buses/The Rackz/TheRackz.jpeg',
+      '/images/buses/The Rackz/Rackz Family.png'
+    ],
     features: ['VIP Seating', 'Premium Audio', 'LED Light Show', 'AC/Heat'],
 
     // ------------------------------------------------------------------
     // RACKZ - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f558375466488a063555?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f558375466488a063555_1771615387203"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a78cd4365f5d4c30d7906f?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78cd4365f5d4c30d7906f_1772651306695"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b5',
-    name: 'The Dirty Dancer',
+    name: 'Dirty Dancer',
     tagline: 'Dance like nobody is watching.',
     description: 'Turn up the heat with The Dirty Dancer. This party bus features an expansive dance floor, pole, and club-quality sound system for the ultimate moving nightclub experience.',
     hourlyRate: 80,
@@ -108,17 +131,22 @@ export const BUSES: Bus[] = [
     capacity: 40,
     nameColor: '#FFA500', // School bus orange
     // IMAGE: The Dirty Dancer bus photo
-    imageUrl: '/images/buses/Dirty Dancer/DirtyDancer.jpeg',
+    imageUrl: '/images/buses/Dirty Dancer/IMG_0615 (1).jpeg',
+    // IMAGES: Multiple images for alternating display
+    images: [
+      '/images/buses/Dirty Dancer/IMG_0615 (1).jpeg',
+      '/images/buses/Dirty Dancer/IMG_0613.jpeg'
+    ],
     features: ['Dance Floor', 'Dance Pole', 'Club Sound System', 'Premium Lighting', 'Climate Control'],
 
     // ------------------------------------------------------------------
     // THE DIRTY DANCER - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f5980a59e3a7e6e925b1?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f5980a59e3a7e6e925b1_1771615368878"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a78d2edcc1c11d37b7385d?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78d2edcc1c11d37b7385d_1772651327695"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b6',
-    name: 'The Limo',
+    name: 'Limo',
     tagline: 'Intimate luxury on wheels.',
     description: 'For smaller groups seeking an upscale experience. Our limo offers elegant seating, premium amenities, and intimate ambiance perfect for special occasions and romantic nights out.',
     hourlyRate: 80,
@@ -132,7 +160,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // THE LIMO - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f691f6ab8f441ceaf29d?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f691f6ab8f441ceaf29d_1771615349252"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a75b17c25820586f47bce6?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a75b17c25820586f47bce6_1772651386811"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   }
   // NOTE: Green Light and The Coconut removed as they were not in the updated fleet list
   // If you need to add them back, use the booking calendar widget format from ZeroMotion Marketing

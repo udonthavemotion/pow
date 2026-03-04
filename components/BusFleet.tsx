@@ -17,8 +17,28 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
   const [visibleCards, setVisibleCards] = useState<Set<string>>(new Set());
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [headerVisible, setHeaderVisible] = useState(false);
+  const [imageIndices, setImageIndices] = useState<Map<string, number>>(new Map());
   const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
   const headerRef = useRef<HTMLDivElement>(null);
+
+  // Image rotation effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setImageIndices(prevIndices => {
+        const newIndices = new Map(prevIndices);
+        BUSES.forEach(bus => {
+          if (bus.images && bus.images.length > 1) {
+            const currentIndex = prevIndices.get(bus.id) || 0;
+            const nextIndex = (currentIndex + 1) % bus.images.length;
+            newIndices.set(bus.id, nextIndex);
+          }
+        });
+        return newIndices;
+      });
+    }, 3500); // Change image every 3.5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -122,24 +142,73 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
                       <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 animate-pulse"></div>
                     )}
 
-                    <img
-                      src={bus.imageUrl}
-                      alt={bus.name}
-                      loading="lazy"
-                      onLoad={() => handleImageLoad(bus.id)}
-                      className={`w-full h-full object-cover transform-gpu transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-105 will-change-transform ${
-                        loadedImages.has(bus.id) ? 'opacity-100' : 'opacity-0'
-                      }`}
-                      style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-                    />
+                    {/* Multiple images with crossfade effect */}
+                    {bus.images && bus.images.length > 1 ? (
+                      <>
+                        {bus.images.map((imgSrc, imgIndex) => {
+                          const currentImageIndex = imageIndices.get(bus.id) || 0;
+                          const isActive = imgIndex === currentImageIndex;
+
+                          return (
+                            <img
+                              key={`${bus.id}-img-${imgIndex}`}
+                              src={imgSrc}
+                              alt={`${bus.name} ${imgIndex + 1}`}
+                              loading="lazy"
+                              onLoad={() => handleImageLoad(bus.id)}
+                              className={`absolute inset-0 w-full h-full object-cover transform-gpu transition-all duration-1500 ease-in-out group-hover:scale-110 group-hover:brightness-105 will-change-transform ${
+                                isActive ? 'opacity-100' : 'opacity-0'
+                              } ${!loadedImages.has(bus.id) ? 'opacity-0' : ''}`}
+                              style={{
+                                backfaceVisibility: 'hidden',
+                                WebkitBackfaceVisibility: 'hidden',
+                                zIndex: isActive ? 1 : 0
+                              }}
+                            />
+                          );
+                        })}
+                      </>
+                    ) : (
+                      /* Single image fallback */
+                      <img
+                        src={bus.imageUrl}
+                        alt={bus.name}
+                        loading="lazy"
+                        onLoad={() => handleImageLoad(bus.id)}
+                        className={`w-full h-full object-cover transform-gpu transition-all duration-700 ease-out group-hover:scale-110 group-hover:brightness-105 will-change-transform ${
+                          loadedImages.has(bus.id) ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+                      />
+                    )}
 
                     {/* Gradient overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10"></div>
 
                     {/* Capacity badge with pulse animation */}
-                    <div className="absolute top-4 sm:top-5 right-4 sm:right-5 bg-[#b9ff66] text-black font-bold px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm uppercase tracking-wide shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:shadow-[#b9ff66]/50 group-hover:shadow-xl">
+                    <div className="absolute top-4 sm:top-5 right-4 sm:right-5 z-20 bg-[#b9ff66] text-black font-bold px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm uppercase tracking-wide shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:shadow-[#b9ff66]/50 group-hover:shadow-xl">
                         <span className="inline-block group-hover:animate-pulse">{bus.capacity} Passengers</span>
                     </div>
+
+                    {/* Image indicators (dots) - only show if multiple images */}
+                    {bus.images && bus.images.length > 1 && (
+                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-15">
+                        {bus.images.map((_, imgIndex) => {
+                          const currentImageIndex = imageIndices.get(bus.id) || 0;
+                          const isActive = imgIndex === currentImageIndex;
+                          return (
+                            <div
+                              key={`${bus.id}-dot-${imgIndex}`}
+                              className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                                isActive
+                                  ? 'bg-white w-6 shadow-lg'
+                                  : 'bg-white/60 hover:bg-white/80'
+                              }`}
+                            />
+                          );
+                        })}
+                      </div>
+                    )}
 
                 </div>
 
@@ -168,7 +237,7 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
 
                             {/* Button text */}
                             <span className="relative z-10 inline-block group-hover/btn:scale-105 transition-transform duration-200">
-                              Book This Bus
+                              {bus.name === 'Limo' ? 'Book This Limo' : `Book ${bus.name}`}
                             </span>
 
                             {/* Shine effect */}

@@ -19,10 +19,11 @@ const Testimonials = lazy(() => import('./components/Testimonials'));
 const FAQ = lazy(() => import('./components/FAQ'));
 
 // Service menu embed code - ZeroMotion Marketing main calendar showing all buses (hoisted for perf)
-const SERVICE_MENU_EMBED = `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sc/69973c8861f69e3db6e9664f?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69973c8861f69e3db6e9664f_1771570530498"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
+// Updated to use new rental embed code for entire party bus fleet
+const SERVICE_MENU_EMBED = `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rc/69a757a0e50c3b2fb71142cd?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a757a0e50c3b2fb71142cd_1772651519600"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
 
-// Limo booking embed code
-const LIMO_EMBED = `<iframe src="https://link.zeromotionmarketing.com/booking/partyonwheels/sv/6997f691f6ab8f441ceaf29d?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="6997f691f6ab8f441ceaf29d_1772247347849"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
+// Limo booking embed code - Updated to use new rental embed code for entire limo fleet
+const LIMO_EMBED = `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rc/69a7598cb24fdc33063231a1?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a7598cb24fdc33063231a1_1772651551264"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
 
 function App() {
   const [selectedBus, setSelectedBus] = useState<Bus | null>(null);
