@@ -120,23 +120,36 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
         }
       });
 
-      // Force iframe to take full viewport space
+      // Responsive iframe sizing
       newIframe.style.width = '100%';
-      newIframe.style.height = '100%';
-      // Full viewport height minus a small buffer for the close button
-      newIframe.style.minHeight = 'calc(100vh - 20px)';
       newIframe.style.border = 'none';
       newIframe.style.display = 'block';
+
+      // Dynamic height based on device
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        // Mobile: Use aspect ratio for better responsiveness
+        newIframe.style.height = '120vh'; // Taller for mobile to accommodate forms
+        newIframe.style.minHeight = '800px';
+        newIframe.style.maxHeight = 'none';
+      } else {
+        // Desktop: Fixed height with scrolling
+        newIframe.style.height = '900px';
+        newIframe.style.minHeight = '600px';
+      }
 
       // Prevent horizontal scrolling
       newIframe.style.maxWidth = '100%';
       newIframe.style.overflowX = 'hidden';
 
+      // Add loading attribute for better performance
+      newIframe.setAttribute('loading', 'lazy');
+
       // Add class for CSS targeting
       newIframe.className = 'booking-iframe';
 
       // Mobile-specific optimizations - enhanced
-      if (window.innerWidth < 768) {
+      if (isMobile) {
         newIframe.setAttribute('scrolling', 'yes'); // Allow vertical scrolling
         // Additional mobile constraints for better UX
         newIframe.style.position = 'relative';
