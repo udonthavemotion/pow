@@ -29,20 +29,25 @@ export const BUSES: Bus[] = [
     minHours: 4,
     capacity: 40,
     nameColor: '#FF6B00', // Orange like the bus
-    // IMAGE: Orange Juice bus photos
-    imageUrl: '/images/buses/The Juice/Orange Juice.jpeg',
-    // IMAGES: Multiple images for alternating display
+    // IMAGE: Orange Juice bus photos (first 5: 3,5,6,7,4 then 1,2,8,9; 10-12 = gallery)
+    imageUrl: '/images/buses/The Juice/orange-juice-3.png',
+    // IMAGES: Multiple images for alternating display (first 5 in this order)
     images: [
-      '/images/buses/The Juice/Orange Juice.jpeg',
-      '/images/buses/The Juice/IMG_3389-1772650503830.png',
-      '/images/buses/The Juice/IMG_3387 - Edited.png',
-      '/images/buses/The Juice/IMG_0557 - Edited.png'
+      '/images/buses/The Juice/orange-juice-3.png',
+      '/images/buses/The Juice/orange-juice-5.jpeg',
+      '/images/buses/The Juice/orange-juice-6.jpeg',
+      '/images/buses/The Juice/orange-juice-7.jpeg',
+      '/images/buses/The Juice/orange-juice-4.png',
+      '/images/buses/The Juice/orange-juice-1.jpeg',
+      '/images/buses/The Juice/orange-juice-2.png',
+      '/images/buses/The Juice/orange-juice-8.jpeg',
+      '/images/buses/The Juice/orange-juice-9.jpeg'
     ],
     // GALLERY: Multiple images of Orange Juice bus
     gallery: [
-      '/images/buses/orange-juice-gallery-1.jpeg',
-      '/images/buses/orange-juice-gallery-2.jpeg',
-      '/images/buses/orange-juice-gallery-3.jpeg',
+      '/images/buses/The Juice/orange-juice-10.jpeg',
+      '/images/buses/The Juice/orange-juice-11.jpeg',
+      '/images/buses/The Juice/orange-juice-12.jpeg',
     ],
     features: ['Open Air Deck', 'Premium Sound System', 'LED Light Show', 'Coolers On Board'],
 
@@ -60,18 +65,16 @@ export const BUSES: Bus[] = [
     minHours: 4,
     capacity: 40,
     nameColor: '#407e3d',
-    // IMAGE: Kuttin Loose bus photo
-    imageUrl: '/images/buses/The Kuttin Loose/KuttinLoose.png',
-    // IMAGES: Multiple images for alternating display
+    // IMAGE: Kuttin Loose bus photo (1-4 = new exterior/interior, 5-7 = previous)
+    imageUrl: '/images/buses/The Kuttin Loose/kuttin-loose-1.jpeg',
+    // IMAGES: Multiple images for alternating display (1-4 shown first)
     images: [
-      '/images/buses/The Kuttin Loose/KuttinLoose.png',
-      '/images/buses/The Kuttin Loose/IMG_3394-1772650507435.jpeg',
-      '/images/buses/The Kuttin Loose/IMG_3395-1772650503734 (1).png',
-      '/images/buses/The Kuttin Loose/IMG_0526.jpeg',
-      '/images/buses/The Kuttin Loose/IMG_0527.jpeg',
-      '/images/buses/The Kuttin Loose/IMG_0528.jpeg',
-      '/images/buses/The Kuttin Loose/IMG_0529.jpeg',
-      '/images/buses/The Kuttin Loose/IMG_0530.jpeg'
+      '/images/buses/The Kuttin Loose/kuttin-loose-1.jpeg',
+      '/images/buses/The Kuttin Loose/kuttin-loose-2.jpeg',
+      '/images/buses/The Kuttin Loose/kuttin-loose-3.jpeg',
+      '/images/buses/The Kuttin Loose/kuttin-loose-4.jpeg',
+      '/images/buses/The Kuttin Loose/kuttin-loose-6.jpeg',
+      '/images/buses/The Kuttin Loose/kuttin-loose-7.png'
     ],
     features: ['Premium Sound System', 'LED Light Show', 'Dance Floor', 'Climate Control'],
 
@@ -90,7 +93,7 @@ export const BUSES: Bus[] = [
     capacity: 40,
     nameColor: '#FF69B4', // Pink/Blue gradient - we'll use pink as primary
     // IMAGE: The Cotton Candy bus photo
-    imageUrl: '/images/buses/The Cotton Candy/CottonCandy.jpeg',
+    imageUrl: '/images/buses/The Cotton Candy/cotton-candy-1.jpeg',
     features: ['Vibrant Interior', 'Premium Sound System', 'LED Lighting', 'Climate Control'],
 
     // ------------------------------------------------------------------
@@ -107,12 +110,12 @@ export const BUSES: Bus[] = [
     minHours: 4,
     capacity: 40,
     nameColor: '#800020', // Maroon red
-    // IMAGE: Rackz bus photo
-    imageUrl: '/images/buses/The Rackz/TheRackz.jpeg',
+    // IMAGE: Rackz bus photo (rackz-1 = main, rackz-2 = second)
+    imageUrl: '/images/buses/The Rackz/rackz-1.jpeg',
     // IMAGES: Multiple images for alternating display
     images: [
-      '/images/buses/The Rackz/TheRackz.jpeg',
-      '/images/buses/The Rackz/Rackz Family.png'
+      '/images/buses/The Rackz/rackz-1.jpeg',
+      '/images/buses/The Rackz/rackz-2.png'
     ],
     features: ['VIP Seating', 'Premium Audio', 'LED Light Show', 'AC/Heat'],
 
@@ -130,12 +133,12 @@ export const BUSES: Bus[] = [
     minHours: 4,
     capacity: 40,
     nameColor: '#FFA500', // School bus orange
-    // IMAGE: The Dirty Dancer bus photo
-    imageUrl: '/images/buses/Dirty Dancer/IMG_0615 (1).jpeg',
+    // IMAGE: The Dirty Dancer bus photo (dirty-dancer-1 = main, dirty-dancer-2 = second)
+    imageUrl: '/images/buses/Dirty Dancer/dirty-dancer-1.jpeg',
     // IMAGES: Multiple images for alternating display
     images: [
-      '/images/buses/Dirty Dancer/IMG_0615 (1).jpeg',
-      '/images/buses/Dirty Dancer/IMG_0613.jpeg'
+      '/images/buses/Dirty Dancer/dirty-dancer-1.jpeg',
+      '/images/buses/Dirty Dancer/dirty-dancer-2.jpeg'
     ],
     features: ['Dance Floor', 'Dance Pole', 'Club Sound System', 'Premium Lighting', 'Climate Control'],
 
@@ -154,7 +157,7 @@ export const BUSES: Bus[] = [
     capacity: 20,
     nameColor: '#1C1C1C', // Black like a classic limo
     // IMAGE: The Limo photo
-    imageUrl: '/images/buses/Limo/Limo.jpeg',
+    imageUrl: '/images/buses/Limo/limo-1.jpeg',
     features: ['Luxury Seating', 'Premium Sound', 'Mood Lighting', 'Climate Control', 'Mini Bar'],
 
     // ------------------------------------------------------------------
