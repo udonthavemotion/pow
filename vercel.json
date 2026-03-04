@@ -21,7 +21,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(js|css|woff2|woff|ttf|otf))",
+      "source": "/assets/:path*",
       "headers": [
         {
           "key": "Cache-Control",
