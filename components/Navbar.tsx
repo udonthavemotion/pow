@@ -93,6 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
             <a href="#how-it-works" onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors">How It Works</a>
             <a href="#events" onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors">Events</a>
             <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors">FAQ</a>
+            <a href="/contact" className="hover:text-[#FF6B00] transition-colors">Contact</a>
           </div>
 
           {/* Right Actions (Mobile Toggle) */}
@@ -143,6 +144,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
             <a href="#how-it-works" onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">How It Works</a>
             <a href="#events" onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Events</a>
             <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">FAQ</a>
+            <a href="/contact" className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Contact</a>
             <a
                 href="#fleet"
                 onClick={(e) => {

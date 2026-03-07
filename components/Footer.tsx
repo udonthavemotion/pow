@@ -55,6 +55,9 @@ const Footer: React.FC<FooterProps> = ({ onLinkClick }) => {
             <li><a href="#how-it-works" onClick={(e) => onLinkClick(e, 'how-it-works')} className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">How It Works</a></li>
             <li><a href="#events" onClick={(e) => onLinkClick(e, 'events')} className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">Events</a></li>
             <li><a href="#faq" onClick={(e) => onLinkClick(e, 'faq')} className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">FAQ</a></li>
+            <li><a href="/contact" className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">Contact</a></li>
+            <li><a href="/terms" className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">Terms of Service</a></li>
+            <li><a href="/privacy" className="hover:text-[#b9ff66] transition-colors inline-block py-1 min-h-[44px] flex items-center">Privacy Policy</a></li>
           </ul>
         </div>
 
