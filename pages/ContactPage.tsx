@@ -40,6 +40,17 @@ function ContactPage() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Load GoHighLevel form embed script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://book.partiesonwheels.com/js/form_embed.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     // Navigation handled by React Router for internal links
   };
@@ -332,9 +343,9 @@ function ContactPage() {
                 <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
                   {/* GoHighLevel Contact Form Embed */}
                   <iframe
-                    src="https://link.zeromotionmarketing.com/widget/form/SJ6QVJFvKD4x5dUBHypc"
-                    style={{ width: '100%', height: '805px', border: 'none' }}
-                    id="inline-SJ6QVJFvKD4x5dUBHypc"
+                    src="https://book.partiesonwheels.com/widget/form/FcOBrAmHxt0vVTMFms0Y"
+                    style={{ width: '100%', height: '1208px', border: 'none', borderRadius: '3px' }}
+                    id="inline-FcOBrAmHxt0vVTMFms0Y"
                     data-layout='{"id":"INLINE"}'
                     data-trigger-type="alwaysShow"
                     data-trigger-value=""
@@ -342,14 +353,12 @@ function ContactPage() {
                     data-activation-value=""
                     data-deactivation-type="neverDeactivate"
                     data-deactivation-value=""
-                    data-form-name="Contact Us Form"
-                    data-height="805"
-                    data-layout-iframe-id="inline-SJ6QVJFvKD4x5dUBHypc"
-                    data-form-id="SJ6QVJFvKD4x5dUBHypc"
-                    title="Contact Us Form"
-                    loading="lazy"
+                    data-form-name="Party Bus Rental Booking Form"
+                    data-height="1208"
+                    data-layout-iframe-id="inline-FcOBrAmHxt0vVTMFms0Y"
+                    data-form-id="FcOBrAmHxt0vVTMFms0Y"
+                    title="Party Bus Rental Booking Form"
                   />
-                  <script src="https://link.zeromotionmarketing.com/js/form_embed.js" async />
                 </div>
               </div>
             </div>
