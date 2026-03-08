@@ -183,14 +183,14 @@ export const EVENTS: EventItem[] = [
         title: "Mardi Gras",
         subtitle: "Laissez les bons temps rouler",
         description: "The ultimate parade base. AC, bathroom breaks, and a dedicated driver to navigate the chaos. Book early!",
-        image: "/images/events/mardi-gras.jpg"
+        image: "/images/events/mardi-gras.jpeg"
     },
     {
         id: 3,
         title: "Nights Out",
         subtitle: "New Orleans & Houma",
         description: "Bachelor/ettes, birthdays, or just because it's Saturday. The party starts the second you step on the bus.",
-        image: "/images/events/nights-out.jpg"
+        image: "/images/events/nights-out.jpeg"
     }
 ];
 
