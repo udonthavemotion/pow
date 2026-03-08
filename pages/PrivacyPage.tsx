@@ -239,8 +239,8 @@ function PrivacyPage() {
             <h4 className="font-bold text-orange-900 mb-2">Opt-Out Instructions</h4>
             <p className="text-sm text-orange-800 mb-2">
               <strong>Marketing Emails:</strong> Click the "Unsubscribe" link at the bottom of any marketing email, or email us at{' '}
-              <a href="mailto:privacy@partyonwheelspow.com" className="text-[#FF6B00] hover:text-[#e56000] font-semibold underline">
-                privacy@partyonwheelspow.com
+              <a href="mailto:getpartyonwheels@gmail.com" className="text-[#FF6B00] hover:text-[#e56000] font-semibold underline">
+                getpartyonwheels@gmail.com
               </a>
             </p>
             <p className="text-sm text-orange-800">
@@ -455,10 +455,10 @@ function PrivacyPage() {
                 <p className="text-gray-700">
                   Email:{' '}
                   <a
-                    href="mailto:privacy@partyonwheelspow.com"
+                    href="mailto:getpartyonwheels@gmail.com"
                     className="text-[#FF6B00] hover:text-[#e56000] font-semibold"
                   >
-                    privacy@partyonwheelspow.com
+                    getpartyonwheels@gmail.com
                   </a>
                 </p>
                 <p className="text-gray-700">
