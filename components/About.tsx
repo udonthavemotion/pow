@@ -3,14 +3,23 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { OWNER_NAME } from '../constants';
 
 const About: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [countersVisible, setCountersVisible] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const countersRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoReadyRef = useRef(false);
+
+  const markVideoReady = useCallback(() => {
+    if (videoReadyRef.current) return;
+    videoReadyRef.current = true;
+    setVideoReady(true);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,13 +49,51 @@ const About: React.FC = () => {
     };
   }, []);
 
+  // Start video playback only when the section scrolls into view.
+  // This avoids downloading 6.4 MB of video until the user actually
+  // reaches the About section.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !isVisible) return;
+
+    video.muted = true;
+    video.setAttribute('playsinline', 'true');
+
+    const attemptPlay = async () => {
+      try {
+        const p = video.play();
+        if (p !== undefined) {
+          await p;
+          markVideoReady();
+        }
+      } catch {
+        // Autoplay blocked -- video stays hidden, poster/placeholder shows
+      }
+    };
+
+    const handlePlaying = () => markVideoReady();
+    const handleCanPlay = () => {
+      if (!video.paused) markVideoReady();
+    };
+
+    video.addEventListener('playing', handlePlaying);
+    video.addEventListener('canplay', handleCanPlay);
+
+    attemptPlay();
+
+    return () => {
+      video.removeEventListener('playing', handlePlaying);
+      video.removeEventListener('canplay', handleCanPlay);
+    };
+  }, [isVisible, markVideoReady]);
+
   return (
     <section
       ref={sectionRef}
       id="about"
       className="bg-white text-gray-900 py-16 sm:py-24 px-4 sm:px-6 md:px-12 relative overflow-hidden"
     >
-      {/* Orange and green background blobs - no more blue! */}
+      {/* Orange and green background blobs */}
       <div
         className={`absolute top-0 right-0 w-[500px] h-[500px] bg-[#FF6B00] rounded-full mix-blend-multiply filter blur-[100px] opacity-10 transition-all duration-1000 ${
           isVisible ? 'translate-y-0' : 'translate-y-[-50px]'
@@ -54,7 +101,7 @@ const About: React.FC = () => {
         style={{ transitionDelay: '0.2s' }}
       />
       <div
-        className={`absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#b9ff66] rounded-full mix-blend-multiply filter blur-[120px] opacity-10 transition-all duration-1200 ${
+        className={`absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#b9ff66] rounded-full mix-blend-multiply filter blur-[120px] opacity-10 transition-all duration-1000 ${
           isVisible ? 'translate-y-0' : 'translate-y-[50px]'
         }`}
         style={{ transitionDelay: '0.3s' }}
@@ -71,26 +118,39 @@ const About: React.FC = () => {
           }`}
         >
           <div className="relative group max-w-[280px] sm:max-w-[320px] lg:max-w-[360px]">
-            {/* Green border - no more blue! */}
+            {/* Green border accent */}
             <div className={`absolute -top-2 sm:-top-4 -left-2 sm:-left-4 w-full h-full border-2 sm:border-4 border-[#b9ff66] rounded-2xl transition-all duration-700 ${
               isVisible ? 'opacity-100 translate-x-0 translate-y-0' : 'opacity-0 translate-x-2 translate-y-2'
             }`}
             style={{ transitionDelay: '0.3s' }}
             />
 
-            {/* 9:16 Vertical Video */}
-            <video
-              src="/videos/about-video.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="relative w-full rounded-2xl shadow-2xl object-cover transform transition-transform duration-500 group-hover:scale-[1.02]"
+            {/* Video wrapper with loading placeholder */}
+            <div
+              className="relative w-full rounded-2xl overflow-hidden shadow-2xl bg-gray-200"
               style={{ aspectRatio: '9/16', maxHeight: '600px' }}
             >
-              Your browser does not support the video tag.
-            </video>
+              {/* Skeleton placeholder while video loads */}
+              {!videoReady && (
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-300 to-gray-200 animate-pulse rounded-2xl" />
+              )}
 
+              {/* 9:16 Vertical Video */}
+              <video
+                ref={videoRef}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className={`relative w-full h-full object-cover transform transition-all duration-700 group-hover:scale-[1.02] ${
+                  videoReady ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <source src="/videos/about-video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
         </div>
 
@@ -217,7 +277,7 @@ const CountUp: React.FC<{ end: number; duration: number }> = ({ end, duration })
 
   useEffect(() => {
     let start = 0;
-    const increment = end / (duration / 16); // 60fps
+    const increment = end / (duration / 16); // ~60fps
     const timer = setInterval(() => {
       start += increment;
       if (start > end) {

@@ -4,82 +4,116 @@
 */
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 interface HeroProps {
   onBookNow?: () => void;
   onBookNowHover?: () => void;
 }
 
+/**
+ * HERO VIDEO LOADING TIMEOUT (ms)
+ * If the video hasn't signaled readiness within this window, we reveal
+ * whatever state we have so users never stare at a black screen.
+ */
+const VIDEO_READY_TIMEOUT_MS = 8000;
+
 const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
   const [videoReady, setVideoReady] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [videoFailed, setVideoFailed] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const readyRef = useRef(false); // avoids stale closures in event callbacks
 
+  // Mark video as ready (idempotent -- safe to call multiple times)
+  const markVideoReady = useCallback(() => {
+    if (readyRef.current) return;
+    readyRef.current = true;
+    setVideoReady(true);
+  }, []);
+
+  // Entrance animation delay
   useEffect(() => {
-    // Trigger entrance animation after mount
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
+  // ---- Core video bootstrap ----
   useEffect(() => {
-    // Comprehensive mobile video autoplay solution
     const video = videoRef.current;
     if (!video) return;
 
-    // Force video attributes for mobile compatibility
+    // Force attributes for maximum mobile compatibility
     video.setAttribute('playsinline', 'true');
     video.setAttribute('muted', 'true');
     video.setAttribute('autoplay', 'true');
     video.setAttribute('loop', 'true');
-    video.setAttribute('preload', 'auto');
 
-    // Remove all controls
+    // Use metadata-only preload: the browser fetches duration/dimensions but
+    // does NOT eagerly download the entire 80 MB file.  Playback will stream
+    // on-demand once play() is called.
+    video.setAttribute('preload', 'metadata');
+
     video.removeAttribute('controls');
     video.controls = false;
 
-    // Disable text track (captions) that might show controls
+    // Disable any text-track overlays
     if (video.textTracks) {
       Array.from(video.textTracks).forEach(track => {
         track.mode = 'disabled';
       });
     }
 
-    // Aggressive autoplay enforcement for mobile browsers
+    // --- Play helper ---
     const forcePlay = async () => {
       try {
-        // Ensure video is muted (required for autoplay on mobile)
         video.muted = true;
         video.volume = 0;
-
-        // Try to play
         const playPromise = video.play();
-
         if (playPromise !== undefined) {
           await playPromise;
-          console.log('Video autoplay successful');
+          // Play succeeded -- reveal the video
+          markVideoReady();
         }
-      } catch (error) {
-        console.warn('Video autoplay failed, retrying...', error);
-
-        // Retry after a short delay
+      } catch {
+        // Autoplay blocked or not enough data yet -- retry once
         setTimeout(() => {
           video.muted = true;
-          video.play().catch(e => console.error('Video play retry failed:', e));
-        }, 100);
+          video.play()
+            .then(() => markVideoReady())
+            .catch(() => {
+              // Truly blocked (e.g. low-power mode). The timeout fallback
+              // below will reveal the placeholder instead.
+            });
+        }, 500);
       }
     };
 
     // Initial play attempt
     forcePlay();
 
-    // Handle various mobile browser events
-    const events = ['loadedmetadata', 'loadeddata', 'canplay', 'canplaythrough'];
-    events.forEach(event => {
-      video.addEventListener(event, forcePlay);
-    });
+    // Listen for both canplay and playing as independent reveal signals.
+    // - canplay: browser has enough data to start playback (even if paused)
+    // - playing: playback has actually started (covers autoplay success)
+    const handleCanPlay = () => {
+      // Only mark ready via canplay if the video is not paused (i.e., it is
+      // actually going to render frames).  If autoplay was blocked the video
+      // could reach canplay while still paused -- we don't want to reveal a
+      // frozen frame in that case.
+      if (!video.paused) {
+        markVideoReady();
+      }
+    };
+    const handlePlaying = () => markVideoReady();
 
-    // Handle visibility change (mobile browser tab switching)
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('playing', handlePlaying);
+
+    // Re-attempt play on metadata events (helps some mobile browsers)
+    const handleMetadataLoaded = () => { forcePlay(); };
+    video.addEventListener('loadedmetadata', handleMetadataLoaded);
+
+    // Visibility change: resume playback when tab becomes active
     const handleVisibilityChange = () => {
       if (!document.hidden && video.paused) {
         forcePlay();
@@ -87,24 +121,43 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // Prevent pause on mobile (some browsers try to pause on certain events)
-    const preventPause = (e: Event) => {
+    // Prevent accidental pause on mobile (some browsers pause on scroll)
+    const handlePause = (e: Event) => {
       e.preventDefault();
       if (video.paused) {
         forcePlay();
       }
     };
-    video.addEventListener('pause', preventPause);
+    video.addEventListener('pause', handlePause);
 
-    // Cleanup
+    // --- Timeout fallback ---
+    // If after VIDEO_READY_TIMEOUT_MS the video still hasn't triggered ready,
+    // reveal whatever we have.  On truly slow connections this means the user
+    // sees the dark gradient placeholder with the text overlay rather than a
+    // blank screen forever.
+    const timeoutId = setTimeout(() => {
+      if (!readyRef.current) {
+        // Check if video has any data at all
+        if (video.readyState >= 2) {
+          // HAVE_CURRENT_DATA or better -- show it
+          markVideoReady();
+        } else {
+          // Video is still not playable.  Mark as failed so the placeholder
+          // gradient stays visible and the content is readable.
+          setVideoFailed(true);
+        }
+      }
+    }, VIDEO_READY_TIMEOUT_MS);
+
     return () => {
-      events.forEach(event => {
-        video.removeEventListener(event, forcePlay);
-      });
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('playing', handlePlaying);
+      video.removeEventListener('loadedmetadata', handleMetadataLoaded);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      video.removeEventListener('pause', preventPause);
+      video.removeEventListener('pause', handlePause);
+      clearTimeout(timeoutId);
     };
-  }, []);
+  }, [markVideoReady]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
@@ -128,11 +181,33 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
     }
   };
 
+  // Determine whether the video layer should be visible.
+  // Show at 60% opacity once ready; keep hidden while loading.
+  const showVideo = videoReady && !videoFailed;
+
   return (
     <section className="relative w-full h-screen min-h-[700px] lg:min-h-[800px] overflow-hidden bg-gray-900">
 
       {/* Background Video - Party Bus Hero Video */}
       <div className="absolute inset-0 w-full h-full">
+
+        {/* Animated placeholder gradient visible while video loads.
+            Uses the brand dark palette so it looks intentional, not broken.
+            A subtle pulse animation gives a "loading" feel without a spinner. */}
+        <div
+          className={`absolute inset-0 z-0 transition-opacity duration-1000 ${
+            showVideo ? 'opacity-0' : 'opacity-100'
+          }`}
+          aria-hidden="true"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
+          {/* Subtle animated shimmer while loading -- disappears when video is up */}
+          {!videoReady && !videoFailed && (
+            <div className="absolute inset-0 opacity-30 animate-pulse bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+          )}
+        </div>
+
         <video
           ref={videoRef}
           autoPlay
@@ -140,29 +215,22 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
           muted
           playsInline
           controls={false}
-          preload="auto"
+          preload="metadata"
           disablePictureInPicture
           disableRemotePlayback
-          x5-playsinline="true"
-          webkit-playsinline="true"
-          onPlaying={() => setVideoReady(true)}
           className={`w-full h-full object-cover mobile-video-no-controls transition-[opacity,visibility] duration-1000 ${
-            videoReady ? 'visible opacity-60' : 'invisible opacity-0'
+            showVideo ? 'visible opacity-60' : 'invisible opacity-0'
           }`}
           style={{
             pointerEvents: 'none',
-            WebkitMediaControls: 'none',
-            MozMediaControls: 'none',
-            msMediaControls: 'none'
           } as React.CSSProperties}
           aria-hidden="true"
         >
           <source src="/videos/hero-video.mp4" type="video/mp4" />
         </video>
 
-        {/* Dark base layer — visible while video buffers, no broken-image flash */}
-
-        {/* Enhanced gradient overlays */}
+        {/* Enhanced gradient overlays -- always visible on top of both
+            the placeholder and the video for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/90"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B00]/10 via-transparent to-[#b9ff66]/10"></div>
       </div>
@@ -207,7 +275,7 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
           {/* Location badge - between TIMES ROLL and subtitle */}
           <div className="text-base sm:text-xl md:text-2xl font-bold uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#b9ff66] mb-6 sm:mb-8 drop-shadow-[0_0_15px_rgba(57,255,20,0.5)] text-center">
             <div className="block">
-              {"Houma • Thibodaux".split('').map((letter, index) => (
+              {"Houma \u2022 Thibodaux".split('').map((letter, index) => (
                 <span
                   key={index}
                   className="inline-block animate-wave-cascade"
@@ -278,17 +346,17 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
           <div className="mt-12 sm:mt-16 flex flex-wrap justify-center gap-6 sm:gap-10 text-sm sm:text-base text-white/80 font-bold uppercase tracking-wider">
             <div className="flex items-center gap-2 hover:text-[#b9ff66] transition-colors duration-300 animate-trust-pop"
                  style={{ animationDelay: '1.8s', opacity: 0 }}>
-              <span className="text-xl sm:text-2xl">⚡</span>
+              <span className="text-xl sm:text-2xl">&#9889;</span>
               <span>Instant Booking</span>
             </div>
             <div className="flex items-center gap-2 hover:text-[#b9ff66] transition-colors duration-300 animate-trust-pop"
                  style={{ animationDelay: '2s', opacity: 0 }}>
-              <span className="text-xl sm:text-2xl">🎉</span>
+              <span className="text-xl sm:text-2xl">&#127881;</span>
               <span>6 Party Buses</span>
             </div>
             <div className="flex items-center gap-2 hover:text-[#b9ff66] transition-colors duration-300 animate-trust-pop"
                  style={{ animationDelay: '2.2s', opacity: 0 }}>
-              <span className="text-xl sm:text-2xl">🔒</span>
+              <span className="text-xl sm:text-2xl">&#128274;</span>
               <span>Licensed & Insured</span>
             </div>
           </div>

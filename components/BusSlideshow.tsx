@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { BUSES } from '../constants';
 
 interface BusSlideshowProps {
@@ -29,25 +29,42 @@ const BusSlideshow: React.FC<BusSlideshowProps> = ({
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  // Prepare bus data with images
-  const busesWithImages = BUSES.map(bus => ({
-    ...bus,
-    // Use first image from images array, fallback to imageUrl
-    displayImage: bus.images && bus.images.length > 0 ? bus.images[0] : bus.imageUrl
-  }));
+  // Memoize derived bus data so it is not re-allocated on every render.
+  // BUSES is a module-level constant so the dependency is stable.
+  const busesWithImages = useMemo(
+    () =>
+      BUSES.map(bus => ({
+        ...bus,
+        displayImage: bus.images && bus.images.length > 0 ? bus.images[0] : bus.imageUrl,
+      })),
+    []
+  );
 
   const totalSlides = busesWithImages.length;
 
-  // Preload images for smooth transitions
+  // Only preload the *first* slide image eagerly.  Adjacent slides are
+  // preloaded one step ahead as the user navigates, avoiding a burst of
+  // network requests for all images on mount.
   useEffect(() => {
-    busesWithImages.forEach((bus, index) => {
-      const img = new Image();
-      img.src = bus.displayImage;
+    // Preload the first image immediately
+    const img = new window.Image();
+    img.src = busesWithImages[0].displayImage;
+    img.onload = () => {
+      setImagesLoaded(prev => ({ ...prev, [0]: true }));
+    };
+  }, [busesWithImages]);
+
+  // Preload the next slide image when currentIndex changes
+  useEffect(() => {
+    const nextIndex = (currentIndex + 1) % totalSlides;
+    if (!imagesLoaded[nextIndex]) {
+      const img = new window.Image();
+      img.src = busesWithImages[nextIndex].displayImage;
       img.onload = () => {
-        setImagesLoaded(prev => ({ ...prev, [index]: true }));
+        setImagesLoaded(prev => ({ ...prev, [nextIndex]: true }));
       };
-    });
-  }, []);
+    }
+  }, [currentIndex, totalSlides, busesWithImages, imagesLoaded]);
 
   // Auto-rotate logic
   useEffect(() => {

@@ -4,9 +4,13 @@
 */
 
 
-import React, { useState, useEffect, startTransition } from 'react';
+import React, { useState, useEffect, startTransition, lazy, Suspense } from 'react';
 import { BRAND_NAME, LOGO_URL } from '../constants';
-import BookingModal from './BookingModal';
+
+// Lazy-load BookingModal so the Navbar chunk stays small.  BookingModal
+// contains iframe/script management logic that is only needed when a user
+// actually clicks "Our Buses" or "Our Limos" in the nav.
+const BookingModal = lazy(() => import('./BookingModal'));
 
 interface NavbarProps {
   onNavClick: (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => void;
@@ -164,19 +168,26 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
           </div>
       </div>
 
-      {/* Booking Modals */}
-      {busesModalOpen && (
-        <BookingModal
-          serviceMenuEmbedCode={busesEmbedCode}
-          onClose={() => setBusesModalOpen(false)}
-        />
-      )}
-
-      {limosModalOpen && (
-        <BookingModal
-          serviceMenuEmbedCode={limosEmbedCode}
-          onClose={() => setLimosModalOpen(false)}
-        />
+      {/* Booking Modals -- lazy loaded, only mounted when open */}
+      {(busesModalOpen || limosModalOpen) && (
+        <Suspense fallback={
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="text-white text-lg">Loading...</div>
+          </div>
+        }>
+          {busesModalOpen && (
+            <BookingModal
+              serviceMenuEmbedCode={busesEmbedCode}
+              onClose={() => setBusesModalOpen(false)}
+            />
+          )}
+          {limosModalOpen && (
+            <BookingModal
+              serviceMenuEmbedCode={limosEmbedCode}
+              onClose={() => setLimosModalOpen(false)}
+            />
+          )}
+        </Suspense>
       )}
     </>
   );
