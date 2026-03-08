@@ -358,7 +358,7 @@ function TermsPage() {
                         Phone: <a href="tel:+19858561860" className="text-[#FF6B00] hover:text-[#e56000] font-semibold">+1 985-856-1860</a>
                       </p>
                       <p className="text-gray-700 mb-2">
-                        Email: <a href="mailto:info@partyonwheelspow.com" className="text-[#FF6B00] hover:text-[#e56000] font-semibold">info@partyonwheelspow.com</a>
+                        Email: <a href="mailto:getpartyonwheels@gmail.com" className="text-[#FF6B00] hover:text-[#e56000] font-semibold">getpartyonwheels@gmail.com</a>
                       </p>
                       <p className="text-gray-700">
                         Service Area: Southern Louisiana (Houma, Thibodaux, New Orleans)

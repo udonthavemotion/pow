@@ -276,10 +276,10 @@ function ContactPage() {
                       <div>
                         <h3 className="font-bold text-lg mb-1 text-[#1a1a1a]">Email</h3>
                         <a
-                          href="mailto:info@partyonwheelspow.com"
+                          href="mailto:getpartyonwheels@gmail.com"
                           className="text-[#FF6B00] hover:text-[#e56000] transition-colors break-all font-semibold"
                         >
-                          info@partyonwheelspow.com
+                          getpartyonwheels@gmail.com
                         </a>
                       </div>
                     </div>

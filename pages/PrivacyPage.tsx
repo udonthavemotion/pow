@@ -473,10 +473,10 @@ function PrivacyPage() {
                 <p className="text-gray-700">
                   General Email:{' '}
                   <a
-                    href="mailto:info@partyonwheelspow.com"
+                    href="mailto:getpartyonwheels@gmail.com"
                     className="text-[#FF6B00] hover:text-[#e56000] font-semibold"
                   >
-                    info@partyonwheelspow.com
+                    getpartyonwheels@gmail.com
                   </a>
                 </p>
               </div>
