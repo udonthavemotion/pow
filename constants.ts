@@ -173,10 +173,10 @@ export const BUSES: Bus[] = [
 export const EVENTS: EventItem[] = [
     {
         id: 1,
-        title: "Weddings",
-        subtitle: "Get to the altar on time",
-        description: "Transport your bridal party or your entire guest list in style. We handle the driving so you can handle the champagne.",
-        image: "/images/events/wedding.jpg"
+        title: "Birthday Parties",
+        subtitle: "Make a wish, then roll out",
+        description: "Turn the big day into a rolling celebration. We bring the bus, the music, and the good times—you just bring your crew.",
+        image: "/images/events/birthday-parties.jpeg"
     },
     {
         id: 2,
