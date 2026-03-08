@@ -12,7 +12,7 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const videoRef = React.useRef<HTMLVideoElement>(null);
 
@@ -145,9 +145,9 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
           disableRemotePlayback
           x5-playsinline="true"
           webkit-playsinline="true"
-          onLoadedData={() => setVideoLoaded(true)}
-          className={`w-full h-full object-cover transition-opacity duration-1000 mobile-video-no-controls ${
-            videoLoaded ? 'opacity-60' : 'opacity-0'
+          onPlaying={() => setVideoReady(true)}
+          className={`w-full h-full object-cover mobile-video-no-controls transition-[opacity,visibility] duration-1000 ${
+            videoReady ? 'visible opacity-60' : 'invisible opacity-0'
           }`}
           style={{
             pointerEvents: 'none',
@@ -160,14 +160,7 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
           <source src="/videos/hero-video.mp4" type="video/mp4" />
         </video>
 
-        {/* Fallback image if video doesn't load */}
-        {!videoLoaded && (
-          <img
-            src="/images/hero/hero-background.jpg"
-            alt="Party Bus Atmosphere"
-            className="absolute inset-0 w-full h-full object-cover opacity-60"
-          />
-        )}
+        {/* Dark base layer — visible while video buffers, no broken-image flash */}
 
         {/* Enhanced gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-black/90"></div>
