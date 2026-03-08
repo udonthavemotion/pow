@@ -5,6 +5,7 @@
 
 
 import React, { useState, useEffect, startTransition, lazy, Suspense } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { BRAND_NAME, LOGO_URL } from '../constants';
 
 // Lazy-load BookingModal so the Navbar chunk stays small.  BookingModal
@@ -19,6 +20,8 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [busesModalOpen, setBusesModalOpen] = useState(false);
@@ -73,12 +76,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
       >
         <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <a 
-            href="#" 
+          <a
+            href="/"
             onClick={(e) => {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                onNavClick(e, ''); 
+                if (location.pathname !== '/') {
+                  navigate('/');
+                } else {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                setMobileMenuOpen(false);
             }}
             className="z-50 relative flex items-center gap-2"
           >
