@@ -13,31 +13,31 @@ const HowItWorks: React.FC = () => {
   const steps = [
     {
       number: '01',
-      title: 'Pick Your Bus',
-      description: 'Browse our fleet and choose the perfect ride for your crew. Each bus has its own vibe and capacity.',
+      title: 'Pick Your Ride',
+      description: 'Browse the fleet and choose the perfect bus or limo for your crew. Each one has its own vibe and capacity.',
       icon: '🚌',
       time: '2 min'
     },
     {
       number: '02',
-      title: 'Book Your Time',
-      description: 'Select your date and time using our online calendar. We\'ll confirm your booking instantly.',
+      title: 'Request Your Date',
+      description: 'Submit your date, time, and details online or give us a call. We\'ll take it from there.',
       icon: '📅',
-      time: 'Instant'
+      time: 'Quick & easy'
     },
     {
       number: '03',
-      title: 'Show Up & Ride',
-      description: 'Meet us at your pickup spot. We handle the driving, you handle the party. It\'s that simple.',
-      icon: '🎉',
-      time: 'Party time!'
+      title: 'We Confirm',
+      description: 'We\'ll personally reach out by call or email to verify your details and lock in your booking.',
+      icon: '📞',
+      time: 'Same day'
     },
     {
       number: '04',
-      title: 'Custom Rides',
-      description: 'Got a crazy idea? We can handle it. Special requests, unique routes, themed parties - just ask!',
-      icon: '🎨',
-      time: 'Let\'s talk',
+      title: 'We Pull Up & Party',
+      description: 'We come to you. Hop on, turn up the music, and let us handle the driving while you handle the fun.',
+      icon: '🎉',
+      time: 'Party time!',
       isCustom: true
     }
   ];

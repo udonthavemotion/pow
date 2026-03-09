@@ -347,17 +347,17 @@ const Hero: React.FC<HeroProps> = ({ onBookNow, onBookNowHover }) => {
             <div className="flex items-center gap-2 hover:text-[#b9ff66] transition-colors duration-300 animate-trust-pop"
                  style={{ animationDelay: '1.8s', opacity: 0 }}>
               <span className="text-xl sm:text-2xl">&#9889;</span>
-              <span>Instant Booking</span>
+              <span>We Come to You</span>
             </div>
             <div className="flex items-center gap-2 hover:text-[#b9ff66] transition-colors duration-300 animate-trust-pop"
                  style={{ animationDelay: '2s', opacity: 0 }}>
               <span className="text-xl sm:text-2xl">&#127881;</span>
-              <span>6 Party Buses</span>
+              <span>LED Lights & Sound Systems</span>
             </div>
             <div className="flex items-center gap-2 hover:text-[#b9ff66] transition-colors duration-300 animate-trust-pop"
                  style={{ animationDelay: '2.2s', opacity: 0 }}>
-              <span className="text-xl sm:text-2xl">&#128274;</span>
-              <span>Licensed & Insured</span>
+              <span className="text-xl sm:text-2xl">&#128266;</span>
+              <span>Loudest Buses in Louisiana</span>
             </div>
           </div>
         </div>
