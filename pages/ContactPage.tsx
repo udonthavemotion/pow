@@ -105,7 +105,7 @@ function ContactPage() {
             <div className={`flex-1 flex flex-col justify-center items-center w-full max-w-5xl mx-auto transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
             }`}>
-              <h1 className="text-[5rem] sm:text-8xl md:text-[10rem] lg:text-[9rem] xl:text-[10rem] font-black text-white leading-[0.85] sm:leading-[0.9] lg:leading-[1.1] mb-6 sm:mb-8 drop-shadow-2xl font-['Bebas_Neue'] tracking-tight">
+              <h1 className="text-[4rem] sm:text-8xl md:text-[10rem] lg:text-[9rem] xl:text-[10rem] font-black text-white leading-[0.85] sm:leading-[0.9] lg:leading-[1.1] mb-6 sm:mb-8 drop-shadow-2xl font-['Bebas_Neue'] tracking-tight">
                 {!entranceDone ? (
                   // Wave-cascade entrance for "PLAN "
                   <>
