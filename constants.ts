@@ -126,14 +126,14 @@ export const BUSES: Bus[] = [
   },
   {
     id: 'b5',
-    name: 'Dirty Dancer',
-    tagline: 'Dance like nobody is watching.',
-    description: 'Turn up the heat with The Dirty Dancer. This party bus features an expansive dance floor, pole, and club-quality sound system for the ultimate moving nightclub experience.',
+    name: 'Skittles',
+    tagline: 'Taste the rainbow on wheels.',
+    description: 'Turn up the heat with Skittles. This party bus features an expansive dance floor, pole, and club-quality sound system for the ultimate moving nightclub experience.',
     hourlyRate: 80,
     minHours: 4,
     capacity: 40,
-    nameColor: '#FFA500', // School bus orange
-    // IMAGE: The Dirty Dancer bus photo (dirty-dancer-1 = main, dirty-dancer-2 = second)
+    nameColor: '#9B59B6', // Skittles purple
+    // IMAGE: Skittles bus photo
     imageUrl: '/images/buses/Dirty Dancer/dirty-dancer-1.jpeg',
     // IMAGES: Multiple images for alternating display
     images: [
@@ -143,7 +143,7 @@ export const BUSES: Bus[] = [
     features: ['Dance Floor', 'Dance Pole', 'Club Sound System', 'Premium Lighting', 'Climate Control'],
 
     // ------------------------------------------------------------------
-    // THE DIRTY DANCER - CALENDAR EMBED
+    // SKITTLES - CALENDAR EMBED
     // ------------------------------------------------------------------
     calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a78d2edcc1c11d37b7385d?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78d2edcc1c11d37b7385d_1772651327695"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
   },
