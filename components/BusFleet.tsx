@@ -221,7 +221,27 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
                         >
                           {bus.name}
                         </h3>
-                        <span className="text-xl sm:text-2xl font-bold text-[#FF6B00] whitespace-nowrap group-hover:scale-110 transition-transform duration-300">${bus.hourlyRate}/hr</span>
+                        <span
+                          className="text-lg sm:text-xl md:text-2xl font-bold text-right leading-snug max-w-[52%] group-hover:scale-110 transition-transform duration-300"
+                          style={{ color: bus.nameColor || '#FF6B00' }}
+                        >
+                          ${bus.hourlyRate}/hr
+                          {typeof bus.minHours === 'number' ? (
+                          <span
+                            className="block sm:inline text-base sm:text-lg font-semibold"
+                            style={{ color: bus.nameColor || '#FF6B00', opacity: 0.88 }}
+                          >
+                            {' '}({bus.minHours}hr min)
+                          </span>
+                          ) : (
+                          <span
+                            className="block sm:inline text-base sm:text-lg font-semibold"
+                            style={{ color: bus.nameColor || '#FF6B00', opacity: 0.88 }}
+                          >
+                            {' '}(no minimum)
+                          </span>
+                          )}
+                        </span>
                     </div>
 
                     <p className="text-black font-bold tracking-[0.15em] uppercase text-xs sm:text-sm mb-4 sm:mb-5">{bus.tagline}</p>
@@ -237,7 +257,7 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
 
                             {/* Button text */}
                             <span className="relative z-10 inline-block group-hover/btn:scale-105 transition-transform duration-200">
-                              {bus.name === 'Limo' ? 'Book This Limo' : `Book ${bus.name}`}
+                              {`Book ${bus.name}`}
                             </span>
 
                             {/* Shine effect */}

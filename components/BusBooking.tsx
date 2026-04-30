@@ -33,7 +33,7 @@ const BusBooking: React.FC<BusBookingProps> = ({ bus, onBack }) => {
           {/* Left: Info & Specs */}
           <div>
              <h1 className="text-6xl md:text-7xl font-black text-gray-900 mb-2 uppercase font-['Bebas_Neue']">{bus.name}</h1>
-             <p className="text-2xl text-[#FF6B00] font-bold mb-8">{bus.tagline}</p>
+             <p className="text-2xl font-bold mb-8" style={{ color: bus.nameColor }}>{bus.tagline}</p>
 
              <div className="w-full aspect-video rounded-xl overflow-hidden mb-8 shadow-lg">
                 <img 
@@ -54,17 +54,24 @@ const BusBooking: React.FC<BusBookingProps> = ({ bus, onBack }) => {
                         <span className="w-2 h-2 bg-[#b9ff66] rounded-full"></span>
                         Capacity: {bus.capacity} Guests
                     </li>
-                    <li className="flex items-center gap-3 text-gray-700">
-                        <span className="w-2 h-2 bg-[#b9ff66] rounded-full"></span>
+                    <li className="flex items-center gap-3 font-semibold" style={{ color: bus.nameColor }}>
+                        <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: bus.nameColor }}></span>
                         Rate: ${bus.hourlyRate}/hr
                     </li>
-                    <li className="flex items-center gap-3 text-gray-700">
-                        <span className="w-2 h-2 bg-[#b9ff66] rounded-full"></span>
-                        Min Time: {bus.minHours} Hours
+                    {typeof bus.minHours === 'number' ? (
+                    <li className="flex items-center gap-3 font-semibold" style={{ color: bus.nameColor, opacity: 0.92 }}>
+                        <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: bus.nameColor }}></span>
+                        Min time: ({bus.minHours}hr min)
                     </li>
+                    ) : (
+                    <li className="flex items-center gap-3 font-semibold" style={{ color: bus.nameColor, opacity: 0.92 }}>
+                        <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: bus.nameColor }}></span>
+                        Min time: (no minimum)
+                    </li>
+                    )}
                     {bus.features.map((feat, idx) => (
                         <li key={idx} className="flex items-center gap-3 text-gray-700">
-                            <span className="w-2 h-2 bg-[#FF6B00] rounded-full"></span>
+                            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: bus.nameColor }}></span>
                             {feat}
                         </li>
                     ))}
@@ -73,7 +80,10 @@ const BusBooking: React.FC<BusBookingProps> = ({ bus, onBack }) => {
           </div>
 
           {/* Right: Booking Calendar (GHL) */}
-          <div className="bg-white rounded-xl shadow-2xl border-t-8 border-[#FF6B00] overflow-hidden flex flex-col">
+          <div
+            className="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col border-t-[8px] border-solid"
+            style={{ borderTopColor: bus.nameColor }}
+          >
              <div className="p-8 bg-gray-900 text-white text-center">
                 <h2 className="text-3xl font-bold uppercase tracking-wide">Book {bus.name}</h2>
                 <p className="text-gray-400 mt-2 text-sm">Select your date and time below to lock in your ride.</p>

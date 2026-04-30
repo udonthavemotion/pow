@@ -11,7 +11,8 @@ export interface Bus {
   tagline: string;
   description: string;
   hourlyRate: number;
-  minHours: number;
+  /** Only set for vehicles that advertise a minimum booking length (e.g. Rackz, Skittles). */
+  minHours?: number;
   capacity: number;
   imageUrl: string;
   images?: string[]; // Array of images for alternating display on card

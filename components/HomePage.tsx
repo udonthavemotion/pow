@@ -21,21 +21,17 @@ const FAQ = lazy(() => import('./FAQ'));
 // Updated to use new rental embed code for entire party bus fleet
 const SERVICE_MENU_EMBED = `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rc/69a757a0e50c3b2fb71142cd?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a757a0e50c3b2fb71142cd_1772651519600"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
 
-// Limo booking embed code - Updated to use new rental embed code for entire limo fleet
-const LIMO_EMBED = `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rc/69a7598cb24fdc33063231a1?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a7598cb24fdc33063231a1_1772651551264"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
-
 /**
  * HomePage - Main landing page component containing all homepage sections
  *
  * Contains Hero, BusFleet, HowItWorks, Events, About, Testimonials, FAQ, and Footer sections.
- * Manages booking modal state for bus bookings, service menu, and limo bookings.
+ * Manages booking modal state for bus bookings and the full-fleet service menu.
  *
  * @returns {JSX.Element} The complete homepage layout
  */
 function HomePage() {
   const [selectedBus, setSelectedBus] = useState<Bus | null>(null);
   const [showServiceMenu, setShowServiceMenu] = useState(false);
-  const [showLimoBooking, setShowLimoBooking] = useState(false);
 
   const preloadBookingModal = useCallback(() => {
     void import('./BookingModal');
@@ -49,7 +45,6 @@ function HomePage() {
   const handleCloseModal = useCallback(() => {
     setSelectedBus(null);
     setShowServiceMenu(false);
-    setShowLimoBooking(false);
     document.body.classList.remove('modal-open');
   }, []);
 
@@ -75,13 +70,6 @@ function HomePage() {
     e.preventDefault();
     const linkText = e.currentTarget.textContent?.toLowerCase() || '';
     const href = e.currentTarget.getAttribute('href') || '';
-
-    // Handle limo booking
-    if (targetId === 'limos') {
-      setShowLimoBooking(true);
-      document.body.classList.add('modal-open');
-      return;
-    }
 
     // Handle fleet/bus booking
     if (targetId === 'fleet' && (linkText.includes('book') || href === '#fleet')) {
@@ -124,11 +112,11 @@ function HomePage() {
 
       <Footer onLinkClick={handleNavClick} />
 
-      {(selectedBus || showServiceMenu || showLimoBooking) && (
+      {(selectedBus || showServiceMenu) && (
         <Suspense fallback={<div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><div className="text-white">Loading...</div></div>}>
           <BookingModal
             bus={selectedBus}
-            serviceMenuEmbedCode={showServiceMenu ? SERVICE_MENU_EMBED : showLimoBooking ? LIMO_EMBED : undefined}
+            serviceMenuEmbedCode={showServiceMenu ? SERVICE_MENU_EMBED : undefined}
             onClose={handleCloseModal}
           />
         </Suspense>

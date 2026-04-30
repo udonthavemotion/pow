@@ -215,7 +215,7 @@ function ContactPage() {
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-100 font-medium mb-6 sm:mb-8 drop-shadow-lg px-4 leading-relaxed max-w-2xl mx-auto animate-subtitle-fade"
                  style={{ animationDelay: '1s', opacity: 0 }}>
                 Browse the fleet, pick your ride, and lock in your date.{' '}
-                <span className="text-[#b9ff66] font-bold">Your party bus or limo is one booking away.</span>
+                <span className="text-[#b9ff66] font-bold">Your party bus is one booking away.</span>
               </p>
 
               {/* Quick Action Buttons - Now inside the hero */}

@@ -10,7 +10,7 @@ import { BRAND_NAME, LOGO_URL } from '../constants';
 
 // Lazy-load BookingModal so the Navbar chunk stays small.  BookingModal
 // contains iframe/script management logic that is only needed when a user
-// actually clicks "Our Buses" or "Our Limos" in the nav.
+// opens the full fleet booking embed from "Our Buses".
 const BookingModal = lazy(() => import('./BookingModal'));
 
 interface NavbarProps {
@@ -25,12 +25,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [busesModalOpen, setBusesModalOpen] = useState(false);
-  const [limosModalOpen, setLimosModalOpen] = useState(false);
 
-  // Embed codes for buses and limos
   const busesEmbedCode = '<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rc/69a757a0e50c3b2fb71142cd?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a757a0e50c3b2fb71142cd_1772651519600"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>';
-
-  const limosEmbedCode = '<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rc/69a7598cb24fdc33063231a1?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a7598cb24fdc33063231a1_1772651551264"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,18 +37,10 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
   }, []);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    // Handle special cases for buses and limos - open booking modals
     if (targetId === 'fleet' || targetId === 'buses') {
       e.preventDefault();
       setMobileMenuOpen(false);
       setBusesModalOpen(true);
-      return;
-    }
-
-    if (targetId === 'limos') {
-      e.preventDefault();
-      setMobileMenuOpen(false);
-      setLimosModalOpen(true);
       return;
     }
 
@@ -100,7 +88,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
           {/* Center Links - Desktop */}
           <div className={`hidden md:flex items-center gap-12 text-lg font-bold tracking-wider uppercase ${textClasses}`}>
             <a href="#" onClick={(e) => handleLinkClick(e, 'buses')} className="hover:text-[#FF6B00] transition-colors cursor-pointer">Our Buses</a>
-            <a href="#" onClick={(e) => handleLinkClick(e, 'limos')} className="hover:text-[#FF6B00] transition-colors cursor-pointer">Our Limos</a>
             <a href="#how-it-works" onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors">How It Works</a>
             <a href="#events" onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors">Events</a>
             <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors">FAQ</a>
@@ -151,7 +138,6 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
       }`}>
           <div className="flex flex-col items-center space-y-6 text-3xl sm:text-4xl font-bold font-serif text-gray-900 uppercase px-6">
             <a href="#" onClick={(e) => handleLinkClick(e, 'buses')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center cursor-pointer">Our Buses</a>
-            <a href="#" onClick={(e) => handleLinkClick(e, 'limos')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center cursor-pointer">Our Limos</a>
             <a href="#how-it-works" onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">How It Works</a>
             <a href="#events" onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Events</a>
             <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">FAQ</a>
@@ -176,24 +162,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
       </div>
 
       {/* Booking Modals -- lazy loaded, only mounted when open */}
-      {(busesModalOpen || limosModalOpen) && (
+      {busesModalOpen && (
         <Suspense fallback={
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <div className="text-white text-lg">Loading...</div>
           </div>
         }>
-          {busesModalOpen && (
-            <BookingModal
-              serviceMenuEmbedCode={busesEmbedCode}
-              onClose={() => setBusesModalOpen(false)}
-            />
-          )}
-          {limosModalOpen && (
-            <BookingModal
-              serviceMenuEmbedCode={limosEmbedCode}
-              onClose={() => setLimosModalOpen(false)}
-            />
-          )}
+          <BookingModal
+            serviceMenuEmbedCode={busesEmbedCode}
+            onClose={() => setBusesModalOpen(false)}
+          />
         </Suspense>
       )}
     </>

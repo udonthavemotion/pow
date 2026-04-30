@@ -14,7 +14,7 @@ const HowItWorks: React.FC = () => {
     {
       number: '01',
       title: 'Pick Your Ride',
-      description: 'Browse the fleet and choose the perfect bus or limo for your crew. Each one has its own vibe and capacity.',
+      description: 'Browse the fleet and choose the perfect bus for your crew. Each one has its own vibe and capacity.',
       icon: '🚌',
       time: '2 min'
     },

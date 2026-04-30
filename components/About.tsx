@@ -107,35 +107,30 @@ const About: React.FC = () => {
         style={{ transitionDelay: '0.3s' }}
       />
 
-      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-10 sm:gap-16 lg:gap-20 relative z-10">
+      <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-stretch gap-10 sm:gap-16 lg:gap-20 relative z-10">
 
-        {/* Video Container - 9:16 Vertical Format */}
+        {/* Video: fills a larger rounded frame; object-cover trims edges without stretching pixels */}
         <div
-          className={`lg:w-auto w-full flex justify-center transition-all duration-1000 ease-out ${
+          className={`w-full lg:w-[48%] lg:max-w-[620px] shrink-0 flex flex-col lg:self-stretch justify-center lg:justify-start transition-all duration-1000 ease-out ${
             isVisible
               ? 'opacity-100 scale-100 translate-x-0'
               : 'opacity-0 scale-95 translate-x-[-30px]'
           }`}
         >
-          <div className="relative group max-w-[280px] sm:max-w-[320px] lg:max-w-[360px]">
+          <div className="relative group w-full flex-1 flex flex-col min-h-[clamp(22rem,78vw,40rem)] lg:min-h-0 lg:h-full">
             {/* Green border accent */}
-            <div className={`absolute -top-2 sm:-top-4 -left-2 sm:-left-4 w-full h-full border-2 sm:border-4 border-[#b9ff66] rounded-2xl transition-all duration-700 ${
+            <div
+              className={`absolute inset-[-10px] sm:inset-[-16px] border-2 sm:border-4 border-[#b9ff66] rounded-3xl transition-all duration-700 pointer-events-none ${
               isVisible ? 'opacity-100 translate-x-0 translate-y-0' : 'opacity-0 translate-x-2 translate-y-2'
             }`}
-            style={{ transitionDelay: '0.3s' }}
+              style={{ transitionDelay: '0.3s' }}
             />
 
-            {/* Video wrapper with loading placeholder */}
-            <div
-              className="relative w-full rounded-2xl overflow-hidden shadow-2xl bg-gray-200"
-              style={{ aspectRatio: '9/16', maxHeight: '600px' }}
-            >
-              {/* Skeleton placeholder while video loads */}
+            <div className="relative flex-1 w-full min-h-[clamp(22rem,78vw,40rem)] lg:min-h-0 lg:h-full rounded-2xl overflow-hidden shadow-2xl bg-gray-200 isolate">
               {!videoReady && (
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-300 to-gray-200 animate-pulse rounded-2xl" />
               )}
 
-              {/* 9:16 Vertical Video */}
               <video
                 ref={videoRef}
                 autoPlay
@@ -143,7 +138,7 @@ const About: React.FC = () => {
                 muted
                 playsInline
                 preload="metadata"
-                className={`relative w-full h-full object-cover transform transition-all duration-700 group-hover:scale-[1.02] ${
+                className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ease-out ${
                   videoReady ? 'opacity-100' : 'opacity-0'
                 }`}
               >
