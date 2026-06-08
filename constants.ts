@@ -103,7 +103,7 @@ export const BUSES: Bus[] = [
     name: 'Rackz',
     tagline: 'Make it rain on wheels.',
     description: 'Bring the VIP experience wherever you go with Rackz. This sleek party bus is designed for those who want to make a statement with style, sound, and comfort.',
-    hourlyRate: 130,
+    hourlyRate: 120,
     minHours: 3,
     capacity: 40,
     nameColor: '#800020', // Maroon red
