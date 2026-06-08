@@ -103,7 +103,7 @@ export const BUSES: Bus[] = [
     name: 'Rackz',
     tagline: 'Make it rain on wheels.',
     description: 'Bring the VIP experience wherever you go with Rackz. This sleek party bus is designed for those who want to make a statement with style, sound, and comfort.',
-    hourlyRate: 100,
+    hourlyRate: 130,
     minHours: 3,
     capacity: 40,
     nameColor: '#800020', // Maroon red
@@ -129,6 +129,7 @@ export const BUSES: Bus[] = [
     hourlyRate: 100,
     minHours: 3,
     capacity: 40,
+    isActive: false, // Currently being worked on — booking disabled
     nameColor: '#9B59B6', // Skittles purple
     // IMAGE: Skittles bus photo
     imageUrl: '/images/buses/Dirty Dancer/dirty-dancer-1.jpeg',

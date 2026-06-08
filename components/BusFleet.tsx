@@ -117,22 +117,29 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
 
         {/* Large Grid - Enhanced spacing */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-14 lg:gap-20">
-          {BUSES.map((bus, index) => (
+          {BUSES.map((bus, index) => {
+            const isInactive = bus.isActive === false;
+            return (
             <div
                 key={bus.id}
                 ref={(el) => {
                   if (el) cardRefs.current.set(bus.id, el);
                 }}
                 data-bus-id={bus.id}
-                className={`content-visibility-fleet-card group cursor-pointer flex flex-col bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-xl hover:shadow-2xl hover:shadow-[#FF6B00]/30 transition-all duration-700 rounded-2xl overflow-hidden transform hover:-translate-y-2 ${
+                aria-disabled={isInactive || undefined}
+                className={`content-visibility-fleet-card group flex flex-col bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-xl transition-all duration-700 rounded-2xl overflow-hidden transform ${
+                  isInactive
+                    ? 'cursor-not-allowed opacity-90'
+                    : 'cursor-pointer hover:shadow-2xl hover:shadow-[#FF6B00]/30 hover:-translate-y-2'
+                } ${
                   visibleCards.has(bus.id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{
                   transitionDelay: visibleCards.has(bus.id) ? `${index * 0.1}s` : '0s',
                 }}
-                onClick={() => onBusClick(bus)}
-                onMouseEnter={onCardHover}
-                onFocus={onCardHover}
+                onClick={() => { if (!isInactive) onBusClick(bus); }}
+                onMouseEnter={isInactive ? undefined : onCardHover}
+                onFocus={isInactive ? undefined : onCardHover}
             >
                 {/* Image with loading state */}
                 <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 transform-gpu"
@@ -189,6 +196,18 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
                     <div className="absolute top-4 sm:top-5 right-4 sm:right-5 z-20 bg-[#b9ff66] text-black font-bold px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm uppercase tracking-wide shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:shadow-[#b9ff66]/50 group-hover:shadow-xl">
                         <span className="inline-block group-hover:animate-pulse">{bus.capacity} Passengers</span>
                     </div>
+
+                    {/* Inactive badge */}
+                    {isInactive && (
+                      <div className="absolute top-4 sm:top-5 left-4 sm:left-5 z-20 bg-black text-white font-bold px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm uppercase tracking-wide shadow-lg">
+                        Currently Unavailable
+                      </div>
+                    )}
+
+                    {/* Dim overlay on the image when inactive */}
+                    {isInactive && (
+                      <div className="absolute inset-0 bg-black/35 z-10 pointer-events-none"></div>
+                    )}
 
                     {/* Image indicators (dots) - only show if multiple images */}
                     {bus.images && bus.images.length > 1 && (
@@ -248,27 +267,39 @@ const BusFleet: React.FC<BusFleetProps> = ({ onBusClick, onCardHover }) => {
                     <p className="text-black mb-8 sm:mb-10 line-clamp-2 text-sm sm:text-base leading-relaxed">{bus.description}</p>
 
                     <div className="mt-auto">
-                        <button
-                            onClick={() => onBusClick(bus)}
-                            className="relative w-full py-5 sm:py-6 min-h-[60px] bg-black text-white font-bold uppercase tracking-[0.2em] rounded-xl text-sm sm:text-base overflow-hidden group/btn transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF6B00]/50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF6B00]/50 focus-visible:ring-offset-2"
-                        >
-                            {/* Animated background on hover */}
-                            <span className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-[#ff8533] transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-400 origin-left"></span>
+                        {isInactive ? (
+                          <button
+                            type="button"
+                            disabled
+                            aria-disabled="true"
+                            className="relative w-full py-5 sm:py-6 min-h-[60px] bg-gray-300 text-gray-600 font-bold uppercase tracking-[0.2em] rounded-xl text-sm sm:text-base cursor-not-allowed"
+                          >
+                            Currently Unavailable
+                          </button>
+                        ) : (
+                          <button
+                              onClick={() => onBusClick(bus)}
+                              className="relative w-full py-5 sm:py-6 min-h-[60px] bg-black text-white font-bold uppercase tracking-[0.2em] rounded-xl text-sm sm:text-base overflow-hidden group/btn transition-all duration-300 hover:shadow-2xl hover:shadow-[#FF6B00]/50 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF6B00]/50 focus-visible:ring-offset-2"
+                          >
+                              {/* Animated background on hover */}
+                              <span className="absolute inset-0 bg-gradient-to-r from-[#FF6B00] to-[#ff8533] transform scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-400 origin-left"></span>
 
-                            {/* Button text */}
-                            <span className="relative z-10 inline-block group-hover/btn:scale-105 transition-transform duration-200">
-                              {`Book ${bus.name}`}
-                            </span>
+                              {/* Button text */}
+                              <span className="relative z-10 inline-block group-hover/btn:scale-105 transition-transform duration-200">
+                                {`Book ${bus.name}`}
+                              </span>
 
-                            {/* Shine effect */}
-                            <span className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500">
-                              <span className="absolute inset-0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></span>
-                            </span>
-                        </button>
+                              {/* Shine effect */}
+                              <span className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500">
+                                <span className="absolute inset-0 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></span>
+                              </span>
+                          </button>
+                        )}
                     </div>
                 </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

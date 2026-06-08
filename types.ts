@@ -21,6 +21,8 @@ export interface Bus {
   nameColor?: string; // Color to match the actual bus color
   // Paste your GoHighLevel Embed Code (iframe) into this string in constants.ts
   calendarEmbedCode?: string;
+  /** When false, bus is shown but booking is disabled (e.g. in the shop / being updated). Defaults to true. */
+  isActive?: boolean;
 }
 
 export interface EventItem {
