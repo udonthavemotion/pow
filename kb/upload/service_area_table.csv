@@ -1,0 +1,23 @@
+location,distance_miles_from_houma,eligible_buses,notes
+Houma LA,0,All five buses,Home base
+Thibodaux LA,20,All five buses,Local zone
+Schriever LA,10,All five buses,Local zone
+Gray LA,10,All five buses,Local zone
+Bourg LA,10,All five buses,Local zone
+Chauvin LA,15,All five buses,Local zone
+Montegut LA,15,All five buses,Local zone
+Raceland LA,20,All five buses,Local zone
+Lockport LA,25,All five buses,Local zone
+Larose LA,30,Confirm with Deric,Borderline local zone for Rackz Skittles
+Morgan City LA,30,Confirm with Deric,Borderline local zone for Rackz Skittles
+New Orleans LA,60,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 wide travel only - Rackz and Skittles do not travel here
+Metairie LA,55,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 wide travel only
+Kenner LA,60,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 wide travel only
+French Quarter New Orleans,60,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 wide travel only - very common destination
+Baton Rouge LA,80,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 wide travel only - LSU games common
+Lafayette LA,85,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 wide travel only
+Lake Charles LA,140,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 only - confirm with Deric first due to distance
+Slidell LA,95,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 wide travel only - Northshore
+Mandeville LA,95,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 wide travel only - Northshore
+Covington LA,100,Orange Juice Kuttin Loose Cotton Candy only,Tier 1 wide travel only - Northshore
+Out of state,N/A,Hand off to Deric,Requires special insurance review case-by-case approval
