@@ -137,7 +137,7 @@ const About: React.FC = () => {
                 loop
                 muted
                 playsInline
-                preload="metadata"
+                preload="none"
                 className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ease-out ${
                   videoReady ? 'opacity-100' : 'opacity-0'
                 }`}

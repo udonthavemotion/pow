@@ -19,7 +19,7 @@ const FAQ = lazy(() => import('./FAQ'));
 
 // Service menu embed code - ZeroMotion Marketing main calendar showing all buses (hoisted for perf)
 // Updated to use new rental embed code for entire party bus fleet
-const SERVICE_MENU_EMBED = `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rc/69a757a0e50c3b2fb71142cd?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a757a0e50c3b2fb71142cd_1772651519600"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`;
+const SERVICE_MENU_EMBED = `<iframe src="https://book.partiesonwheels.com/rentals/party-on-wheels-/rc/69a757a0e50c3b2fb71142cd?heightMode=full&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a757a0e50c3b2fb71142cd_1782825523932"></iframe><br><script src="https://book.partiesonwheels.com/js/form_embed.js" type="text/javascript"></script>`;
 
 /**
  * HomePage - Main landing page component containing all homepage sections

@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://partyonwheelspow.com/sitemap.xml
-
+Sitemap: https://www.partiesonwheels.com/sitemap.xml

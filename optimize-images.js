@@ -19,9 +19,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const IMAGES_DIR = './public/images';
-const MAX_WIDTH = 2400; // Higher resolution for retina displays
-const JPEG_QUALITY = 90; // Higher quality to preserve image perfection
-const PNG_QUALITY = 95; // Even higher for PNG to avoid artifacts
+const MAX_WIDTH = 1800;
+const JPEG_QUALITY = 78;
+const PNG_QUALITY = 82;
 
 // Recursively get all image files
 function getAllImageFiles(dir, fileList = []) {

@@ -26,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [busesModalOpen, setBusesModalOpen] = useState(false);
 
-  const busesEmbedCode = '<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rc/69a757a0e50c3b2fb71142cd?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a757a0e50c3b2fb71142cd_1772651519600"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>';
+  const busesEmbedCode = '<iframe src="https://book.partiesonwheels.com/rentals/party-on-wheels-/rc/69a757a0e50c3b2fb71142cd?heightMode=full&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a757a0e50c3b2fb71142cd_1782825523932"></iframe><br><script src="https://book.partiesonwheels.com/js/form_embed.js" type="text/javascript"></script>';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +56,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
   const textClasses = scrolled || mobileMenuOpen
     ? 'text-gray-900'
     : 'text-white';
+  const mobileMenuTabIndex = mobileMenuOpen ? 0 : -1;
 
   return (
     <>
@@ -135,15 +136,16 @@ const Navbar: React.FC<NavbarProps> = ({ onNavClick, onBookNow, onBookNowHover }
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 bg-white z-40 flex flex-col justify-center items-center transition-all duration-500 ease-in-out ${
           mobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-10 pointer-events-none'
-      }`}>
+      }`} aria-hidden={!mobileMenuOpen}>
           <div className="flex flex-col items-center space-y-6 text-3xl sm:text-4xl font-bold font-serif text-gray-900 uppercase px-6">
-            <a href="#" onClick={(e) => handleLinkClick(e, 'buses')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center cursor-pointer">Our Buses</a>
-            <a href="#how-it-works" onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">How It Works</a>
-            <a href="#events" onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Events</a>
-            <a href="#faq" onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">FAQ</a>
-            <a href="/contact" className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Contact</a>
+            <a href="#" tabIndex={mobileMenuTabIndex} onClick={(e) => handleLinkClick(e, 'buses')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center cursor-pointer">Our Buses</a>
+            <a href="#how-it-works" tabIndex={mobileMenuTabIndex} onClick={(e) => handleLinkClick(e, 'how-it-works')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">How It Works</a>
+            <a href="#events" tabIndex={mobileMenuTabIndex} onClick={(e) => handleLinkClick(e, 'events')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Events</a>
+            <a href="#faq" tabIndex={mobileMenuTabIndex} onClick={(e) => handleLinkClick(e, 'faq')} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">FAQ</a>
+            <a href="/contact" tabIndex={mobileMenuTabIndex} className="hover:text-[#FF6B00] transition-colors py-3 min-h-[44px] flex items-center">Contact</a>
             <a
                 href="#fleet"
+                tabIndex={mobileMenuTabIndex}
                 onClick={(e) => {
                   e.preventDefault();
                   if (onBookNow) {

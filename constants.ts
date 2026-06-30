@@ -29,16 +29,16 @@ export const BUSES: Bus[] = [
     capacity: 40,
     nameColor: '#FF6B00', // Orange like the bus
     // IMAGE: Orange Juice bus photos (first 5: 3,5,6,7,4 then 1,2,8,9; 10-12 = gallery)
-    imageUrl: '/images/buses/The Juice/orange-juice-3.png',
+    imageUrl: '/images/buses/The Juice/orange-juice-3.jpg',
     // IMAGES: Multiple images for alternating display (first 5 in this order)
     images: [
-      '/images/buses/The Juice/orange-juice-3.png',
+      '/images/buses/The Juice/orange-juice-3.jpg',
       '/images/buses/The Juice/orange-juice-5.jpeg',
       '/images/buses/The Juice/orange-juice-6.jpeg',
       '/images/buses/The Juice/orange-juice-7.jpeg',
-      '/images/buses/The Juice/orange-juice-4.png',
+      '/images/buses/The Juice/orange-juice-4.jpg',
       '/images/buses/The Juice/orange-juice-1.jpeg',
-      '/images/buses/The Juice/orange-juice-2.png',
+      '/images/buses/The Juice/orange-juice-2.jpg',
       '/images/buses/The Juice/orange-juice-8.jpeg',
       '/images/buses/The Juice/orange-juice-9.jpeg'
     ],
@@ -53,7 +53,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // ORANGE JUICE - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a73da8ab0c5f869f4e3ba8?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a73da8ab0c5f869f4e3ba8_1772651362455"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://book.partiesonwheels.com/rentals/party-on-wheels-/rl/69a73da8ab0c5f869f4e3ba8?heightMode=full&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a73da8ab0c5f869f4e3ba8_1782825494054"></iframe><br><script src="https://book.partiesonwheels.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b2',
@@ -72,14 +72,14 @@ export const BUSES: Bus[] = [
       '/images/buses/The Kuttin Loose/kuttin-loose-3.jpeg',
       '/images/buses/The Kuttin Loose/kuttin-loose-4.jpeg',
       '/images/buses/The Kuttin Loose/kuttin-loose-6.jpeg',
-      '/images/buses/The Kuttin Loose/kuttin-loose-7.png'
+      '/images/buses/The Kuttin Loose/kuttin-loose-7.jpg'
     ],
     features: ['Premium Sound System', 'LED Light Show', 'Dance Floor', 'Climate Control'],
 
     // ------------------------------------------------------------------
     // KUTTIN LOOSE - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a78d9d7132f3629284deed?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78d9d7132f3629284deed_1772651375530"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://book.partiesonwheels.com/rentals/party-on-wheels-/rl/69a78d9d7132f3629284deed?heightMode=full&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78d9d7132f3629284deed_1782825523932"></iframe><br><script src="https://book.partiesonwheels.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b3',
@@ -96,7 +96,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // THE COTTON CANDY - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a78c3f85c0159b524cac2c?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78c3f85c0159b524cac2c_1772651337096"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://book.partiesonwheels.com/rentals/party-on-wheels-/rl/69a78c3f85c0159b524cac2c?heightMode=full&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78c3f85c0159b524cac2c_1782825511832"></iframe><br><script src="https://book.partiesonwheels.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b4',
@@ -112,14 +112,14 @@ export const BUSES: Bus[] = [
     // IMAGES: Multiple images for alternating display
     images: [
       '/images/buses/The Rackz/rackz-1.jpeg',
-      '/images/buses/The Rackz/rackz-2.png'
+      '/images/buses/The Rackz/rackz-2.jpg'
     ],
     features: ['VIP Seating', 'Premium Audio', 'LED Light Show', 'AC/Heat'],
 
     // ------------------------------------------------------------------
     // RACKZ - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a78cd4365f5d4c30d7906f?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78cd4365f5d4c30d7906f_1772651306695"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://book.partiesonwheels.com/rentals/party-on-wheels-/rl/69a78cd4365f5d4c30d7906f?heightMode=full&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78cd4365f5d4c30d7906f_1782825450757"></iframe><br><script src="https://book.partiesonwheels.com/js/form_embed.js" type="text/javascript"></script>`
   },
   {
     id: 'b5',
@@ -143,7 +143,7 @@ export const BUSES: Bus[] = [
     // ------------------------------------------------------------------
     // SKITTLES - CALENDAR EMBED
     // ------------------------------------------------------------------
-    calendarEmbedCode: `<iframe src="https://link.zeromotionmarketing.com/rentals/party-on-wheels-/rl/69a78d2edcc1c11d37b7385d?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78d2edcc1c11d37b7385d_1772651327695"></iframe><br><script src="https://link.zeromotionmarketing.com/js/form_embed.js" type="text/javascript"></script>`
+    calendarEmbedCode: `<iframe src="https://book.partiesonwheels.com/rentals/party-on-wheels-/rl/69a78d2edcc1c11d37b7385d?heightMode=fixed&showHeader=true" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="69a78d2edcc1c11d37b7385d_1782825478595"></iframe><br><script src="https://book.partiesonwheels.com/js/form_embed.js" type="text/javascript"></script>`
   }
   // NOTE: Green Light and The Coconut removed as they were not in the updated fleet list
   // If you need to add them back, use the booking calendar widget format from ZeroMotion Marketing

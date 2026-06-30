@@ -22,8 +22,6 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
   const onCloseRef = useRef(onClose);
   const [isVisible, setIsVisible] = useState(false);
   const [isCalendarLoading, setIsCalendarLoading] = useState(true);
-  const scriptLoadedRef = useRef(false);
-
   onCloseRef.current = onClose;
 
   useEffect(() => {
@@ -101,6 +99,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
 
     // Get iframe element
     const iframe = tempDiv.querySelector('iframe');
+    const embedScript = tempDiv.querySelector('script[src]');
     if (iframe) {
       // Create a new iframe with fresh attributes
       const newIframe = document.createElement('iframe');
@@ -142,9 +141,6 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
       newIframe.style.maxWidth = '100%';
       newIframe.style.overflowX = 'hidden';
 
-      // Add loading attribute for better performance
-      newIframe.setAttribute('loading', 'lazy');
-
       // Add class for CSS targeting
       newIframe.className = 'booking-iframe';
 
@@ -154,7 +150,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
         // Additional mobile constraints for better UX
         newIframe.style.position = 'relative';
         newIframe.style.transform = 'translateZ(0)'; // Hardware acceleration
-        newIframe.style.WebkitOverflowScrolling = 'touch'; // Smooth iOS scrolling
+        newIframe.style.setProperty('-webkit-overflow-scrolling', 'touch'); // Smooth iOS scrolling
         newIframe.style.touchAction = 'pan-y pinch-zoom'; // Allow vertical scroll and zoom
       }
 
@@ -175,14 +171,12 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
       }, 3000);
     }
 
-    // Always reload the GoHighLevel script to ensure proper initialization
-    const scriptSrc = 'https://link.zeromotionmarketing.com/js/form_embed.js';
+    const scriptSrc = embedScript?.getAttribute('src') || 'https://book.partiesonwheels.com/js/form_embed.js';
 
     // Remove existing script if present
     const existingScript = document.querySelector(`script[src="${scriptSrc}"]`);
     if (existingScript) {
       existingScript.remove();
-      scriptLoadedRef.current = false;
     }
 
     // Add script fresh each time
@@ -192,7 +186,6 @@ const BookingModal: React.FC<BookingModalProps> = ({ bus, serviceMenuEmbedCode, 
     script.async = true;
 
     script.onload = () => {
-      scriptLoadedRef.current = true;
       if (window.dispatchEvent) {
         window.dispatchEvent(new Event('resize'));
       }
