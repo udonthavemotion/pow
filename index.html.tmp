@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5" />
+
+  <!-- Preconnect to speed up external resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://book.partiesonwheels.com">
+
+  <!-- Primary Meta Tags -->
+  <title>Party Bus Rental Houma LA | Party on Wheels</title>
+  <meta name="title" content="Party Bus Rental Houma LA | Party on Wheels" />
+  <meta name="description" content="Book a party bus in Houma, LA. Serving Thibodaux, Morgan City, Raceland and New Orleans for weddings, proms, bachelorette parties, Mardi Gras and nights out. Call (985) 856-1860." />
+  <meta name="keywords" content="party bus rental, Houma party bus, New Orleans party bus, Thibodaux party bus, wedding transportation, Mardi Gras bus, prom bus, bachelor party bus, bachelorette party bus" />
+  <meta name="author" content="Party On Wheels" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.partiesonwheels.com/" />
+  <meta property="og:title" content="Party Bus Rental Houma LA | Party on Wheels" />
+  <meta property="og:description" content="Book a party bus in Houma, LA. Serving Thibodaux, Morgan City, Raceland and New Orleans for weddings, proms, bachelorette parties, Mardi Gras and nights out." />
+  <meta property="og:image" content="https://www.partiesonwheels.com/images/buses/The%20Juice/orange-juice-3.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Party On Wheels - Orange Juice party bus, South Louisiana's premier party bus rental" />
+  <meta property="og:site_name" content="Party On Wheels" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://www.partiesonwheels.com/" />
+  <meta name="twitter:title" content="Party Bus Rental Houma LA | Party on Wheels" />
+  <meta name="twitter:description" content="Book a party bus in Houma, LA. Serving Thibodaux, Morgan City, Raceland and New Orleans for weddings, proms, bachelorette parties, Mardi Gras and nights out." />
+  <meta name="twitter:image" content="https://www.partiesonwheels.com/images/buses/The%20Juice/orange-juice-3.jpg" />
+  <meta name="twitter:image:alt" content="Party On Wheels - Orange Juice party bus, South Louisiana's premier party bus rental" />
+
+  <!-- Additional Meta Tags -->
+  <meta name="theme-color" content="#FF6B00" />
+  <meta name="msapplication-TileColor" content="#FF6B00" />
+  <meta name="msapplication-TileImage" content="/android-chrome-192x192.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.partiesonwheels.com/" />
+  <link rel="stylesheet" href="/index.css">
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1502040401647036');
+fbq('track', 'PageView');
+</script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1502040401647036&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- LocalBusiness structured data -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"LocalBusiness","name":"Party On Wheels","image":"https://www.partiesonwheels.com/images/buses/The%20Juice/orange-juice-3.jpg","telephone":"+19858561860","email":"getpartyonwheels@gmail.com","url":"https://www.partiesonwheels.com/","priceRange":"$$","areaServed":[{"@type":"City","name":"Houma, LA"},{"@type":"City","name":"Thibodaux, LA"},{"@type":"City","name":"Raceland, LA"},{"@type":"City","name":"Morgan City, LA"},{"@type":"City","name":"New Orleans, LA"},{"@type":"City","name":"Baton Rouge, LA"}],"geo":{"@type":"GeoCoordinates","latitude":29.5958,"longitude":-90.7195},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}}
+</script>
+
+  <!-- FAQPage structured data (mirrors the on-page FAQ section) -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How far in advance should I book?","acceptedAnswer":{"@type":"Answer","text":"We recommend booking at least 2-3 weeks in advance, especially for popular dates like Mardi Gras, Saints game days, and wedding season. However, we often have last-minute availability, just give us a call."}},{"@type":"Question","name":"What areas do you serve?","acceptedAnswer":{"@type":"Answer","text":"We primarily serve Houma, Thibodaux, and the greater New Orleans area. We can also travel to nearby cities for longer bookings. Contact us to discuss your specific route."}},{"@type":"Question","name":"What's included with the rental?","acceptedAnswer":{"@type":"Answer","text":"Each bus comes with a driver, premium sound system, LED lighting, and basic amenities. Some buses have additional features like coolers, dance poles, or karaoke systems, check each bus's features for details."}},{"@type":"Question","name":"Can we bring our own music?","acceptedAnswer":{"@type":"Answer","text":"Absolutely! All our buses have Bluetooth connectivity so you can play your own playlist. You can also connect via aux cable or USB."}},{"@type":"Question","name":"What's your cancellation policy?","acceptedAnswer":{"@type":"Answer","text":"Cancellations made 48+ hours before your booking receive a full refund. Cancellations within 48 hours are subject to a 50% fee. Contact us directly to discuss any special circumstances."}},{"@type":"Question","name":"Do you provide decorations?","acceptedAnswer":{"@type":"Answer","text":"We can help coordinate decorations for special events like birthdays or bachelorette parties. Additional fees may apply. Let us know what you have in mind when you book."}},{"@type":"Question","name":"What payment methods do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept all major credit cards, debit cards, and digital payment methods. A deposit is required to secure your booking, with the balance due before or on the day of your event."}},{"@type":"Question","name":"Is there a minimum age requirement?","acceptedAnswer":{"@type":"Answer","text":"All passengers must be 18 or older, or accompanied by a parent/guardian. For certain events like proms, we work with schools and parents to ensure a fun and appropriate experience."}}]}
+</script>
+  </head>
+  <body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+  </body>
+  </html>
